@@ -10,7 +10,7 @@ class CreateUserTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'User';
+    public $tableName = 'Users';
 
     /**
      * Run the migrations.
@@ -30,9 +30,9 @@ else if advisor user type = 2
 else if adminstrator user type = 3 
 ');
             $table->string('email', 45);
-            $table->string('password', 30);
+            $table->string('password');
             $table->string('rememberToken', 15)->nullable();
-            $table->timestamp('created_at')->nullable();
+           // $table->timestamp('created_at')->nullable();
 
             $table->unique(["phone"], 'phone_UNIQUE');
 
