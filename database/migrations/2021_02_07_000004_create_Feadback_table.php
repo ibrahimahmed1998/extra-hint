@@ -36,7 +36,7 @@ class CreateFeadbackTable extends Migration
             $table->unique(["fid"], 'pid_UNIQUE');
             
             $table->foreign('User_id', 'fk_Post_User1_idx')
-                ->references('id')->on('User')
+                ->references('id')->on('Users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
  

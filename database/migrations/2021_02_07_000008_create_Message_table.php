@@ -31,7 +31,7 @@ class CreateMessageTable extends Migration
 
 
             $table->foreign('User_id', 'fk_Message_User1_idx')
-                ->references('id')->on('User')
+                ->references('id')->on('Users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

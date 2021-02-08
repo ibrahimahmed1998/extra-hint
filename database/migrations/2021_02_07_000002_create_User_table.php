@@ -10,11 +10,11 @@ class CreateUserTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'User';
+    public $tableName = 'Users';
 
     /**
      * Run the migrations.
-     * @table User
+     * @table Users
      *
      * @return void
      */

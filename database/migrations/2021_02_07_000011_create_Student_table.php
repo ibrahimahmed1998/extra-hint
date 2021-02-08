@@ -39,12 +39,12 @@ calculated from f()');
             $table->index(["Student_id"], 'fk_S_User2_idx');
 
             $table->foreign('adv_id', 'fk_S_User2_idx')
-                ->references('id')->on('User')
+                ->references('id')->on('Users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
                 $table->foreign('Student_id', 'fk_S_User1_idx')
-                ->references('id')->on('User')
+                ->references('id')->on('Users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 

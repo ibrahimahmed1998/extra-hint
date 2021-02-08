@@ -35,7 +35,7 @@ class CreateNotificationTable extends Migration
 
 
             $table->foreign('User_id', 'fk_Notification_User1_idx')
-                ->references('id')->on('User')
+                ->references('id')->on('Users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });
