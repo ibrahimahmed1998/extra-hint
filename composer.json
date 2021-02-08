@@ -60,5 +60,13 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
+
+        ,"pre-generate-key": [
+            "@php artisan key:generate",
+             "@php artisan cache:clear",
+            "@php artisan config:clear"
+        ]
     }
+
+  
 }
