@@ -16,6 +16,10 @@ class Service1 extends Controller
  
     public function level_calc(Request $request)
     {
+        $validated = $request->validate([
+            'student_id' => 'required|exists:Students',
+        ]);
+
         $passed_courses = SCT:: where('hpass',1)->where('Student_id',$request->student_id)->get();
 
         $sum = 0 ; 
