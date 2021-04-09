@@ -20,36 +20,40 @@ class CreateShcTable extends Migration
      */
     public function up()
     {
-        Schema::create($this->tableName, function (Blueprint $table) {
+        Schema::create($this->tableName, function (Blueprint $table) 
+        {
             $table->engine = 'InnoDB';
-            $table->integer('dep_id');
             $table->integer('Sec_id');
+            $table->integer('dep_id');
             $table->string('ccode');
             $table->double('c_theoretical_ratio');
-            $table->tinyInteger('c_elective')->comment('if course is optional may be student select it or not ');
-            $table->integer('c_semester')->comment('which semester intrduce this course');
-            $table->string('c_lvl', 45);
+            $table->tinyInteger('c_elective');
+            $table->integer('c_semester');
+            $table->string('c_lvl', 5);
 
-            $table->index(["dep_id"], 'fk_SHC_Sections2_idx');
-            $table->index(["Sec_id"], 'fk_SHC_Sections1_idx');
-            $table->index(["ccode"], 'fk_SHC_Courses1_idx');
+            $table->index(["dep_id"], 'fk_Shcs_Sections2_idx');
+            $table->index(["Sec_id"], 'fk_Shcs_Sections1_idx');
+            $table->index(["ccode"], 'fk_Shcs_Courses1_idx');
 
 
-            $table->foreign('Sec_id', 'fk_SHC_Sections1_idx')
+            $table->foreign('Sec_id', 'fk_Shcs_Sections1_idx')
                 ->references('Sec_id')->on('Sections')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-
-            $table->foreign('dep_id', 'fk_SHC_Sections2_idx')
+            $table->foreign('dep_id', 'fk_Shcs_Sections2_idx')
             ->references('dep_id')->on('Sections')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->foreign('ccode', 'fk_SHC_Courses1_idx')
+            $table->foreign('ccode', 'fk_Shcs_Courses1_idx')
                 ->references('ccode')->on('Courses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->primary(array('Sec_id','dep_id','ccode'));
+            
+
         });
     }
 

@@ -37,7 +37,9 @@ Route::group(['middleware'=>'api','prefix'=>'auth'], function ($router)
 
 
     Route::post('level_calc'      ,Service1::class.'@level_calc');
+    Route::post('show_courses'      ,Service1::class.'@show_courses');
 
+    
     
     
     }

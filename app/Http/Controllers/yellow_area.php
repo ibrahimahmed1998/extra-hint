@@ -127,41 +127,62 @@ use App\Models\SHC;
 
     public function SCT(Validate_SCT $request)
     {
-        $check = Sct::where('ccode',$request->ccode)->
-                      where('year',$request->year)->
-                      where('semester',$request->semester)->
-                      where('Student_id',$request->Student_id)->
-                      first();
-
+        $check = Sct::where('ccode',$request->ccode)->where('year',$request->year)->
+                      where('semester',$request->semester)->where('Student_id',$request->Student_id)->first();
+                     
         if( $check )
         {
-            return response()->json(['error' => "Student Enrolled this Course Before"], 400);
-
+            return response()->json(['error' => "Student enrolled this Course Before in same SEMESTER , YEAR"], 400);
         }
         else 
         {
-        $Sct = Sct::create(
-            [
+         $pre_req = Pre_request::where('ccode',$request->ccode)->get();
+         $p_r_counter = Pre_request::where('ccode',$request->ccode)->count();
+         $counter = 0 ; 
 
-                'Student_id' => $request->Student_id,
-                'hmedterm_d' => $request->hmedterm_d,
+       foreach( $pre_req as $pr) 
+       {
+        $pass = Sct::where('ccode',$pr->pr_ccode)->value('hpass');
+       
+        if ( $pass == 1 )
+            {
+                $counter= $counter + 1  ; 
+            }
+           
+        }
+         if( $counter != $p_r_counter  )
+        {
+            return response()->json(['error' => "Student can't enroll this course before it has pre-request and not passed "
+            .$pre_req->pr_code ], 400); 
+        }
+        else 
+        {
+            $Sct = Sct::create(
+                [
+                    'Student_id' => $request->Student_id,
+                    'semester' => $request->semester,
+                    'year' => $request->year,
+                    'ccode' => $request->ccode,
+                    ]
+            );
+            return response()->json(['message' => 'Student Has Course Rel Created Sucessfully '], 201);
+        }
+    }}
+
+
+    public function update_student_degree(Validate_SCT $request)
+    {
+        /* Up[pdaaaaaaaaaaaaaaaate]
+        'hmedterm_d' => $request->hmedterm_d,
                 'hlab_d' => $request->hlab_d,
                 'horal_d' => $request->horal_d,
                 'hclass_work_d' => $request->hclass_work_d,
                 'hfinal_d' => $request->hfinal_d,
                 'htotal_d' => $request->htotal_d,
                 'hpass' => $request->hpass,
-                'semester' => $request->semester,
-                'year' => $request->year,
-                'ccode' => $request->ccode,
-             ]
-        );
+                */
 
-
-        return response()->json(['message' => 'Student Has Course Rel Created Sucessfully '], 201);
     }
-    }
-
 
 
 }
