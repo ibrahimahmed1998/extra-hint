@@ -10,7 +10,7 @@ class CreateShcTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'SHC';
+    public $tableName = 'Shcs';
 
     /**
      * Run the migrations.
@@ -30,24 +30,24 @@ class CreateShcTable extends Migration
             $table->integer('c_semester')->comment('which semester intrduce this course');
             $table->string('c_lvl', 45);
 
-            $table->index(["dep_id"], 'fk_SHC_Section2_idx');
-            $table->index(["Sec_id"], 'fk_SHC_Section1_idx');
-            $table->index(["ccode"], 'fk_SHC_Course1_idx');
+            $table->index(["dep_id"], 'fk_SHC_Sections2_idx');
+            $table->index(["Sec_id"], 'fk_SHC_Sections1_idx');
+            $table->index(["ccode"], 'fk_SHC_Courses1_idx');
 
 
-            $table->foreign('Sec_id', 'fk_SHC_Section1_idx')
-                ->references('Sec_id')->on('Section')
+            $table->foreign('Sec_id', 'fk_SHC_Sections1_idx')
+                ->references('Sec_id')->on('Sections')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
 
-            $table->foreign('dep_id', 'fk_SHC_Section2_idx')
-            ->references('dep_id')->on('Section')
+            $table->foreign('dep_id', 'fk_SHC_Sections2_idx')
+            ->references('dep_id')->on('Sections')
             ->onDelete('cascade')
             ->onUpdate('cascade');
 
-            $table->foreign('ccode', 'fk_SHC_Course1_idx')
-                ->references('ccode')->on('Course')
+            $table->foreign('ccode', 'fk_SHC_Courses1_idx')
+                ->references('ccode')->on('Courses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

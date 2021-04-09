@@ -30,16 +30,16 @@ class CreateAttendsTable extends Migration
 
             $table->index(["ccode", "Week_is_lec"], 'fk_Attends_Week1_idx');
 
-            $table->index(["Student_id"], 'fk_Student_has_Week_table_Student1_idx');
+            $table->index(["Student_id"], 'fk_Student_has_Week_table_Students1_idx');
 
 
-            $table->foreign('Student_id', 'fk_Student_has_Week_table_Student1_idx')
-                ->references('Student_id')->on('Student')
+            $table->foreign('Student_id', 'fk_Student_has_Week_table_Students1_idx')
+                ->references('Student_id')->on('Students')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('ccode', 'fk_Attends_Week1_idx')
-                ->references('ccode')->on('Week')
+            $table->foreign('ccode', 'fk_Attends_Weeks1_idx')
+                ->references('ccode')->on('Weeks')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

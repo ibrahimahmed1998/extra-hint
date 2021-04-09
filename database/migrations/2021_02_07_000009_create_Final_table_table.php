@@ -10,7 +10,7 @@ class CreateFinalTableTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Final_table';
+    public $tableName = 'Final_tables';
 
     /**
      * Run the migrations.
@@ -28,11 +28,11 @@ class CreateFinalTableTable extends Migration
             $table->integer('to');
             $table->integer('day_id');
 
-            $table->index(["ccode"], 'fk_Final_table_Course1_idx');
+            $table->index(["ccode"], 'fk_Final_table_Courses1_idx');
 
 
-            $table->foreign('ccode', 'fk_Final_table_Course1_idx')
-                ->references('ccode')->on('Course')
+            $table->foreign('ccode', 'fk_Final_table_Courses_idx')
+                ->references('ccode')->on('Courses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

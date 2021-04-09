@@ -2,31 +2,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+// use Illuminate\Foundation\Auth\Student as Authenticatable;
+ 
 
-class User extends Authenticatable implements JWTSubject
+class Student extends Model // extends Authenticatable implements JWTSubject
 {
+    use HasFactory;
+
     use Notifiable;
     
     public $timestamps = false;
 
-    
     protected $fillable = [
-        'id','full_name','type' , 'email', 'password','phone'//,'updated_at','created_at'//'email_verified_at',
-    ];
+        'Student_id','roadmap','live_hour' , 'total_gpa', 'current_lvl','adv_id' /* , 'dep_id' ,'sec_id'*/
+    ];  
 
-    protected $hidden = [
-        'password', 'remember_token' ,//'updated_at','created_at'
-    ];
-
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
-
-    
     // Rest omitted for brevity
 
     /**
@@ -49,6 +43,5 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 }
-
  
  

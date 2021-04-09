@@ -10,7 +10,7 @@ class CreateWeekTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Week';
+    public $tableName = 'Weeks';
 
     /**
      * Run the migrations.
@@ -28,11 +28,11 @@ class CreateWeekTable extends Migration
             $table->string('ccode_hour', 45);
             $table->tinyInteger('is_lec')->index();
 
-            $table->index(["ccode"], 'fk_Week_table_Course1_idx');
+            $table->index(["ccode"], 'fk_Week_table_Courses1_idx');
 
 
-            $table->foreign('ccode', 'fk_Week_table_Course1_idx')
-                ->references('ccode')->on('Course')
+            $table->foreign('ccode', 'fk_Week_table_Courses1_idx')
+                ->references('ccode')->on('Courses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

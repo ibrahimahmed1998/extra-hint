@@ -10,11 +10,11 @@ class CreateStudentTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Student';
+    public $tableName = 'Students';
 
     /**
      * Run the migrations.
-     * @table Student
+     * @table Students
      *
      * @return void
      */
@@ -34,22 +34,22 @@ calculated from f()');
             $table->string('Dep_id', 45);
             $table->integer('Sec_id');
 
-            $table->index(["Sec_id", "Dep_id"], 'fk_Student_Section1_idx');
-            $table->index(["adv_id"], 'fk_S_User1_idx');
-            $table->index(["Student_id"], 'fk_S_User2_idx');
+            $table->index(["Sec_id", "Dep_id"], 'fk_Student_Sections1_idx');
+            $table->index(["adv_id"], 'fk_S_Users1_idx');
+            $table->index(["Student_id"], 'fk_S_Users2_idx');
 
             $table->foreign('adv_id', 'fk_S_User2_idx')
                 ->references('id')->on('Users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-                $table->foreign('Student_id', 'fk_S_User1_idx')
+                $table->foreign('Student_id', 'fk_S_Users1_idx')
                 ->references('id')->on('Users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('Sec_id', 'fk_Student_Section1_idx')
-                ->references('Sec_id')->on('Section')
+            $table->foreign('Sec_id', 'fk_Student_Sections1_idx')
+                ->references('Sec_id')->on('Sections')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

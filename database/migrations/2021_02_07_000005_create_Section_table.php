@@ -10,11 +10,11 @@ class CreateSectionTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Section';
+    public $tableName = 'Sections';
 
     /**
      * Run the migrations.
-     * @table Section
+     * @table Sections
      *
      * @return void
      */
@@ -26,15 +26,16 @@ class CreateSectionTable extends Migration
             $table->integer('dep_id');
             $table->string('sec_name', 45);
 
-            $table->index(["dep_id"], 'fk_Section_Department1_idx');
-            $table->unique(["sec_name"], 'sec_name_UNIQUE');
-            $table->unique(["Sec_id"], 'Sec_id_UNIQUE');
+            $table->index(["dep_id"], 'fk_Sections_Departments1_idx');
+ 
 
-
-            $table->foreign('dep_id', 'fk_Section_Department1_idx')
-                ->references('dep_id')->on('Department')
+            $table->foreign('dep_id', 'fk_Sections_Departments1_idx')
+                ->references('dep_id')->on('Departments')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->primary(array('dep_id','Sec_id'));
+
         });
     }
 

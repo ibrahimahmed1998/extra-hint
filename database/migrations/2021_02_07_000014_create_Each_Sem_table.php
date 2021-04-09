@@ -29,11 +29,11 @@ class CreateEachSemTable extends Migration
             $table->integer('lvl');
             $table->double('total_gpa');
 
-            $table->index(["Student_id"], 'fk_Each_Semester_Student1_idx');
+            $table->index(["Student_id"], 'fk_Each_Semester_Students1_idx');
 
 
-            $table->foreign('Student_id', 'fk_Each_Semester_Student1_idx')
-                ->references('Student_id')->on('Student')
+            $table->foreign('Student_id', 'fk_Each_Semester_Students1_idx')
+                ->references('Student_id')->on('Students')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

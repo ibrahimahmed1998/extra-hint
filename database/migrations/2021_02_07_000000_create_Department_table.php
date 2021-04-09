@@ -10,11 +10,11 @@ class CreateDepartmentTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Department';
+    public $tableName = 'Departments';
 
     /**
      * Run the migrations.
-     * @table Department
+     * @table Departments
      *
      * @return void
      */

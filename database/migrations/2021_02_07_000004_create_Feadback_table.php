@@ -10,7 +10,7 @@ class CreateFeadbackTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Feadback';
+    public $tableName = 'Feadbacks';
 
     /**
      * Run the migrations.
@@ -31,17 +31,17 @@ class CreateFeadbackTable extends Migration
 
             $table->index(["User_id"], 'fk_Post_User1_idx');
 
-            $table->index(["ccode"], 'fk_Post_Course1_idx');
+            $table->index(["ccode"], 'fk_Post_Courses1_idx');
 
             $table->unique(["fid"], 'pid_UNIQUE');
             
-            $table->foreign('User_id', 'fk_Post_User1_idx')
+            $table->foreign('User_id', 'fk_Post_Users1_idx')
                 ->references('id')->on('Users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
  
-            $table->foreign('ccode', 'fk_Post_Course1_idx')
-                ->references('ccode')->on('Course')
+            $table->foreign('ccode', 'fk_Post_Courses1_idx')
+                ->references('ccode')->on('Courses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
         });

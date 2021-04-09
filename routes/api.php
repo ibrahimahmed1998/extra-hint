@@ -2,6 +2,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Service1;
+use App\Http\Controllers\yellow_area;
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request)
  {
@@ -9,25 +12,39 @@ Route::middleware('auth:api')->get('/user', function (Request $request)
 });
 
  
-Route::group([
-
-    'middleware' => 'api',
-    'prefix' => 'auth'
-
-], function ($router)
+Route::group(['middleware'=>'api','prefix'=>'auth'], function ($router)
     {
-        //Route::get('/route', AuthController::class . '@action');
+    /* Have not [sign_in || Register Method , Verify Method , edit_profile , send_reset_password_email] 
+    Becouse Adminstrator Add Users Dirctly 
+    , So Needn't to Verify there Mails 
+    , Also User Can't Dirctly Edit his Profile , Must ask Admin to make it for him 
+    send_reset_password_email , Soln : Call Center  ( Adminstrator )
+    */
+    Route::post('signup'          ,AuthController::class.'@signup');
+    Route::post('login'           ,AuthController::class.'@login');
+    Route::post('change_password' ,AuthController::class.'@change_password');
+    Route::post('refresh'         ,AuthController::class.'@refresh');
+    Route::post('me'              ,AuthController::class.'@me');
+    Route::post('logout'          ,AuthController::class.'@logout');
+    Route::post('Student'         ,AuthController::class.'@Student');
+ 
+    Route::post('Section'         ,yellow_area::class.'@Section');
+    Route::post('Department'      ,yellow_area::class.'@Department');
+    Route::post('Course'          ,yellow_area::class.'@Course');
+    Route::post('Pre_request'     ,yellow_area::class.'@Pre_request');
+    Route::post('SHC'             ,yellow_area::class.'@SHC');
+    Route::post('SCT'             ,yellow_area::class.'@SCT');
 
-    /*1*/Route::post('signin',AuthController::class .'@signin');
-    /*2*/Route::post('verify/{verification_code}',AuthController::class.'@verifyUser');
-    /*3*/Route::post('login',AuthController::class.'@login');
-    /*4*/Route::post('edit_profile', AuthController::class.'@edit_profile');
-    /*5*/Route::post('change_password', AuthController::class.'@change_password');
-    /*6*/Route::Post('sendresetpasswordemail', AuthController::class.'@sendresetpasswordemail');
-    /*7*/Route::post('reset_pass/{token}',AuthController::class.'@reset_password_2');
-    /*8*/Route::post('refresh', AuthController::class.'@refresh');
-    /*9*/Route::post('me', AuthController::class.'@me');
-    /*10*/Route::post('logout',AuthController::class.'@logout');
+
+    Route::post('level_calc'      ,Service1::class.'@level_calc');
+
+    
+    
     }
 );
  
+Route::group(['middleware'=>'api','prefix'=>'ServiceOne'], function ($router)
+    {
+
+    }
+);

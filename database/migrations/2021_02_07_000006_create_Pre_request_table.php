@@ -10,7 +10,7 @@ class CreatePreRequestTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Pre_request';
+    public $tableName = 'Pre_requests';
 
     /**
      * Run the migrations.
@@ -25,19 +25,22 @@ class CreatePreRequestTable extends Migration
             $table->string('ccode');
             $table->string('pr_ccode', 10);
 
-            $table->index(["ccode"], 'fk_Pre_request_Course1_idx');
-            $table->index(["pr_ccode"], 'fk_Pre_request_Course2_idx');
+            $table->index(["ccode"], 'fk_Pre_request_Courses1_idx');
+            $table->index(["pr_ccode"], 'fk_Pre_request_Courses2_idx');
 
 
-            $table->foreign('ccode', 'fk_Pre_request_Course1_idx')
-                ->references('ccode')->on('Course')
+            $table->foreign('ccode', 'fk_Pre_request_Courses1_idx')
+                ->references('ccode')->on('Courses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('pr_ccode', 'fk_Pre_request_Course2_idx')
-                ->references('ccode')->on('Course')
+            $table->foreign('pr_ccode', 'fk_Pre_request_Courses2_idx')
+                ->references('ccode')->on('Courses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+        $table->primary(array('ccode','pr_ccode'));
+
         });
     }
 

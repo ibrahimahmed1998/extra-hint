@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateSctTable extends Migration
 {
@@ -10,7 +11,7 @@ class CreateSctTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'SCT';
+    public $tableName = 'Scts';
 
     /**
      * Run the migrations.
@@ -28,29 +29,26 @@ class CreateSctTable extends Migration
             $table->integer('horal_d')->nullable();
             $table->integer('hclass_work_d')->nullable();
             $table->integer('hfinal_d')->nullable();
-            $table->integer('htotal_d')->nullable()->comment('student degree of course x 
-ex x_d = 150 
-s_d may be 137 ');
-            $table->tinyInteger('hpass')->nullable()->comment('boolean value
-1 = pass
-0 = not pass
-');
+            $table->integer('htotal_d')->nullable();
+            $table->tinyInteger('hpass')->nullable();
             $table->integer('semester')->index();
-            $table->increments('year')->index();
+            $table->integer('year')->index();
             $table->string('ccode', 10);
 
-            $table->index(["Student_id"], 'fk_StuCourse_Rel_Student1_idx');
-            $table->index(["ccode"], 'fk_SCT_Course1_idx');
+            $table->index(["Student_id"],'fk_Scts_Students1_idx');
+            $table->index(["ccode"], 'fk_SCT_Courses1_idx');
 
-            $table->foreign('Student_id', 'fk_StuCourse_Rel_Student1_idx')
-                ->references('Student_id')->on('Student')
+            $table->foreign('Student_id', 'fk_Scts_Students1_idx')
+                ->references('Student_id')->on('Students')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('ccode', 'fk_SCT_Course1_idx')
-                ->references('ccode')->on('Course')
+            $table->foreign('ccode', 'fk_Scts_Courses1_idx')
+                ->references('ccode')->on('Courses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->primary(array('semester','year','Student_id','ccode'));
         });
     }
 

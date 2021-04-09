@@ -10,7 +10,7 @@ class CreateCourseTable extends Migration
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Course';
+    public $tableName = 'Courses';
 
     /**
      * Run the migrations.
@@ -22,10 +22,9 @@ class CreateCourseTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->string('ccode')->comment('comp415')->index();
-            $table->string('cname', 45)->comment('compiler2');
-            $table->integer('cch')->comment('course cridet hours
-ex = 3');
+            $table->string('ccode')->index();
+            $table->string('cname',45);
+            $table->integer('cch');
             $table->integer('dmidterm');
             $table->integer('dlab');
             $table->integer('doral');
@@ -33,11 +32,7 @@ ex = 3');
             $table->integer('dfinal');
             $table->string('dtotal', 45);
             $table->string('instructor', 45);
-
-            $table->unique(["cname"], 'cname_UNIQUE');
-
-            $table->unique(["ccode"], 'ccode_UNIQUE');
-        });
+         });
     }
 
     /**
