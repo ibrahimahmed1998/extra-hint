@@ -15,10 +15,8 @@ class Validate_dep extends FormRequest
     public function rules()
     {
         return [
-            
                 'dname' => 'required|string|unique:Departments',       
                 'dep_id' => 'required|integer|unique:Departments',       
-               
         ];
     }
 }

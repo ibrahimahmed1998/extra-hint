@@ -3,7 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Validate_Course;
 use App\Http\Requests\Validate_Section;
-use App\Http\Requests\Validate_Dep;
+use App\Http\Requests\Validate_dep;
 use App\Http\Requests\Validate_Pre_request;
 use App\Http\Requests\Validate_SCT;
 use App\Http\Requests\Validate_SHC;
@@ -20,7 +20,7 @@ use App\Models\SHC;
      $this->middleware('auth:api', ['except' => ['Section','Department','Course','Pre_request','SHC','SCT'] ]);
     }
 
-    public function Department(Validate_Dep $request)
+    public function Department(Validate_dep $request)
     {
         $department = Department::create(
             [
