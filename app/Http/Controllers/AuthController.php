@@ -1,17 +1,20 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Validate_change_pass;
+use App\Http\Requests\Validate_delete;
 use App\Http\Requests\Validate_Login;
 use App\Http\Requests\Validate_signup;
 use App\Http\Requests\Validate_Student;
 use App\Models\Student;
 use App\Models\User;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+
 class AuthController extends Controller
 {
     public function __construct( )
     {
-     $this->middleware('auth:api', ['except' => ['login', 'signup','Student'] ]);
+     $this->middleware('auth:api', ['except' => ['login', 'signup','Student','delete_user'] ]);
     }
  
     public function signup(Validate_signup  $request)
@@ -49,17 +52,11 @@ class AuthController extends Controller
         return response()->json(auth()->user());
     }
 
-    public function logout()
-    {
-        auth()->logout();
-        return response()->json(['message' => 'Successfully logged out']);
-    }
-
     public function refresh()   // Refresh a token.
     {
         return $this->respondWithToken(auth()->refresh());
     }
- 
+
     protected function respondWithToken($token)         // Get the token array structure. 
     {
         return response()->json([
@@ -69,8 +66,15 @@ class AuthController extends Controller
         ]);
     }
 
+    public function logout()
+    {
+        auth()->logout();
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
     public function Student(Validate_Student  $request)
     {
+
         $check = Student::where('Student_id',$request->Student_id)->first();
         $advisor_counter = Student::where('adv_id',$request->adv_id)->get()->count();
         $is_adv = User::where('id',$request->adv_id)->value('type');
@@ -114,4 +118,50 @@ class AuthController extends Controller
                     ]
                 );
                 return response()->json(['message' => 'Student Created Sucessfully '], 201);
-            }}}}
+            }}
+    }
+
+    public function delete_user(Validate_delete  $request)
+    {
+        /*if (auth()->type == 3) 
+        {}
+        else { return response()->json(['error' => ' You are not adminstrator '], 400 ); }
+        */
+
+        if( User::find( $request->id) )
+        {
+            User::find( $request->id)->delete();
+            return response()->json(['message' => 'User Sucessfully Deleted  '], 201);
+
+        }
+        else
+        {
+            return response()->json(['message' => 'User not found '], 201);
+        }
+    }
+
+
+    public function change_pass(Validate_change_pass  $request)
+    {
+        $user = Auth()->user();
+       // dd($user->password);
+
+     
+        if ($user)
+         {
+           $x = Hash::check($request->password, $user->password );
+            
+            if ( ! $x  )
+            {
+                return response()->json(["error" => " password is wrong "], 400);
+            } 
+            else if ($request->password == $request->new_pass) 
+            {
+                return response()->json(["error" => " Old password =  new password  "], 400);
+            } else {
+                User::where('id', $user->id)->update(array('password' => hash::make($request->new_pass)));
+                return response()->json(["success" => "Password Changed Successfully "], 200);
+            }
+        }
+    }
+}

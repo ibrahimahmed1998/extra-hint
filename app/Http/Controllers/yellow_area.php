@@ -6,6 +6,7 @@ use App\Http\Requests\Validate_Section;
 use App\Http\Requests\Validate_dep;
 use App\Http\Requests\Validate_Pre_request;
 use App\Http\Requests\Validate_SCT;
+use App\Http\Requests\Validate_SCT_degree;
 use App\Http\Requests\Validate_SHC;
 use App\Models\Course;
 use App\Models\Section;
@@ -17,7 +18,7 @@ use App\Models\SHC;
 {
     public function __construct( )
     {
-     $this->middleware('auth:api', ['except' => ['Section','Department','Course','Pre_request','SHC','SCT'] ]);
+     $this->middleware('auth:api', ['except' => ['Section','Department','Course','Pre_request','SHC','SCT','update_student_degree'] ]);
     }
 
     public function Department(Validate_dep $request)
@@ -32,7 +33,6 @@ use App\Models\SHC;
         return response()->json(['message' => 'Department Created Sucessfully '], 201);
     }
 
- 
     public function Section(Validate_Section $request    )
     {
 
@@ -144,17 +144,16 @@ use App\Models\SHC;
        {
         $pass = Sct::where('ccode',$pr->pr_ccode)->value('hpass');
        
-        if ( $pass == 1 )
-            {
-                $counter= $counter + 1  ; 
-            }
-           
+        if ( $pass == 1 )  {   $counter= $counter + 1  ; }
+        
         }
+
          if( $counter != $p_r_counter  )
         {
             return response()->json(['error' => "Student can't enroll this course before it has pre-request and not passed "
             .$pre_req->pr_code ], 400); 
         }
+        
         else 
         {
             $Sct = Sct::create(
@@ -167,22 +166,55 @@ use App\Models\SHC;
             );
             return response()->json(['message' => 'Student Has Course Rel Created Sucessfully '], 201);
         }
-    }}
-
-
-    public function update_student_degree(Validate_SCT $request)
-    {
-        /* Up[pdaaaaaaaaaaaaaaaate]
-        'hmedterm_d' => $request->hmedterm_d,
-                'hlab_d' => $request->hlab_d,
-                'horal_d' => $request->horal_d,
-                'hclass_work_d' => $request->hclass_work_d,
-                'hfinal_d' => $request->hfinal_d,
-                'htotal_d' => $request->htotal_d,
-                'hpass' => $request->hpass,
-                */
-
+    }
     }
 
+    public function update_student_degree(Validate_SCT_degree $request)
+    {
+        $check = Sct::where('ccode',$request->ccode)->where('year',$request->year)->
+        where('semester',$request->semester)->where('Student_id',$request->Student_id)->first();
+        
+        $update = Sct::where('ccode',$request->ccode)->where('year',$request->year)->
+        where('semester',$request->semester)->where('Student_id',$request->Student_id) ; 
 
+        $course = Course::where('ccode',$request->ccode)->first();
+
+        $class_work = $request->hmedterm_d + $request->hlab_d +  $request->horal_d ; 
+        
+        $total =   $class_work  +   $request->hfinal_d  ; 
+
+        if ( $total >=  ($course->dtotal)*0.60 )  {   $is_pass = 1 ;  }
+        else { $is_pass = 0 ;  }
+
+         if($check)
+            {
+                if(  $request->hmedterm_d > $course->dmidterm ||
+                     $request->hlab_d > $course->dlab  ||
+                     $request->horal_d > $course->doral ||
+                     $class_work > $course->dclass_work  ||
+                     $request->hfinal_d > $course->dfinal  ||
+                     $total > $course->dtotal   
+                 )
+               {
+                return response()->json(['error' => ' Student Degrees > Course expected Degrees'], 201);
+               }
+               else
+               {
+                $update->update(array(
+                    'hmedterm_d' => $request->hmedterm_d ,
+                    'hlab_d' => $request->hlab_d,
+                    'horal_d' =>  $request->horal_d,
+                    'hclass_work_d' =>  $class_work ,
+                    'hfinal_d' => $request->hfinal_d,
+                    'htotal_d' =>  $total ,
+                    'hpass' =>  $is_pass    
+                ) );
+               }
+                return response()->json(['message' => 'Student Degree has updated Sucessfully '], 201);
+            }
+          else
+          {
+            return response()->json(['error' => 'Student Degree has not updated , may be wrong data '], 400);
+          }
+    }
 }

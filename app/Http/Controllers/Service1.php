@@ -2,12 +2,10 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Sct;
 use App\Models\Shc;
 use App\Models\Student;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\BinaryOp\Equal;
 
 class Service1 extends Controller
 {
@@ -29,8 +27,6 @@ class Service1 extends Controller
         {
             $sum = $sum + Course::where('ccode',$p->ccode)->value('cch');  
         }
-
-      //  echo $sum."\n" ; 
 
     $student = Student::where('student_id',$request->student_id)->first();
  
