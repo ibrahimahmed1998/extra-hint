@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\student_area;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Validate_Student extends FormRequest
+class validate_student extends FormRequest
 {
     public function authorize()
     {
