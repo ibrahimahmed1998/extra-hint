@@ -1,38 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
- 
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\auth\Validate_change_pass;
-use App\Http\Requests\auth\Validate_delete;
 use App\Http\Requests\auth\Validate_Login;
-use App\Http\Requests\auth\Validate_signup;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
+class Auth_Controller extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login', 'signup', 'Student', 'delete_user']]);
+        $this->middleware('auth:api', ['except' => ['login',]]);
     }
-
-    public function signup(Validate_signup  $request)
-    {
-        $user = User::create(
-            [
-                'id' => $request->id,
-                'full_name' => $request->full_name,
-                'password' => $request->password,
-                'email' => $request->email,
-                'type' => $request->type,
-                'phone' => $request->phone,
-            ]
-        );
-        return response()->json(['message' => 'Successfully sign up'], 201);
-    }
-
 
     public function login(Validate_Login $request)
     {
@@ -71,22 +51,6 @@ class AuthController extends Controller
         auth()->logout();
         return response()->json(['message' => 'Successfully logged out']);
     }
-
-    public function delete_user(Validate_delete  $request)
-    {
-        /*if (auth()->type == 3) 
-        {}
-        else { return response()->json(['error' => ' You are not adminstrator '], 400 ); }
-        */
-
-        if (User::find($request->id)) {
-            User::find($request->id)->delete();
-            return response()->json(['message' => 'User Sucessfully Deleted  '], 201);
-        } else {
-            return response()->json(['message' => 'User not found '], 201);
-        }
-    }
-
 
     public function change_pass(Validate_change_pass  $request)
     {

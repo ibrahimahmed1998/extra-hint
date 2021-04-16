@@ -15,7 +15,7 @@ use App\Models\Department;
 use App\Models\Pre_request;
 use App\Models\SHC;
 
-class yellow_area extends Controller
+class Yellow_Area extends Controller
 {
     public function __construct()
     {
@@ -23,9 +23,7 @@ class yellow_area extends Controller
         ['Section', 'Department', 'Course','delete_Course', 'Pre_request', 'SHC']]);
     }
 
-    public function Department(Validate_dep $request)
-    {
-        /*
+     /*
         $user = auth->users();
         if($user->type == 3 )
         {
@@ -33,6 +31,10 @@ class yellow_area extends Controller
         else 
             {       return response()->json(['error' => 'need admin premission '], 400); }
         */ 
+        
+    public function Department(Validate_dep $request)
+    {
+       
 
         $department = Department::create(
             [
@@ -46,13 +48,6 @@ class yellow_area extends Controller
 
     public function Section(Validate_Section $request)
     {
-        /* $user = auth->users();
-        if($user->type == 3 )
-        {
-        }
-        else 
-            {       return response()->json(['error' => 'need admin premission '], 400); }
-        */ 
         $section = Section::create(
             [
                 'Sec_id' => $request->Sec_id,
@@ -66,15 +61,6 @@ class yellow_area extends Controller
 
     public function Course(Validate_Course $request)
     {
-        /*
-        $user = auth->users();
-        if($user->type == 3 )
-        {
-        }
-        else 
-            {       return response()->json(['error' => 'need admin premission '], 400); }
-        */ 
-
         $sum1 = $request->dmidterm + $request->dlab + $request->doral;
 
         if ($sum1  !=  $request->dclass_work) 
@@ -107,28 +93,12 @@ class yellow_area extends Controller
 
     public function delete_Course(Validate_delete_course $request)
     {
-        /*
-        $user = auth->users();
-        if($user->type == 3 )
-        {
-        }
-        else 
-            {       return response()->json(['error' => 'need admin premission '], 400); }
-        */ 
             Course::where('ccode', $request->ccode)->delete();
             return response()->json(['Sucessfully' => " Course deleted Sucessfully"], 201);
-        
     }
 
     public function Pre_request(Validate_Pre_request $request)
     {
-        /* $user = auth->users();
-        if($user->type == 3 )
-        {
-        }
-        else 
-            {       return response()->json(['error' => 'need admin premission '], 400); }
-        */ 
         $check = Pre_request::where('ccode', $request->ccode)->where('pr_ccode', $request->pr_ccode)->first();
 
         if ($check) {
@@ -146,15 +116,6 @@ class yellow_area extends Controller
 
     public function SHC(Validate_SHC $request)
     {
-        /* $user = auth->users();
-        if($user->type == 3 )
-        {
-        }
-        else 
-            {       return response()->json(['error' => 'need admin premission '], 400); }
-        */ 
-
-
         $SHC = SHC::create(
             [
 
