@@ -18,7 +18,6 @@ Route::group(
     ['middleware' => 'api', 'prefix' => 'auth'],
     function ($router) 
     {
-        Route::post('signup', Auth_Controller::class . '@signup');
         Route::post('login', Auth_Controller::class . '@login');
         Route::post('change_password', Auth_Controller::class . '@change_password');
         Route::post('refresh', Auth_Controller::class . '@refresh');
@@ -55,10 +54,12 @@ Route::group(
     }
 );
 
+
 Route::group(
     ['middleware' => 'api', 'prefix' => 'admin'],
     function ($router) 
     {
+        Route::post('signup', Admin::class . '@signup');
         Route::post('search', Admin::class . '@search');
        
     }

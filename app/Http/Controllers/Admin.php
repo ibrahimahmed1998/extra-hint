@@ -18,7 +18,7 @@ class Admin extends Controller  /// for adminstratooooooooooor
     {
         $this->middleware('auth:api', ['except' =>
         [
-            'search'
+            'search' , 'list_all', 'signup'
         ]]);
     }
 
@@ -37,9 +37,15 @@ class Admin extends Controller  /// for adminstratooooooooooor
         return response()->json(['message' => 'Successfully sign up'], 201);
     }
 
-    public function search(Request $request)
+    public function search(Request $request) // by name 
     {
         $user = User::where('full_name', $request->name)->get();
+        return response()->json(['message' =>  $user], 201);
+    }
+
+    public function list_all() // list all users 
+    {
+        $user = User::all();
         return response()->json(['message' =>  $user], 201);
     }
 
