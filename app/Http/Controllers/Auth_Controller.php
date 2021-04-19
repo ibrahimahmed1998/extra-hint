@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\auth\Validate_change_pass;
@@ -71,9 +70,7 @@ class Auth_Controller extends Controller
     public function change_pass(Validate_change_pass  $request)
     {
         $user = Auth()->user();
-        // dd($user->password);
-
-
+        
         if ($user) {
             $x = Hash::check($request->password, $user->password);
 
