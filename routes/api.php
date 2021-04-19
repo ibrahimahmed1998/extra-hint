@@ -27,10 +27,9 @@ Route::group(
 );
 
 Route::group(
-    ['middleware' => 'api', 'prefix' => 'yellow'],
+    ['middleware' => admin_::class, 'prefix' => 'yellow'],
     function ($router) {
-        //Route::get('/users', [UserController::class, 'index']);
-        Route::post('Section', [Yellow::class,'Section']); //->middleware(admin_::class);
+         Route::post('Section', [Yellow::class,'Section']); //->middleware(admin_::class);
         Route::post('Department', [Yellow::class,'Department']); //->middleware(admin_::class);
         Route::post('Course', [Yellow::class,'Course']); //->middleware(admin_::class);
         Route::post('Pre_request', [Yellow::class,'Pre_request']); //->middleware(admin_::class);
@@ -42,7 +41,7 @@ Route::group(
 Route::group(
     ['middleware' => 'api', 'prefix' => 'student'],
     function ($router) {
-        Route::post('update_degree', [Stu::class,'update_student_degree']); //->middleware(advisor_::class);
+        Route::post('update_degree', [Stu::class,'update_student_degree'])->middleware(advisor_::class);
         Route::post('level_calc', [Stu::class,'level_calc']);
         Route::post('show_courses', [Stu::class,'show_courses']);
         Route::post('SCT', [Stu::class,'SCT']); // student has course 
