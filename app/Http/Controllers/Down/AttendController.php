@@ -24,9 +24,11 @@ class AttendController extends Controller
         $check_stu=Student::where('Student_id',$user->id)->first();
         $check_sct=Sct::where('Student_id',$user->id)->where('ccode',$request->ccode)->first();
 
-        $is_attend=Attend::where('Student_id',$user->id)->where('ccode',$request->ccode)
-        ->where('day_date',$request->day_date)->where('is_attend',$request->is_attend)
-        ->where('is_lecture', $request->is_lecture);
+        $is_attend=Attend::where('Student_id',$user->id)
+                          ->where('ccode',$request->ccode)
+                          ->where('day_date',$request->day_date)->where('is_attend',$request->is_attend)
+                          ->where('is_lecture', $request->is_lecture)->first();
+
         if($is_attend)
         {
             return response()->json(['error' => "Duplicated !"], 400);
