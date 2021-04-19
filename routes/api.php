@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth_Controller;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ChatsController;
+use App\Http\Controllers\Down\AttendController;
+use App\Http\Controllers\Down\FeadbackController;
 use App\Http\Controllers\Stu;
 use App\Http\Controllers\Yellow;
 use App\Http\Middleware\admin_;
@@ -29,12 +31,12 @@ Route::group(
 Route::group(
     ['middleware' => admin_::class, 'prefix' => 'yellow'],
     function ($router) {
-         Route::post('Section', [Yellow::class,'Section']); //->middleware(admin_::class);
-        Route::post('Department', [Yellow::class,'Department']); //->middleware(admin_::class);
-        Route::post('Course', [Yellow::class,'Course']); //->middleware(admin_::class);
-        Route::post('Pre_request', [Yellow::class,'Pre_request']); //->middleware(admin_::class);
-        Route::post('SHC', [Yellow::class,'SHC']); //->middleware(admin_::class);
-        Route::post('delete_Course', [Yellow::class,'delete_Course']); //->middleware(admin_::class);
+         Route::post('Section', [Yellow::class,'Section']);  
+        Route::post('Department', [Yellow::class,'Department']);  
+        Route::post('Course', [Yellow::class,'Course']);  
+        Route::post('Pre_request', [Yellow::class,'Pre_request']);  
+        Route::post('SHC', [Yellow::class,'SHC']);  
+        Route::post('delete_Course', [Yellow::class,'delete_Course']);  
     }
 );
 
@@ -45,6 +47,9 @@ Route::group(
         Route::post('level_calc', [Stu::class,'level_calc']);
         Route::post('show_courses', [Stu::class,'show_courses']);
         Route::post('SCT', [Stu::class,'SCT']); // student has course 
+        Route::post('attend', [AttendController::class,'attend']); // student has course 
+
+        
     }
 );
 
@@ -59,10 +64,13 @@ Route::group(
 );
 
 Route::group(
-    ['middleware' => 'api', 'prefix' => 'chat'],
+    ['middleware' => 'api', 'prefix' => 'general'],
     function ($router) {
         Route::get('/', ChatsController::class . '@index');
         Route::get('messages', ChatsController::class . '@fetchMessages');
         Route::post('messages', ChatsController::class . '@sendMessage');
+        Route::post('add_feedback', FeadbackController::class . '@add_feedback');
+
+
     }
 );

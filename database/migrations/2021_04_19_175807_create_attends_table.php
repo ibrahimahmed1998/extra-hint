@@ -24,24 +24,22 @@ class CreateAttendsTable extends Migration
             $table->engine = 'InnoDB';
             $table->string('ccode');
             $table->integer('Student_id');
-            $table->date('day_date')->index();
-            $table->tinyInteger('attend');
-            $table->tinyInteger('Week_is_lec');
+            $table->date('day_date');
+            $table->tinyInteger('is_attend');
+            $table->tinyInteger('is_lecture');
 
-            $table->index(["ccode", "Week_is_lec"], 'fk_Attends_Week1_idx');
-
-            $table->index(["Student_id"], 'fk_Student_has_Week_table_Students1_idx');
-
-
-            $table->foreign('Student_id', 'fk_Student_has_Week_table_Students1_idx')
+            $table->foreign('Student_id', 'fk_Attends_Students1_idx')
                 ->references('Student_id')->on('Students')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('ccode', 'fk_Attends_Weeks1_idx')
-                ->references('ccode')->on('Weeks')
+            $table->foreign('ccode', 'fk_Attends_Courses1_idx')
+                ->references('ccode')->on('Courses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->primary(array('Student_id','ccode','day_date','is_attend','is_lecture'));
+
         });
     }
 
