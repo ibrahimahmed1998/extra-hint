@@ -10,14 +10,12 @@ use App\Models\Shc;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
-class Student_Area extends Controller
+class Stu extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' =>[ ]]);
+        $this->middleware('auth:api', ['except' =>[ ] ]);
     }
-
-    
 
     public function level_calc(Request $request)
     {

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\yellow_area\Validate_Course;
@@ -13,7 +14,7 @@ use App\Models\Department;
 use App\Models\Pre_request;
 use App\Models\SHC;
 
-class Yellow_Area extends Controller
+class Yellow extends Controller
 {
     public function __construct()
     {

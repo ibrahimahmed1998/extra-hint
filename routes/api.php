@@ -1,13 +1,12 @@
 <?php
-// App\Http\Controllers\Yellow_Area
-use App\Http\Controllers\add_student;
+ use App\Http\Controllers\add_student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth_Controller;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ChatsController;
-use App\Http\Controllers\Student_Area;
-use App\Http\Controllers\Yellow_Area;
+use App\Http\Controllers\Stu;
+use App\Http\Controllers\Yellow;
 use App\Http\Middleware\admin_;
 use App\Http\Middleware\advisor_;
 
@@ -31,22 +30,22 @@ Route::group(
     ['middleware' => 'api', 'prefix' => 'yellow'],
     function ($router) {
         //Route::get('/users', [UserController::class, 'index']);
-        Route::post('Section', [Yellow_Area::class, 'Section']); //->middleware(admin_::class);
-        Route::post('Department', [Yellow_Area::class, 'Department']); //->middleware(admin_::class);
-        Route::post('Course', [Yellow_Area::class, 'Course']); //->middleware(admin_::class);
-        Route::post('Pre_request', [Yellow_Area::class, 'Pre_request']); //->middleware(admin_::class);
-        Route::post('SHC', [Yellow_Area::class, 'SHC']); //->middleware(admin_::class);
-        Route::post('delete_Course', [Yellow_Area::class, 'delete_Course']); //->middleware(admin_::class);
+        Route::post('Section', [Yellow::class,'Section']); //->middleware(admin_::class);
+        Route::post('Department', [Yellow::class,'Department']); //->middleware(admin_::class);
+        Route::post('Course', [Yellow::class,'Course']); //->middleware(admin_::class);
+        Route::post('Pre_request', [Yellow::class,'Pre_request']); //->middleware(admin_::class);
+        Route::post('SHC', [Yellow::class,'SHC']); //->middleware(admin_::class);
+        Route::post('delete_Course', [Yellow::class,'delete_Course']); //->middleware(admin_::class);
     }
 );
 
 Route::group(
-    ['middleware' => 'api', 'prefix' => 'Student'],
+    ['middleware' => 'api', 'prefix' => 'student'],
     function ($router) {
-        Route::post('update_degree', [Student_Area::class, 'update_student_degree']); //->middleware(advisor_::class);
-        Route::post('level_calc', [Student_Area::class, 'level_calc']);
-        Route::post('show_courses', [Student_Area::class, 'show_courses']);
-        Route::post('SCT', [Student_Area::class,  'SCT']); // student has course 
+        Route::post('update_degree', [Stu::class,'update_student_degree']); //->middleware(advisor_::class);
+        Route::post('level_calc', [Stu::class,'level_calc']);
+        Route::post('show_courses', [Stu::class,'show_courses']);
+        Route::post('SCT', [Stu::class,'SCT']); // student has course 
     }
 );
 
