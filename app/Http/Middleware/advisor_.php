@@ -4,7 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Student_Area;
+use App\Http\Controllers\Yellow_Area;
 class advisor_
 {
     /**

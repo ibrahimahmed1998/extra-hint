@@ -28,8 +28,8 @@ Route::group(
 
 Route::group(
     ['middleware' => admin_::class, 'prefix' => 'yellow'],function ($router) {
-        Route::post('Section', Yellow_Area::class . '@Section');
-        Route::post('Department', Yellow_Area::class . '@Department');
+        Route::post('Section', Yellow_Area::class.'@Section');
+        Route::post('Department', Yellow_Area::class.'@Department');
         Route::post('Course', Yellow_Area::class . '@Course');
         Route::post('Pre_request', Yellow_Area::class . '@Pre_request');
         Route::post('SHC', Yellow_Area::class . '@SHC');

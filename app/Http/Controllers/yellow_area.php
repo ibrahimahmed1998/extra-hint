@@ -22,20 +22,9 @@ class Yellow_Area extends Controller
         $this->middleware('auth:api', ['except' =>[] ] );
       
     }
-
-     /*
-        $user = auth->users();
-        if($user->type == 3 )
-        {
-        }
-        else 
-            {       return response()->json(['error' => 'need admin premission '], 400); }
-        */ 
-        
+    
     public function Department(Validate_dep $request) //create 
     {
-       
-
         $department = Department::create(
             [
                 'dname' => $request->dname,
