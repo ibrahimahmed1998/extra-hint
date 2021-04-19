@@ -17,55 +17,10 @@ class Student_Area extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' =>
-        [
-            'SCT', 'cancel_course', 'Student', 'level_calc', 'update_student_degree',
-            'show_courses', 'suggestion_courses', 'gpa_calc'
-        ]]);
+        $this->middleware('auth:api', ['except' =>[ ]]);
     }
 
-    public function Student(validate_student  $request)
-    {
-        /*
-            premsion
-        */
-
-        $check = Student::where('Student_id', $request->Student_id)->first();
-        $advisor_counter = Student::where('adv_id', $request->adv_id)->get()->count();
-        $is_adv = User::where('id', $request->adv_id)->value('type');
-        $is_stu = User::where('id', $request->Student_id)->value('type');
-
-        //dd($is_stu->type);
-        if ($is_stu != 1) {
-            return response()->json(['error' => "this id is not student , please use real student id "], 400);
-        }
-
-        if ($is_adv != 2) {
-            return response()->json(['error' => "this id is not advisor , please use real advisor id "], 400);
-        }
-
-        if ($check) {
-            return response()->json(['error' => "Student is found in system "], 400);
-        } else {
-            if ($advisor_counter >= 10) {
-                return response()->json(['error' => "please attach with another , advisor who's id =  " . $request->adv_id . " is completed"], 401);
-            } else {
-                $Student = Student::create(
-                    [
-                        'Student_id' => $request->Student_id,
-                        'roadmap' => $request->roadmap,
-                        'live_hour' => $request->live_hour,
-                        'total_gpa' => $request->total_gpa,
-                        'current_lvl' => $request->current_lvl,
-                        'adv_id' => $request->adv_id,
-                        'dep_id' => $request->dep_id,
-                        'sec_id' => $request->sec_id,
-                    ]
-                );
-                return response()->json(['message' => 'Student Created Sucessfully '], 201);
-            }
-        }
-    }
+    
 
     public function level_calc(Request $request)
     {
@@ -166,19 +121,6 @@ class Student_Area extends Controller
         }
     }
 
-    public function cancel_course(Validate_SCT $request)
-    {
-        /* permison */
-        $check = Sct::where('ccode', $request->ccode)->where('year', $request->year)->where('semester', $request->semester)->where('Student_id', $request->Student_id)->first();
-
-        if ($check) {
-            $check = Sct::where('ccode', $request->ccode)->where('year', $request->year)->where('semester', $request->semester)->where('Student_id', $request->Student_id)->delete();
-            return response()->json(['Sucessfully' => " Course Canceled Sucessfully"], 201);
-        } else {
-            return response()->json(['error' => "Course Not Found "], 400);
-        }
-    }
-
     public function update_student_degree(Validate_SCT_degree $request)
     {
 
@@ -228,14 +170,6 @@ class Student_Area extends Controller
 
     public function SCT(Validate_SCT $request)
     {
-        /* $user = auth->users();
-        if($user->type == 3 )
-        {
-        }
-        else 
-            {       return response()->json(['error' => 'need admin premission '], 400); }
-        */
-
         $x = Sct::where('ccode', $request->ccode)->where('year', $request->year)->where('semester', $request->semester)->where('Student_id', $request->Student_id)->first();
 
         if ($x) {

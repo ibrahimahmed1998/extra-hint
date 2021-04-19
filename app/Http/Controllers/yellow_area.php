@@ -19,8 +19,8 @@ class Yellow_Area extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => 
-        ['Section', 'Department', 'Course','delete_Course', 'Pre_request', 'SHC']]);
+        $this->middleware('auth:api', ['except' =>[] ] );
+      
     }
 
      /*
@@ -32,7 +32,7 @@ class Yellow_Area extends Controller
             {       return response()->json(['error' => 'need admin premission '], 400); }
         */ 
         
-    public function Department(Validate_dep $request)
+    public function Department(Validate_dep $request) //create 
     {
        
 
@@ -46,7 +46,7 @@ class Yellow_Area extends Controller
         return response()->json(['message' => 'Department Created Sucessfully '], 201);
     }
 
-    public function Section(Validate_Section $request)
+    public function Section(Validate_Section $request) //create 
     {
         $section = Section::create(
             [
@@ -59,7 +59,7 @@ class Yellow_Area extends Controller
         return response()->json(['message' => 'Section Created Sucessfully '], 201);
     }
 
-    public function Course(Validate_Course $request)
+    public function Course(Validate_Course $request) //create 
     {
         $sum1 = $request->dmidterm + $request->dlab + $request->doral;
 
@@ -97,7 +97,7 @@ class Yellow_Area extends Controller
             return response()->json(['Sucessfully' => " Course deleted Sucessfully"], 201);
     }
 
-    public function Pre_request(Validate_Pre_request $request)
+    public function Pre_request(Validate_Pre_request $request) //create 
     {
         $check = Pre_request::where('ccode', $request->ccode)->where('pr_ccode', $request->pr_ccode)->first();
 
@@ -114,7 +114,7 @@ class Yellow_Area extends Controller
         return response()->json(['message' => 'Pre_request Course Created Sucessfully '], 201);
     }
 
-    public function SHC(Validate_SHC $request)
+    public function SHC(Validate_SHC $request) // Section Has Course //create 
     {
         $SHC = SHC::create(
             [
@@ -129,9 +129,6 @@ class Yellow_Area extends Controller
 
             ]
         );
-
         return response()->json(['message' => 'Section Has Course Rel Created Sucessfully '], 201);
     }
-
-
 }

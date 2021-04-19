@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\auth\Validate_change_pass;
 use App\Http\Requests\auth\Validate_Login;
+use App\Http\Requests\auth\Validate_signup;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
@@ -11,7 +12,22 @@ class Auth_Controller extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login',]]);
+        $this->middleware('auth:api', ['except' => ['login','signup',]]);
+    }
+
+    public function signup(Validate_signup  $request)
+    {
+        $user = User::create(
+            [
+                'id' => $request->id,
+                'full_name' => $request->full_name,
+                'password' => $request->password,
+                'email' => $request->email,
+                'type' => $request->type,
+                'phone' => $request->phone,
+            ]
+        );
+        return response()->json(['message' => 'Successfully sign up'], 201);
     }
 
     public function login(Validate_Login $request)
