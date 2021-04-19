@@ -8,7 +8,8 @@ use App\Http\Controllers\Admin;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\Student_Area;
 use App\Http\Controllers\Yellow_Area;
-
+use App\Http\Middleware\admin_;
+use App\Http\Middleware\advisor_;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

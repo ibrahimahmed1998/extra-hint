@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\yellow_area\Validate_Course;
 use App\Http\Requests\yellow_area\Validate_delete_course;

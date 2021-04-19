@@ -1,16 +1,13 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\student_area\Validate_SCT;
 use App\Http\Requests\student_area\Validate_SCT_degree;
-use App\Http\Requests\student_area\validate_student;
 use App\Models\Course;
 use App\Models\Pre_request;
 use App\Models\Sct;
 use App\Models\Shc;
 use App\Models\Student;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class Student_Area extends Controller
