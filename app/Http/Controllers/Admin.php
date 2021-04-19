@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\auth\Validate_delete;
+use App\Http\Requests\auth\validate_delete;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Http\Requests\auth\Validate_signup;
 use App\Http\Requests\student_area\Validate_SCT;
 use App\Models\Sct;
 
@@ -19,7 +18,6 @@ class Admin extends Controller
 
     public function search(Request $request) // by name 
     {
-       // dd(auth()->user()->type); 
         $user = User::where('full_name', $request->name)->get();
         return response()->json(['message' =>  $user], 201);
     }
@@ -30,7 +28,7 @@ class Admin extends Controller
         return response()->json(['message' =>  $user], 201);
     }
 
-    public function delete_user(Validate_delete  $request)
+    public function delete_user(validate_delete  $request)
     {
         if (User::find($request->id)) {
             User::find($request->id)->delete();

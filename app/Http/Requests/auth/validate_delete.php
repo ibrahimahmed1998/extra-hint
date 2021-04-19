@@ -4,7 +4,7 @@ namespace App\Http\Requests\auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Validate_delete extends FormRequest
+class validate_delete extends FormRequest
 {
     public function authorize()
     {
