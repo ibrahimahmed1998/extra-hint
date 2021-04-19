@@ -6,8 +6,7 @@ use App\Http\Controllers\Auth_Controller;
 use App\Http\Controllers\Student_Area;
 use App\Http\Controllers\Yellow_Area;
 use App\Http\Controllers\Admin;
-
-
+use App\Http\Controllers\ChatsController;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
@@ -16,22 +15,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(
     ['middleware' => 'api', 'prefix' => 'auth'],
-    function ($router) 
-    {
+    function ($router) {
         Route::post('login', Auth_Controller::class . '@login');
         Route::post('change_password', Auth_Controller::class . '@change_password');
         Route::post('refresh', Auth_Controller::class . '@refresh');
         Route::post('me', Auth_Controller::class . '@me');
         Route::post('logout', Auth_Controller::class . '@logout');
         Route::post('delete_user', Auth_Controller::class . '@delete_user');
-        Route::post('change_pass', Auth_Controller::class . '@change_pass'); 
+        Route::post('change_pass', Auth_Controller::class . '@change_pass');
     }
 );
 
 Route::group(
     ['middleware' => 'api', 'prefix' => 'yellow'],
-    function ($router) 
-    {
+    function ($router) {
         Route::post('Section', Yellow_Area::class . '@Section');
         Route::post('Department', Yellow_Area::class . '@Department');
         Route::post('Course', Yellow_Area::class . '@Course');
@@ -43,8 +40,7 @@ Route::group(
 
 Route::group(
     ['middleware' => 'api', 'prefix' => 'Student'],
-    function ($router) 
-    {
+    function ($router) {
         Route::post('Student', Student_Area::class . '@Student');
         Route::post('level_calc', Student_Area::class . '@level_calc');
         Route::post('show_courses', Student_Area::class . '@show_courses');
@@ -54,13 +50,19 @@ Route::group(
     }
 );
 
-
 Route::group(
     ['middleware' => 'api', 'prefix' => 'admin'],
-    function ($router) 
-    {
+    function ($router) {
         Route::post('signup', Admin::class . '@signup');
         Route::post('search', Admin::class . '@search');
-       
+    }
+);
+
+Route::group(
+    ['middleware' => 'api', 'prefix' => 'chat'],
+    function ($router) {
+        Route::get('/', ChatsController::class . '@index');
+        Route::get('messages', ChatsController::class . '@fetchMessages');
+        Route::post('messages', ChatsController::class . '@sendMessage');
     }
 );
