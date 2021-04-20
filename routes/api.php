@@ -1,13 +1,15 @@
 <?php
- use App\Http\Controllers\add_student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth_Controller;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ChatsController;
-use App\Http\Controllers\Down\AttendController;
-use App\Http\Controllers\Down\FeadbackController;
+use App\Http\Controllers\AttendController;
+use App\Http\Controllers\FeadbackController;
+use App\Http\Controllers\lvl_calc;
 use App\Http\Controllers\Stu;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\update_student;
 use App\Http\Controllers\Yellow;
 use App\Http\Middleware\admin_;
 use App\Http\Middleware\advisor_;
@@ -31,7 +33,7 @@ Route::group(
 Route::group(
     ['middleware' => admin_::class, 'prefix' => 'yellow'],
     function ($router) {
-         Route::post('Section', [Yellow::class,'Section']);  
+        Route::post('Section', [Yellow::class,'Section']);  
         Route::post('Department', [Yellow::class,'Department']);  
         Route::post('Course', [Yellow::class,'Course']);  
         Route::post('Pre_request', [Yellow::class,'Pre_request']);  
@@ -42,21 +44,22 @@ Route::group(
 
 Route::group(
     ['middleware' => 'api', 'prefix' => 'student'],
-    function ($router) {
+    function ($router)
+     {
         Route::post('update_degree', [Stu::class,'update_student_degree'])->middleware(advisor_::class);
-        Route::post('level_calc', [Stu::class,'level_calc']);
         Route::post('show_courses', [Stu::class,'show_courses']);
         Route::post('SCT', [Stu::class,'SCT']); // student has course 
         Route::post('attend', [AttendController::class,'attend']); // student has course 
-
-        
+        Route::post('layer', [AttendController::class,'layer']); // student has course 
     }
 );
 
 Route::group(
     ['middleware' => admin_::class, 'prefix' => 'admin'],
     function ($router) {
-        Route::post('add_student', add_student::class . '@add_student');
+        Route::post('add_student', StudentController::class . '@add_student');
+        Route::post('delete_student', StudentController::class . '@add_student');
+        Route::post('update_student', StudentController::class . '@update_student');
         Route::post('search', Admin::class . '@search');
         Route::post('delete_user', Admin::class . '@delete_user');
         Route::post('cancel_course', Admin::class . '@cancel_course');
@@ -65,12 +68,13 @@ Route::group(
 
 Route::group(
     ['middleware' => 'api', 'prefix' => 'general'],
-    function ($router) {
+    function ($router) 
+    {
         Route::get('/', ChatsController::class . '@index');
         Route::get('messages', ChatsController::class . '@fetchMessages');
         Route::post('messages', ChatsController::class . '@sendMessage');
         Route::post('add_feedback', FeadbackController::class . '@add_feedback');
-
-
+        Route::post('delete_feedback', FeadbackController::class . '@delete_feedback');
+        Route::post('lvl_calc', lvl_calc::class.'@lvl_calc_f');
     }
 );

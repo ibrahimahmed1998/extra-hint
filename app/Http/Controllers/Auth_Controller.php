@@ -1,21 +1,25 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\auth\Validate_change_pass;
 use App\Http\Requests\auth\Validate_Login;
 use App\Http\Requests\auth\Validate_signup;
 use App\Models\User;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Hash;
 
 class Auth_Controller extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','signup',]]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup',]]);
     }
 
     public function signup(Validate_signup  $request)
     {
+        //  $vcode = Str::random(70);
         $user = User::create(
             [
                 'id' => $request->id,
@@ -27,16 +31,24 @@ class Auth_Controller extends Controller
             ]
         );
         return response()->json(['message' => 'Successfully sign up'], 201);
+
+        /* Mail::to($user)->send(new verifyEmail($user->firstname, $vcode));
+
+        return response()->json(['message' => 'Successfully sign up ,Look at your email inbox'], 201);
+        */
     }
 
     public function login(Validate_Login $request)
     {
         $credentials = $request->only('email', 'password');
 
-        if ($token = auth()->attempt($credentials)) { {
-                $this->respondWithToken($token);
-            }
-            return $this->respondWithToken($token);
+        if ($token = auth()->attempt($credentials)) 
+        { 
+           
+           $token =    $this->respondWithToken($token);
+           $user = auth()->user();
+            ; 
+            return response()->json(['token' =>$token , 'user type'=> $user->type]) ; 
         } else {
             return response()->json(['error' => "Wrong credintials, Please try to login with a valid e-mail or password"], 401);
         }
@@ -65,23 +77,5 @@ class Auth_Controller extends Controller
     {
         auth()->logout();
         return response()->json(['message' => 'Successfully logged out']);
-    }
-
-    public function change_pass(Validate_change_pass  $request)
-    {
-        $user = Auth()->user();
-        
-        if ($user) {
-            $x = Hash::check($request->password, $user->password);
-
-            if (!$x) {
-                return response()->json(["error" => " password is wrong "], 400);
-            } else if ($request->password == $request->new_pass) {
-                return response()->json(["error" => " Old password =  new password  "], 400);
-            } else {
-                User::where('id', $user->id)->update(array('password' => hash::make($request->new_pass)));
-                return response()->json(["success" => "Password Changed Successfully "], 200);
-            }
-        }
     }
 }

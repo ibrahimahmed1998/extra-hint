@@ -102,11 +102,17 @@ class Yellow extends Controller
         return response()->json(['message' => 'Pre_request Course Created Sucessfully '], 201);
     }
 
+    public function delete_Pre_request(Validate_Pre_request $request) //create 
+    {
+        Pre_request::where('ccode', $request->ccode)
+                   ->where('pr_ccode', $request->pr_ccode)->delete();
+        return response()->json(['Sucessfully' => " Prerequest Course deleted Sucessfully"], 201);
+    }
+
     public function SHC(Validate_SHC $request) // Section Has Course //create 
     {
         $SHC = SHC::create(
             [
-
                 'dep_id' => $request->dep_id,
                 'Sec_id' => $request->Sec_id,
                 'ccode' => $request->ccode,

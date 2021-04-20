@@ -1,14 +1,12 @@
 <?php
-
-namespace App\Http\Controllers\Down;
-
+namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\validate_Feedback;
- use App\Models\Feedbacks;
+use App\Models\Feedbacks;
+use Illuminate\Http\Request;
 
 class FeadbackController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth:api', ['except' =>  []]);
@@ -28,5 +26,13 @@ class FeadbackController extends Controller
              ]
         );
         return response()->json(['message' => 'Successfully Feedback'], 201);
+    }
+
+    public function delete_feedback(Request $request)
+    {
+        $request->validate(['fid' => 'required|exists:Feedbacks']);
+
+        Feedbacks::where('fid', $request->fid)->delete();
+        return response()->json(['Sucessfully' => " Feedback deleted"], 201);
     }
 }
