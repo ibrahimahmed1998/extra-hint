@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Down;
+namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\validate_attend;
 use App\Models\Attend;

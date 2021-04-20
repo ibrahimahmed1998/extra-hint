@@ -30,19 +30,19 @@ class lvl_calc extends Controller
 
         Student::where('Student_id', $request->Student_id)->first();
 
-        if ($sum >= 0 && $sum < 33) {
-            $lvl = 1;
-        } else if ($sum  >= 33 && $sum < 67) {
-            $lvl = 2;
-        } else if ($sum  >= 67 && $sum < 100) {
-            $lvl =  3;
-        } else if ($sum  >= 100 && $sum < 134) {
-            $lvl =  4;
-        } else if ($sum >= 134) {
+        if ($sum >= 0 && $sum < 33) {  $lvl = 1; } 
+        else if ($sum  >= 33 && $sum < 67) { $lvl = 2; }
+        else if ($sum  >= 67 && $sum < 100) { $lvl =  3; }
+        else if ($sum  >= 100 && $sum < 134) {$lvl =  4;}
+        else if ($sum >= 134) 
+        {
             response()->json(['message' => 'student was graduated  '], 201);
-        } else {
+        } 
+        else 
+        {
             return response()->json(['error' => 'level calculator has error  '], 400);
         }
+        
         return $lvl;
     }
 }

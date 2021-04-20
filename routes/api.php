@@ -5,11 +5,13 @@ use App\Http\Controllers\Auth_Controller;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\AttendController;
+use App\Http\Controllers\enroll_course;
 use App\Http\Controllers\FeadbackController;
+use App\Http\Controllers\intell_alg;
 use App\Http\Controllers\lvl_calc;
 use App\Http\Controllers\Stu;
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\update_student;
+use App\Http\Controllers\update_degree;
 use App\Http\Controllers\Yellow;
 use App\Http\Middleware\admin_;
 use App\Http\Middleware\advisor_;
@@ -46,9 +48,9 @@ Route::group(
     ['middleware' => 'api', 'prefix' => 'student'],
     function ($router)
      {
-        Route::post('update_degree', [Stu::class,'update_student_degree'])->middleware(advisor_::class);
-        Route::post('show_courses', [Stu::class,'show_courses']);
-        Route::post('SCT', [Stu::class,'SCT']); // student has course 
+        Route::post('update_degree', [update_degree::class,'update_degree'])->middleware(advisor_::class);
+        Route::post('show_courses', [intell_alg::class,'show_courses']);
+        Route::post('enroll_course', [enroll_course::class,'SCT']); // student has course 
         Route::post('attend', [AttendController::class,'attend']); // student has course 
         Route::post('layer', [AttendController::class,'layer']); // student has course 
     }

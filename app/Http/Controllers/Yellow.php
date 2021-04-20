@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\yellow_area\Validate_Course;
 use App\Http\Requests\yellow_area\Validate_delete_course;
@@ -13,15 +14,15 @@ use App\Models\Section;
 use App\Models\Department;
 use App\Models\Pre_request;
 use App\Models\SHC;
+use Illuminate\Http\Request;
 
 class Yellow extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' =>[] ] );
-      
+        $this->middleware('auth:api', ['except' => []]);
     }
-    
+
     public function Department(Validate_dep $request) //create 
     {
         $department = Department::create(
@@ -33,6 +34,15 @@ class Yellow extends Controller
 
         return response()->json(['message' => 'Department Created Sucessfully '], 201);
     }
+
+    public function delete_department(Request $request)
+    {
+        $request->validate(['dep_id' => 'required|exists:Departments']);
+
+        Department::where('dep_id', $request->dep_id)->delete();
+        return response()->json(['Sucessfully' => " Department deleted"], 201);
+    }
+
 
     public function Section(Validate_Section $request) //create 
     {
@@ -47,21 +57,27 @@ class Yellow extends Controller
         return response()->json(['message' => 'Section Created Sucessfully '], 201);
     }
 
+    public function delete_section(Request $request)
+    {
+        $request->validate(['sec_id' => 'required|exists:Sections']);
+
+        Section::where('sec_id', $request->sec_id)->delete();
+        return response()->json(['Sucessfully' => " Section deleted"], 201);
+    }
+
     public function Course(Validate_Course $request) //create 
     {
         $sum1 = $request->dmidterm + $request->dlab + $request->doral;
 
-        if ($sum1  !=  $request->dclass_work) 
-        {
+        if ($sum1  !=  $request->dclass_work) {
             return response()->json(['error' => 'dclass_work Not Calculated Good => ' . $sum1 . '!=' . $request->dclass_work], 400);
         }
-     
+
         $sum2 =  $sum1 +  $request->dfinal;
-        if ($sum2 != $request->dtotal) 
-        {
+        if ($sum2 != $request->dtotal) {
             return response()->json(['error' => 'Total Degree Not Calculated Good => ' . $sum2 . '!=' . $request->dtotal], 400);
         }
-        $Course = Course::create(
+        Course::create(
             [
                 'ccode' => $request->ccode,
                 'cname' => $request->cname,
@@ -81,8 +97,8 @@ class Yellow extends Controller
 
     public function delete_Course(Validate_delete_course $request)
     {
-            Course::where('ccode', $request->ccode)->delete();
-            return response()->json(['Sucessfully' => " Course deleted Sucessfully"], 201);
+        Course::where('ccode', $request->ccode)->delete();
+        return response()->json(['Sucessfully' => " Course deleted Sucessfully"], 201);
     }
 
     public function Pre_request(Validate_Pre_request $request) //create 
@@ -105,7 +121,7 @@ class Yellow extends Controller
     public function delete_Pre_request(Validate_Pre_request $request) //create 
     {
         Pre_request::where('ccode', $request->ccode)
-                   ->where('pr_ccode', $request->pr_ccode)->delete();
+            ->where('pr_ccode', $request->pr_ccode)->delete();
         return response()->json(['Sucessfully' => " Prerequest Course deleted Sucessfully"], 201);
     }
 
@@ -124,5 +140,14 @@ class Yellow extends Controller
             ]
         );
         return response()->json(['message' => 'Section Has Course Rel Created Sucessfully '], 201);
+    }
+
+    public function delete_SHC(Validate_SHC $request)
+    {
+        SHC::where('ccode', $request->ccode)
+            ->where('sec_id', $request->sec_id)
+            ->where('dep_id', $request->dep_id)
+            ->delete();
+        return response()->json(['Sucessfully' => " Course deleted Sucessfully from Scetion"], 201);
     }
 }

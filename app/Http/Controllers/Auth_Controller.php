@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\auth\Validate_change_pass;
 use App\Http\Requests\auth\Validate_Login;
 use App\Http\Requests\auth\Validate_signup;
 use App\Models\User;
-use GuzzleHttp\Psr7\Request;
-use Illuminate\Support\Facades\Hash;
-
+ 
 class Auth_Controller extends Controller
 {
     public function __construct()
