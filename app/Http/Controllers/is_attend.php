@@ -7,7 +7,7 @@ use App\Models\Sct;
 use App\Models\Student;
 use Illuminate\Support\Str;
 
-class AttendController extends Controller
+class is_attend extends Controller
 {
     public function __construct()
     {

@@ -12,7 +12,7 @@ class enroll_course extends Controller
         $this->middleware('auth:api', ['except' => []]);
     }
 
-    public function SCT(Validate_SCT $request)  // student enroll course table
+    public function enroll(Validate_SCT $request)  // student enroll course table
     {
         $x = Sct::where('ccode', $request->ccode)->
                   where('year', $request->year)->

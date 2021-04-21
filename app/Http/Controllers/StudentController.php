@@ -56,12 +56,13 @@ class StudentController extends Controller
         $lvl = new lvl_calc(); 
         $student = Student::where('Student_id', $request->Student_id);
         $class = new C_GPA();
-      
-        if ($student) {
+         
+        if ($student) 
+        {
             $student->update(array(
               //'live_hour' => live hour calc,
-                'total_gpa' =>$class->gpa_calc_f($request),
-                'current_lvl' => $lvl->lvl_calc_f($request),
+                'c_gpa' =>$class->gpa_calc_f($request),
+                'lvl' => $lvl->lvl_calc_f($request),
                 'roadmap' => $request->roadmap,
                 'adv_id' => $request->adv_id,
                 'dep_id' => $request->dep_id,

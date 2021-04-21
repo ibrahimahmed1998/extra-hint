@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\auth\validate_delete;
 use App\Http\Requests\auth\Validate_Login;
 use App\Http\Requests\auth\Validate_signup;
 use App\Models\User;
@@ -75,4 +76,31 @@ class Auth_Controller extends Controller
         auth()->logout();
         return response()->json(['message' => 'Successfully logged out']);
     }
+
+    public function delete_user(validate_delete  $request)
+    {
+        if (User::find($request->id)) 
+        {
+            User::find($request->id)->delete();
+            return response()->json(['success' => 'User  Deleted  '], 201);
+        } else 
+        {
+            return response()->json(['error' => 'User not found '], 201);
+        }
+    }
+
+    public function list_all() // list all users 
+    {
+        $user = User::all();
+        return response()->json(['success' =>  $user], 201);
+    }
+
+    /*
+    public function search(Request $request) // by name 
+    {
+        $user = User::where('full_name', $request->name)->get();
+        return response()->json(['success' =>  $user], 201);
+    }
+    */
+    
 }

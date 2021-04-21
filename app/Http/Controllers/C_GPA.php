@@ -77,7 +77,8 @@ class C_GPA extends Controller
             $sum= $sum + $Qulaity;
             $total_cch=$total_cch+$cch;
         }
-        return response()->json(["C.GPA:"=>$sum/$total_cch]);
+        return $sum/$total_cch;
+       // return response()->json(["C_GPA:"=>$c_gpa=$sum/$total_cch]);
       //  return  $arr;
     }
 }

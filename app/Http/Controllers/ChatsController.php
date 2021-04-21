@@ -20,10 +20,7 @@ class ChatsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-      return view('chat');
-    }
+     
     
     /**
      * Fetch all messages

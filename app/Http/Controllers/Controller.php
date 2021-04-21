@@ -6,12 +6,12 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-
+ 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-/*
+    
+/* 
     * ENV : 
         - Debug = true [ in case under Developing ] , = False [ after Deployment or Execution Phase ] 
     * protected $table = Table_Name ;  

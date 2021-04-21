@@ -23,15 +23,12 @@ class CreateStudentTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->integer('Student_id');
-            $table->integer('roadmap')->default('2')->comment('if track = 1 => theortical 
-else if =2   => implementaion - Programming - web or phone');
-            $table->integer('live_hour')->default('12')->comment('hour can repeat it with gain score of passing courses 
-and 
-calculated from f()');
-            $table->double('total_gpa')->nullable();
-            $table->string('current_lvl', 45)->nullable();
+            $table->integer('roadmap');
+            $table->integer('live_hour');
+            $table->string('c_gpa')->nullable();
+            $table->string('lvl')->nullable();
             $table->integer('adv_id');
-            $table->string('Dep_id', 45);
+            $table->string('Dep_id');
             $table->integer('Sec_id');
 
             $table->index(["Sec_id", "Dep_id"], 'fk_Student_Sections1_idx');

@@ -20,7 +20,8 @@ class lvl_calc extends Controller
         $passed_courses = Sct::where('hpass', 1)->where('Student_id', $request->Student_id)->get();
 
         $sum = 0;
-        foreach ($passed_courses as $p) {
+        foreach ($passed_courses as $p) 
+        {
             $sum = $sum + Course::where('ccode', $p->ccode)->value('cch');
         }
 
@@ -41,7 +42,8 @@ class lvl_calc extends Controller
             return response()->json(['error' => 'level calculator has error  '], 400);
         }
         
-        return response()->json(['current lvl' => $lvl], 400);
+       // return response()->json(['current lvl' => $lvl], 400);
+       return $lvl ;
     }
 }
 
