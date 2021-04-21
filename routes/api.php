@@ -5,11 +5,12 @@ use App\Http\Controllers\Auth_Controller;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\AttendController;
+use App\Http\Controllers\C_GPA;
 use App\Http\Controllers\enroll_course;
 use App\Http\Controllers\FeadbackController;
 use App\Http\Controllers\intell_alg;
 use App\Http\Controllers\lvl_calc;
-use App\Http\Controllers\Stu;
+use App\Http\Controllers\S_GPA;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\update_degree;
 use App\Http\Controllers\Yellow;
@@ -51,6 +52,7 @@ Route::group(
         Route::post('update_degree', [update_degree::class,'update_degree'])->middleware(advisor_::class);
         Route::post('show_courses', [intell_alg::class,'show_courses']);
         Route::post('enroll_course', [enroll_course::class,'SCT']); // student has course 
+        Route::post('cancel_course', [enroll_course::class,'cancel_course']); // student has course 
         Route::post('attend', [AttendController::class,'attend']); // student has course 
         Route::post('layer', [AttendController::class,'layer']); // student has course 
     }
@@ -63,6 +65,7 @@ Route::group(
         Route::post('delete_student', StudentController::class . '@add_student');
         Route::post('update_student', StudentController::class . '@update_student');
         Route::post('search', Admin::class . '@search');
+        Route::post('list_all', Admin::class . '@list_all');
         Route::post('delete_user', Admin::class . '@delete_user');
         Route::post('cancel_course', Admin::class . '@cancel_course');
     }
@@ -78,5 +81,8 @@ Route::group(
         Route::post('add_feedback', FeadbackController::class . '@add_feedback');
         Route::post('delete_feedback', FeadbackController::class . '@delete_feedback');
         Route::post('lvl_calc', lvl_calc::class.'@lvl_calc_f');
+        Route::post('S_GPA', S_GPA::class.'@gpa_calc_f');
+        Route::post('G_GPA', C_GPA::class.'@gpa_calc_f');
+
     }
 );

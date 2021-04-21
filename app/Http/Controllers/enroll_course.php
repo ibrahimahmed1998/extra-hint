@@ -55,7 +55,7 @@ class enroll_course extends Controller
          } 
          else
          {
-            return response()->json(['error' => "Student enrolled".$request->ccode." Before in same SEMESTER,YEAR"], 400);
+            return response()->json(['error' => "Student enrolled ".$request->ccode." before in same SEMESTER,YEAR"], 400);
          }
     }
 

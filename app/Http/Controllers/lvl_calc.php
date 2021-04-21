@@ -41,7 +41,7 @@ class lvl_calc extends Controller
             return response()->json(['error' => 'level calculator has error  '], 400);
         }
         
-        return $lvl;
+        return response()->json(['current lvl' => $lvl], 400);
     }
 }
 

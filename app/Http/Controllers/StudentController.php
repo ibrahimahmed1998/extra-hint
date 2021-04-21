@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\student_area\add_student_;
 use App\Http\Requests\student_area\update_student_;
@@ -36,7 +34,7 @@ class StudentController extends Controller
             if ($advisor_counter >= 10) {
                 return response()->json(['error' => "please attach with another , advisor who's id =  " . $request->adv_id . " is completed"], 401);
             } else {
-                $Student = Student::create(
+                Student::create(
                     [
                         'Student_id' => $request->Student_id,
                         'roadmap' => $request->roadmap,
@@ -55,15 +53,15 @@ class StudentController extends Controller
 
     public function update_student(update_student_ $request)
     {
-        $lvl = new lvl_calc();  $lvl = $lvl->lvl_calc_f($request);
-
+        $lvl = new lvl_calc(); 
         $student = Student::where('Student_id', $request->Student_id);
-
+        $class = new C_GPA();
+      
         if ($student) {
             $student->update(array(
               //'live_hour' => live hour calc,
-              //'total_gpa' => total_gpa,
-                'current_lvl' => $lvl,
+                'total_gpa' =>$class->gpa_calc_f($request),
+                'current_lvl' => $lvl->lvl_calc_f($request),
                 'roadmap' => $request->roadmap,
                 'adv_id' => $request->adv_id,
                 'dep_id' => $request->dep_id,
