@@ -4,7 +4,7 @@ namespace App\Http\Requests\student_area;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Validate_SCT extends FormRequest
+class enroll_ extends FormRequest
 {
     public function authorize()
     {
@@ -18,7 +18,7 @@ class Validate_SCT extends FormRequest
         return [
  
                 'Student_id' => 'required|string|exists:Students,student_id',      
-                'semester' =>'required|integer', 
+                'semester' =>'required|integer|between:1,3',  // summer = 3 
                 'year' => 'required|integer',  
                 'ccode' => 'required|string|exists:Courses,ccode',  
          ];

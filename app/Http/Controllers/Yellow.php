@@ -43,6 +43,11 @@ class Yellow extends Controller
         return response()->json(['Sucessfully' => " Department deleted"], 201);
     }
 
+    public function list_departemnts()
+    {
+        $d = Department::all();
+        return response()->json(['all Departments' =>  $d], 201);
+    }
 
     public function Section(Validate_Section $request) //create 
     {
@@ -65,7 +70,13 @@ class Yellow extends Controller
         return response()->json(['Sucessfully' => " Section deleted"], 201);
     }
 
-    public function Course(Validate_Course $request) //create 
+    public function list_sections()
+    {
+        $s = Section::all();
+        return response()->json(['all Sections' =>  $s], 201);
+    }
+
+    public function add_course(Validate_Course $request)  
     {
         $sum1 = $request->dmidterm + $request->dlab + $request->doral;
 
@@ -95,6 +106,12 @@ class Yellow extends Controller
         return response()->json(['message' => 'Course Created Sucessfully '], 201);
     }
 
+    public function list_courses()
+    {
+        $c = Course::all();
+        return response()->json(['all list_courses' =>  $c], 201);
+    }
+    
     public function delete_Course(Validate_delete_course $request)
     {
         Course::where('ccode', $request->ccode)->delete();
@@ -127,7 +144,7 @@ class Yellow extends Controller
 
     public function SHC(Validate_SHC $request) // Section Has Course //create 
     {
-        $SHC = SHC::create(
+         SHC::create(
             [
                 'dep_id' => $request->dep_id,
                 'Sec_id' => $request->Sec_id,

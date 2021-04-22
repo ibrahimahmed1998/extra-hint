@@ -23,7 +23,7 @@ class CreateStudentTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->integer('Student_id');
-            $table->integer('roadmap');
+            $table->integer('roadmap')->nullable();
             $table->integer('live_hour');
             $table->string('c_gpa')->nullable();
             $table->string('lvl')->nullable();

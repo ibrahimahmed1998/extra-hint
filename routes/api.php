@@ -5,8 +5,10 @@ use App\Http\Controllers\Auth_Controller;
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ChatsController;
 use App\Http\Controllers\AttendController;
+use App\Http\Controllers\C_GPA;
 use App\Http\Controllers\enroll_course;
 use App\Http\Controllers\FeadbackController;
+use App\Http\Controllers\GPA;
 use App\Http\Controllers\intell_alg;
 use App\Http\Controllers\is_attend;
 use App\Http\Controllers\S_GPA;
@@ -31,7 +33,6 @@ Route::group(
         Route::post('change_pass', Auth_Controller::class . '@change_pass');
         Route::post('list_all', Auth_Controller::class . '@list_all')->middleware(admin_::class); //users
         Route::post('delete_user', Auth_Controller::class . '@delete_user')->middleware(admin_::class);
-        
     }
 );
 
@@ -40,11 +41,11 @@ Route::group(
     function ($router) {
         Route::post('Section', [Yellow::class,'Section']);  
         Route::post('Department', [Yellow::class,'Department']);  
-        Route::post('Course', [Yellow::class,'Course']);  
+        Route::post('add_course', [Yellow::class,'add_course']); 
+        Route::get('list_courses', [Yellow::class,'list_courses']); 
         Route::post('Pre_request', [Yellow::class,'Pre_request']);  
         Route::post('SHC', [Yellow::class,'SHC']);  
         Route::post('delete_Course', [Yellow::class,'delete_Course']);  
-
     }
 );
 
@@ -63,9 +64,8 @@ Route::group(
 Route::group(
     ['middleware' => admin_::class, 'prefix' => 'admin'],
     function ($router) {
-        Route::post('add_student', StudentController::class . '@add_student');
-        Route::post('delete_student', StudentController::class . '@add_student');
         Route::post('update_student', StudentController::class . '@update_student');
+        Route::get('list_students', StudentController::class . '@list_students');    
     }
 );
 
@@ -77,13 +77,7 @@ Route::group(
         Route::post('messages', ChatsController::class . '@sendMessage');
         Route::post('add_feedback', FeadbackController::class . '@add_feedback');
         Route::post('delete_feedback', FeadbackController::class . '@delete_feedback');
-        Route::post('S_GPA', S_GPA::class.'@gpa_calc_f');
+        Route::get('list_feedbacks', FeadbackController::class . '@list_feedbacks');
+        Route::post('gpa', GPA::class.'@gpa_calc'); // GPA - DEGREE
     }
 );
-
-/* old req : 
-
-        //Route::post('C_GPA', C_GPA::class.'@gpa_calc_f');
-        //Route::post('lvl_calc', lvl_calc::class.'@lvl_calc_f');
-
-*/

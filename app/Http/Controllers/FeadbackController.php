@@ -35,4 +35,10 @@ class FeadbackController extends Controller
         Feedbacks::where('fid', $request->fid)->delete();
         return response()->json(['Sucessfully' => " Feedback deleted"], 201);
     }
+
+    public function list_feedbacks()
+    {
+        $f = Feedbacks::all();
+        return response()->json(['all feedbacks' =>  $f], 201);
+    }
 }

@@ -18,13 +18,8 @@ class intell_alg extends Controller
 
         switch ($request->choice)
          {
-            case '1': // show all Faculty Courses 
 
-                $courses = Course::all();
-                return response()->json(['message' => $courses], 201);
-                break;
-
-            case '2':   // show all Department [id] Courses    
+            case '1':   // show all Department [id] Courses    
 
                 $validated = $request->validate([
                     'dep_id' => 'required|integer',
@@ -35,7 +30,7 @@ class intell_alg extends Controller
 
                 break;
 
-            case '3': // show all Departemnt-Section [id] Courses    
+            case '2': // show all Departemnt-Section [id] Courses    
 
                 $validated = $request->validate([
                     'dep_id' => 'required|integer',
@@ -46,7 +41,7 @@ class intell_alg extends Controller
                 return response()->json(['message' => $courses], 201);
                 break;
 
-            case '4': // show all Courses Avalable for You  [student-id]   ***   Not Passed   ****
+            case '3': // show all Courses Avalable for You  [student-id]   ***   Not Passed   ****
 
                 $request->validate([
                     'dep_id' => 'required|integer|exists:Departments',
