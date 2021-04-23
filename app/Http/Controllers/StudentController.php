@@ -1,10 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
-use App\Http\Requests\student_area\add_student_;
-use App\Http\Requests\student_area\update_student_;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -15,7 +11,7 @@ class StudentController extends Controller
         $this->middleware('auth:api', ['except' =>  []]);
     }
 
-    public function update_student(update_student_ $request)
+    public function update_student(Request $request)
     {
         $request->validate(
             [
@@ -28,13 +24,13 @@ class StudentController extends Controller
 
         $student = Student::where('Student_id', $request->Student_id);
         $lvl = new lvl_calc();
-        $C_GPA = new C_GPA();
+        $C_GPA = new GPA();
 
         if ($student) 
         {
             $student->update(array(
                 //'live_hour' => live hour calc,
-                'c_gpa' => $C_GPA->gpa_calc_f($request),
+                'c_gpa' => $C_GPA->gpa_calc($request),
                 'lvl' => $lvl->lvl_calc_f($request),
                 'roadmap' => $request->roadmap,
                 'adv_id' => $request->adv_id,
@@ -47,9 +43,10 @@ class StudentController extends Controller
 
     public function delete_student(Request  $request)
     {
-        $request->validate(['Student_id' => 'required|exists:Students']);
+        $request->validate(['Student_id' => 'required|integer|exists:Students']);
 
         Student::where('Student_id', $request->Student_id)->delete();
+
         return response()->json(['Success'=>"Student deleted"], 201);
     }
 
@@ -58,4 +55,13 @@ class StudentController extends Controller
         $s = Student::all();
         return response()->json(['all students' =>  $s], 201);
     }
+
+    public function student_search(Request $request)
+    {
+        $request->validate(['Student_id' => 'required|integer|exists:Students']);
+
+        $s = Student::where('Student_id',$request->Student_id)->first();
+        return response()->json(['student' => $s], 201);
+    }
+
 }

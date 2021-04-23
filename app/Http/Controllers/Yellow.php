@@ -1,14 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
-use App\Http\Requests\yellow_area\Validate_Course;
-use App\Http\Requests\yellow_area\Validate_delete_course;
-use App\Http\Requests\yellow_area\Validate_Section;
-use App\Http\Requests\yellow_area\Validate_dep;
-use App\Http\Requests\yellow_area\Validate_Pre_request;
-use App\Http\Requests\yellow_area\Validate_SHC;
+use App\Http\Requests\Validate_Course;
+use App\Http\Requests\Validate_Section;
+use App\Http\Requests\Validate_SHC;
 use App\Models\Course;
 use App\Models\Section;
 use App\Models\Department;
@@ -23,16 +18,15 @@ class Yellow extends Controller
         $this->middleware('auth:api', ['except' => []]);
     }
 
-    public function Department(Validate_dep $request) //create 
+    public function Department(Request $request) //create 
     {
-        $department = Department::create(
-            [
-                'dname' => $request->dname,
-                'dep_id' => $request->dep_id,
-            ]
-        );
-
-        return response()->json(['message' => 'Department Created Sucessfully '], 201);
+        $request->validate([
+             'dname' => 'required|string|unique:Departments',       
+             'dep_id' => 'required|integer|unique:Departments']);
+        
+        Department::create(['dname' => $request->dname,'dep_id' => $request->dep_id]);
+           
+        return response()->json(['Success' => 'Department Created'], 201);
     }
 
     public function delete_department(Request $request)
@@ -40,7 +34,7 @@ class Yellow extends Controller
         $request->validate(['dep_id' => 'required|exists:Departments']);
 
         Department::where('dep_id', $request->dep_id)->delete();
-        return response()->json(['Sucessfully' => " Department deleted"], 201);
+        return response()->json(['Success'=>"Department deleted"], 201);
     }
 
     public function list_departemnts()
@@ -51,23 +45,15 @@ class Yellow extends Controller
 
     public function Section(Validate_Section $request) //create 
     {
-        $section = Section::create(
-            [
-                'Sec_id' => $request->Sec_id,
-                'dep_id' => $request->dep_id,
-                'sec_name' => $request->sec_name,
-            ]
-        );
-
-        return response()->json(['message' => 'Section Created Sucessfully '], 201);
+       Section::create(['Sec_id' => $request->Sec_id, 'dep_id' => $request->dep_id, 'sec_name' => $request->sec_name]);     
+       return response()->json(['Success' => 'Section Created'], 201);
     }
 
     public function delete_section(Request $request)
     {
         $request->validate(['sec_id' => 'required|exists:Sections']);
-
         Section::where('sec_id', $request->sec_id)->delete();
-        return response()->json(['Sucessfully' => " Section deleted"], 201);
+        return response()->json(['Success'=>"Section deleted"], 201);
     }
 
     public function list_sections()
@@ -103,7 +89,7 @@ class Yellow extends Controller
             ]
         );
 
-        return response()->json(['message' => 'Course Created Sucessfully '], 201);
+        return response()->json(['Success' =>'Course Created'], 201);
     }
 
     public function list_courses()
@@ -112,31 +98,42 @@ class Yellow extends Controller
         return response()->json(['all list_courses' =>  $c], 201);
     }
     
-    public function delete_Course(Validate_delete_course $request)
+    public function delete_Course(Request $request)
     {
+        $request->validate(['ccode' => 'required|string|exists:Courses']);
+
         Course::where('ccode', $request->ccode)->delete();
-        return response()->json(['Sucessfully' => " Course deleted Sucessfully"], 201);
+        return response()->json(['Success' =>"Course deleted"], 201);
     }
 
-    public function Pre_request(Validate_Pre_request $request) //create 
+    public function Pre_request(Request $request) //create 
     {
+        $request->validate([
+            'ccode' => 'required|string|exists:Courses',
+            'pr_ccode' => 'required|string|different:ccode|exists:Courses,ccode'
+        ]);
+       
         $check = Pre_request::where('ccode', $request->ccode)->where('pr_ccode', $request->pr_ccode)->first();
+     
+        if ($check)
+         {
+            return response()->json(['error' => "Course is added Before in AMS "], 401);
+        } else 
+        {
 
-        if ($check) {
-            return response()->json(['error' => "Course is Entered Before in system "], 401);
-        } else
-            $Pre_request = Pre_request::create(
-                [
-                    'ccode' => $request->ccode,
-                    'pr_ccode' => $request->pr_ccode,
-                ]
-            );
+            Pre_request::create( ['ccode' => $request->ccode, 'pr_ccode' => $request->pr_ccode]);
+            
 
-        return response()->json(['message' => 'Pre_request Course Created Sucessfully '], 201);
+            return response()->json(['message' => 'Pre_request Course Created Sucessfully '], 201);
+        }
     }
 
-    public function delete_Pre_request(Validate_Pre_request $request) //create 
+    public function delete_Pre_request(Request $request) //create 
     {
+        $request->validate([ 
+            'ccode' => 'required|string|exists:Courses,ccode',      
+            'pr_ccode' => 'required|string|different:ccode|exists:Courses']);
+            
         Pre_request::where('ccode', $request->ccode)
             ->where('pr_ccode', $request->pr_ccode)->delete();
         return response()->json(['Sucessfully' => " Prerequest Course deleted Sucessfully"], 201);
@@ -157,6 +154,20 @@ class Yellow extends Controller
             ]
         );
         return response()->json(['message' => 'Section Has Course Rel Created Sucessfully '], 201);
+    }
+
+    public function list_c_sem(Validate_SHC $request) // Section Has Course //create 
+    {
+        $c = SHC::where('c_semester',$request->c_semester)->
+                  where("c_lvl",$request->c_lvl)->
+                  where("Sec_id",$request->Sec_id)->
+                  where("dep_id",$request->dep_id)->get();
+
+            foreach ($c as $cc ) 
+            {
+              print($cc);
+            }
+        return response()->json(['all list_courses' =>  $c], 201);
     }
 
     public function delete_SHC(Validate_SHC $request)

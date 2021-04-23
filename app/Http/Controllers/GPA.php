@@ -18,9 +18,7 @@ class GPA extends Controller
         $request->validate([
             'choice' =>'required|integer|between:1,2',
             'Student_id' => 'required|integer|exists:Students',
-            'show_deg' => 'required|integer',
-
-            
+            'show_deg' => 'integer',
         ]);
 
         if($request->choice==1)     // Semester_GPA

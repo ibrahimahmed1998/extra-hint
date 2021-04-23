@@ -16,7 +16,7 @@ class FeadbackController extends Controller
     {
         $user = auth()->user();
         
-        $feedback = Feedbacks::create(
+         Feedbacks::create(
             [
                 'User_id' =>  $user->id,
                 'ccode' => $request->ccode,
@@ -25,7 +25,7 @@ class FeadbackController extends Controller
                 'fvote' => $request->fvote,
              ]
         );
-        return response()->json(['message' => 'Successfully Feedback'], 201);
+        return response()->json(['Success' => 'Feedback added'], 201);
     }
 
     public function delete_feedback(Request $request)
@@ -33,12 +33,12 @@ class FeadbackController extends Controller
         $request->validate(['fid' => 'required|exists:Feedbacks']);
 
         Feedbacks::where('fid', $request->fid)->delete();
-        return response()->json(['Sucessfully' => " Feedback deleted"], 201);
+        return response()->json(['Success' => "Feedback deleted"], 201);
     }
 
     public function list_feedbacks()
     {
         $f = Feedbacks::all();
-        return response()->json(['all feedbacks' =>  $f], 201);
+        return response()->json(['ALL Feedback' =>  $f], 201);
     }
 }

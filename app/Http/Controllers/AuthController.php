@@ -1,16 +1,15 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
-use App\Http\Requests\auth\validate_delete;
-use App\Http\Requests\auth\Validate_Login;
-use App\Http\Requests\auth\Validate_signup;
+use App\Http\Requests\update_user_;
+use App\Http\Requests\Validate_signup; 
 use App\Models\Student;
 use App\Models\User;
+use Illuminate\Http\Request;
 
-class Auth_Controller extends Controller
+class AuthController extends Controller
 {
+    
     public function __construct()
     {
         $this->middleware('auth:api', ['except' => ['login', 'signup',]]);
@@ -19,16 +18,14 @@ class Auth_Controller extends Controller
     public function signup(Validate_signup  $request)
     {
         //  $vcode = Str::random(70);
-        $user = User::create(
-            [
-                'id' => $request->id,
-                'full_name' => $request->full_name,
-                'password' => $request->password,
-                'email' => $request->email,
-                'type' => $request->type,
-                'phone' => $request->phone,
-            ]
-        );
+        $user = User::create([
+            'id' => $request->id,
+            'full_name' => $request->full_name,
+            'password' => $request->password,
+            'email' => $request->email,
+            'type' => $request->type,
+            'phone' => $request->phone,
+        ]);
         //add_student_  
         if ($user->type == 1) 
         {
@@ -50,7 +47,7 @@ class Auth_Controller extends Controller
                 Student::create(
                     [
                         'Student_id' => $request->id,
-                        'roadmap' => 1, // must be null first 
+                        'roadmap' => 1,  
                         'live_hour' =>12,
                         'c_gpa' =>0,
                         'lvl' =>1,
@@ -71,18 +68,20 @@ class Auth_Controller extends Controller
         */
     }
 
-    public function login(Validate_Login $request)
+    public function login(Request $request)
     {
+        $request->validate( ['email'=>'required|email:rfc,dns','password'=>'required|min:8']);
+           
         $credentials = $request->only('email', 'password');
 
-        if ($token = auth()->attempt($credentials)) {
-
-            $token =    $this->respondWithToken($token);
-            $user = auth()->user();;
-            return response()->json(['token' => $token, 'user type' => $user->type]);
-        } else {
+        if ($token = auth()->attempt($credentials)) 
+         {    
+            return response()->json(['token'=>$this->respondWithToken($token),'type'=>auth()->user()->type]);
+         } 
+        else
+         {
             return response()->json(['error' => "Wrong credintials, Please try to login with a valid e-mail or password"], 401);
-        }
+         }
     }
 
     public function me()        //  Get the authenticated User. 
@@ -90,40 +89,57 @@ class Auth_Controller extends Controller
         return response()->json(auth()->user());
     }
 
-    public function refresh()   // Refresh a token.
+    public function refresh()   
     {
         return $this->respondWithToken(auth()->refresh());
     }
 
-    protected function respondWithToken($token)         // Get the token array structure. 
+    protected function respondWithToken($token)          
     {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
+        return response()->json(['token'=>$token,'expires_in'=>auth()->factory()->getTTL()*60 
+        /*'token_type' => 'bearer',*/]);
     }
 
     public function logout()
     {
         auth()->logout();
-        return response()->json(['message' => 'Successfully logged out']);
+        return response()->json(['success'=>'logged out']);
     }
 
-    public function delete_user(validate_delete  $request)
+    public function delete_user(Request  $request) // note this automatic delete user if it student too 
     {
-        if (User::find($request->id)) {
+        $request->validate(['id' => 'required|integer|exists:Users' ]);    
+
             User::find($request->id)->delete();
             return response()->json(['success' => 'User  Deleted  '], 201);
-        } else {
-            return response()->json(['error' => 'User not found '], 201);
-        }
     }
 
-    public function list_all() // list all users 
+    public function list_all()  
     {
-        $user = User::all();
-        return response()->json(['success' =>  $user], 201);
+        return response()->json(['success' =>  User::all()], 201);
+    }
+
+    public function update_user(update_user_ $request)
+    {
+        $user = User::find($request->id);
+
+        $must1 = User::where('email', $request->email)->first();
+        $must2 = User::where('phone', $request->phone)->first();
+
+        if ($user->id == $must1->id && $user->id == $must2->id) 
+        {
+            $user->update([
+                'full_name' => $request->full_name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'type' => $request->type,
+            ]);
+            return response()->json(['updated' => $user], 201);
+        }
+        else
+        {
+            return response()->json(['err' =>'other users use same phone or email'], 201);
+        }
     }
 
     /*

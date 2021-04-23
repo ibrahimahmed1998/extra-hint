@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\student_area\enroll_;
+use App\Http\Requests\enroll_;
 use App\Models\Course;
 use App\Models\Pre_request;
 use App\Models\Sct;
@@ -17,7 +17,8 @@ class enroll_course extends Controller
 
     public function enroll(enroll_ $request)  // student enroll course table
     {
-        $x = Sct::where('ccode', $request->ccode)->where('year', $request->year)->where('semester', $request->semester)->where('Student_id', $request->Student_id)->first();
+        $x = Sct::where('ccode', $request->ccode)->where('year',$request->year)->
+        where('semester', $request->semester)->where('Student_id', $request->Student_id)->first();
 
         if (!$x) // not enrolld before
         {
@@ -28,6 +29,20 @@ class enroll_course extends Controller
             foreach ($ecsy  as $c )
              {
                $sum=$sum+Course::where('ccode',$c->ccode)->value('cch') ;
+             }
+
+             if($request->semester == 3 )
+             {
+                if($sum<6)
+                {
+                    Sct::create(
+                        [
+                            'Student_id' => $request->Student_id, 'semester' => $request->semester,
+                            'year' => $request->year, 'ccode' => $request->ccode,
+                        ]
+                    );
+                    return response()->json(['success' => 'Student Enrolled ' . $request->ccode], 201);
+                }
              }
              //dd($sum);
              if($sum>19 && $request->force != 1)
@@ -51,8 +66,7 @@ class enroll_course extends Controller
 
             if ($counter != $pr_count) 
             {
-                return response()->json(['error' => "Student can't enroll course before it's pre-request"
-                    . $pre_req->pr_code], 400);
+                return response()->json(['error' => "can't enroll before it's pre-request". $pre_req->pr_code], 400);
             }
              else
              { 
@@ -69,22 +83,26 @@ class enroll_course extends Controller
                             'year' => $request->year, 'ccode' => $request->ccode,
                         ]
                     );
-                    return response()->json(['success' => 'Student Enrolled ' . $request->ccode], 201);
+                    return response()->json(['success' => 'Enrolled ' . $request->ccode], 201);
                 }  
              } 
         }
          else 
         {
-            return response()->json(['error' => "Student enrolled " . $request->ccode . " before in same SEMESTER,YEAR"], 400);
+            return response()->json(['error' => "enrolled " . $request->ccode . " before in same SEMESTER,YEAR"], 400);
         }
     }
 
     public function cancel_course(enroll_ $request)
     {
-        $check = Sct::where('ccode', $request->ccode)->where('year', $request->year)->where('semester', $request->semester)->where('Student_id', $request->Student_id)->first();
+        $check = Sct::where('ccode', $request->ccode)->where('year', $request->year)->
+        where('semester', $request->semester)->where('Student_id', $request->Student_id)->first();
 
-        if ($check) {
-            $check = Sct::where('ccode', $request->ccode)->where('year', $request->year)->where('semester', $request->semester)->where('Student_id', $request->Student_id)->delete();
+        if ($check) 
+        {
+            $check = Sct::where('ccode', $request->ccode)->where('year', $request->year)->
+            where('semester', $request->semester)->where('Student_id', $request->Student_id)->delete();
+            
             return response()->json(['success' => $request->ccode . " Canceled"], 201);
         } else {
             return response()->json(['error' => $request->ccode . " Not Enrolled ! "], 400);

@@ -23,28 +23,29 @@ class is_attend extends Controller
         if (time() - $_SESSION['user_start'] < 3) 
         {
             $user = auth()->user();
-            $check_stu = Student::where('Student_id', $user->id)->first();
+
+            if($user->type!=1)
+            {
+                return response()->json(['error' => "not student,please use student id "], 400);
+            }
+
             $check_sct = Sct::where('Student_id', $user->id)->where('ccode', $request->ccode)->first();
 
-            $is_attend = Attend::where('Student_id', $user->id)
+            $duplicated = Attend::where('Student_id', $user->id)
                 ->where('ccode', $request->ccode)
                 ->where('day_date', $request->day_date)->where('is_attend', $request->is_attend)
                 ->where('is_lecture', $request->is_lecture)->first();
 
-            if ($is_attend) {
-                return response()->json(['error' => "Duplicated !"], 400);
-            }
-            if (!$check_stu) {
-                return response()->json(['error' => "this is student id , but not approved yet"], 400);
-            }
-            if ($user->type != 1) {
-                return response()->json(['error' => "this id is not student , please use real student id "], 400);
-            }
-
-            if (!$check_sct) {
-                return response()->json(['error' => "student does not enroll in this course "], 400);
+            if ($duplicated)
+             {
+                 return response()->json(['error' => "Duplicated !"], 400);
+             }
+             
+            if (!$check_sct)
+             {
+                return response()->json(['error'=>"student not enrolled ".$request->ccode], 400);
             } else {
-                $Attend = Attend::create(
+                Attend::create(
                     [
                         'Student_id' =>  $user->id,
                         'ccode' => $request->ccode,
@@ -53,7 +54,7 @@ class is_attend extends Controller
                         'is_lecture' => $request->is_lecture,
                     ]
                 );
-                return response()->json(['message' => 'Attended'], 201);
+                return response()->json(['success' => 'Attended'], 201);
             }
         } else 
         {

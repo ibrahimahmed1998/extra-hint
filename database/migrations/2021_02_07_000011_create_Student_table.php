@@ -23,12 +23,12 @@ class CreateStudentTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->integer('Student_id');
-            $table->integer('roadmap')->nullable();
+            $table->integer('roadmap');
             $table->integer('live_hour');
-            $table->string('c_gpa')->nullable();
-            $table->string('lvl')->nullable();
+            $table->float('c_gpa')->nullable();
+            $table->integer('lvl')->nullable();
             $table->integer('adv_id');
-            $table->string('Dep_id');
+            $table->integer('Dep_id');
             $table->integer('Sec_id');
 
             $table->index(["Sec_id", "Dep_id"], 'fk_Student_Sections1_idx');

@@ -13,9 +13,7 @@ class User extends Authenticatable implements JWTSubject
     public $timestamps = false;
 
     
-    protected $fillable = [
-        'id','full_name','type' , 'email', 'password','phone'//,'updated_at','created_at'//'email_verified_at',
-    ];
+    protected $fillable=['id','phone','full_name','email','password','type'/*,'updated_at','created_at'//'email_verified_at',*/];
 
     protected $hidden = [
         'password', 'remember_token' ,//'updated_at','created_at'
@@ -31,8 +29,6 @@ class User extends Authenticatable implements JWTSubject
   return $this->hasMany(Message::class);
 }
 
-
-    
     // Rest omitted for brevity
 
     /**

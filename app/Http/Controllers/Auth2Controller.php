@@ -1,15 +1,14 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\auth\Validate_change_pass;
 use App\Models\User;
 use Carbon\Carbon;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request ;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
-class Auth2_Controller extends Controller
+class Auth2Controller extends Controller
 {
     public function __construct()
     {
@@ -31,8 +30,14 @@ class Auth2_Controller extends Controller
         }
     }
 
-    public function change_pass(Validate_change_pass  $request)
+    public function change_pass(Request  $request)
     {
+        $request->validate([
+            'password' => 'required|min:8',
+            'new_pass' => 'required|min:8|required_with:conifrm_new_pass|same:conifrm_new_pass'  
+              ]
+        );
+
         $user = Auth()->user();
 
         if ($user) {
@@ -51,6 +56,8 @@ class Auth2_Controller extends Controller
 
     public function sendresetpasswordemail(Request $request)
     {
+         $request->validate([ 'email' => 'required|exists:users|email:rfc,dns',])  ;       
+
         $user = DB::table('users')->where('email', $request->email)->first();
         if ($user) {
             $token = mt_rand(000000, 999999);
