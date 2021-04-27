@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
-use App\Models\Sct;
+use App\Models\enroll;
 use App\Models\Shc;
 use Illuminate\Http\Request;
 class intell_alg extends Controller
@@ -44,7 +44,7 @@ class intell_alg extends Controller
 
                 $section_courses = Shc::where('dep_id', $request->dep_id)->where('sec_id', $request->sec_id)->get();
                 if(!$section_courses){return response()->json(['error' =>'section has\'nt courses'], 400);}
-                $passed_courses = Sct::where('hpass', 1)->where('Student_id', $request->student_id)->get();
+                $passed_courses = enroll::where('hpass', 1)->where('Student_id', $request->student_id)->get();
 
                 $sc_num = $section_courses->count();
                 $pc_num = $passed_courses->count();

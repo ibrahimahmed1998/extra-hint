@@ -5,17 +5,17 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class CreateSctTable extends Migration
+class CreateEnrollTable extends Migration
 {
     /**
      * Schema table name to migrate
      * @var string
      */
-    public $tableName = 'Scts';
+    public $tableName = 'Enrolls';
 
     /**
      * Run the migrations.
-     * @table SCT
+     * @table Enroll
      *
      * @return void
      */
@@ -35,15 +35,15 @@ class CreateSctTable extends Migration
             $table->integer('year')->index();
             $table->string('ccode', 10);
 
-            $table->index(["Student_id"],'fk_Scts_Students1_idx');
-            $table->index(["ccode"], 'fk_SCT_Courses1_idx');
+            $table->index(["Student_id"],'fk_Enrolls_Students1_idx');
+            $table->index(["ccode"], 'fk_Enroll_Courses1_idx');
 
-            $table->foreign('Student_id', 'fk_Scts_Students1_idx')
+            $table->foreign('Student_id', 'fk_Enrolls_Students1_idx')
                 ->references('Student_id')->on('Students')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('ccode', 'fk_Scts_Courses1_idx')
+            $table->foreign('ccode', 'fk_Enrolls_Courses1_idx')
                 ->references('ccode')->on('Courses')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

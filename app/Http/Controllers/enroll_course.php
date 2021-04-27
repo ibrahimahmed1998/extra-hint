@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\enroll_;
 use App\Models\Course;
 use App\Models\Pre_request;
-use App\Models\Sct;
+use App\Models\enroll;
 
 class enroll_course extends Controller
 {
@@ -17,12 +17,19 @@ class enroll_course extends Controller
 
     public function enroll(enroll_ $request)  // student enroll course table
     {
-        $x = Sct::where('ccode', $request->ccode)->where('year',$request->year)->
-        where('semester', $request->semester)->where('Student_id', $request->Student_id)->first();
+        $student=auth()->user();
+
+        if($student->type != 1)
+        {
+            return response()->json(['error' => 'request for student only'], 201);
+        }
+
+        $x = enroll::where('ccode', $request->ccode)->where('year',$request->year)->
+        where('semester', $request->semester)->where('Student_id',$student->id)->first();
 
         if (!$x) // not enrolld before
         {
-            $ecsy = Sct::where('semester', $request->semester)->    //enroled courses in SAME SEMESTER YEARS
+            $ecsy = enroll::where('semester', $request->semester)->    //enroled courses in SAME SEMESTER YEARS
                 where('year', $request->year)->get();
            
             $sum=0;
@@ -35,9 +42,9 @@ class enroll_course extends Controller
              {
                 if($sum<6)
                 {
-                    Sct::create(
+                    enroll::create(
                         [
-                            'Student_id' => $request->Student_id, 'semester' => $request->semester,
+                            'Student_id' => $student->id, 'semester' => $request->semester,
                             'year' => $request->year, 'ccode' => $request->ccode,
                         ]
                     );
@@ -55,7 +62,7 @@ class enroll_course extends Controller
             $counter = 0;
 
             foreach ($pre_req as $pr) {
-                $is_pass = Sct::where('ccode', $pr->pr_ccode)->value('hpass');
+                $is_pass = enroll::where('ccode', $pr->pr_ccode)->value('hpass');
                 if ($is_pass == 1) {
                     $counter = $counter + 1;
                 } else 
@@ -77,9 +84,9 @@ class enroll_course extends Controller
                 }
                 else // sum
                 {
-                    Sct::create(
+                    enroll::create(
                         [
-                            'Student_id' => $request->Student_id, 'semester' => $request->semester,
+                            'Student_id' => $student->id, 'semester' => $request->semester,
                             'year' => $request->year, 'ccode' => $request->ccode,
                         ]
                     );
@@ -95,13 +102,14 @@ class enroll_course extends Controller
 
     public function cancel_course(enroll_ $request)
     {
-        $check = Sct::where('ccode', $request->ccode)->where('year', $request->year)->
+        $student = auth()->user();
+        $check = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
         where('semester', $request->semester)->where('Student_id', $request->Student_id)->first();
 
         if ($check) 
         {
-            $check = Sct::where('ccode', $request->ccode)->where('year', $request->year)->
-            where('semester', $request->semester)->where('Student_id', $request->Student_id)->delete();
+            $check = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
+            where('semester', $request->semester)->where('Student_id', $student->id)->delete();
             
             return response()->json(['success' => $request->ccode . " Canceled"], 201);
         } else {

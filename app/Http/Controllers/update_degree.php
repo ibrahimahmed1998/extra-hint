@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Validate_SCT_degree;
+use App\Http\Requests\Validate_Enroll_degree;
 use App\Models\Course;
-use App\Models\Sct;
+use App\Models\enroll;
 
 class update_degree extends Controller
 {
@@ -12,12 +12,12 @@ class update_degree extends Controller
         $this->middleware('auth:api', ['except' =>[ ] ]);
     }
 
-    public function update_student_degree(Validate_SCT_degree $request)
+    public function update_student_degree(Validate_Enroll_degree $request)
     {
-        $check = Sct::where('ccode', $request->ccode)->where('year', $request->year)->
+        $check = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
         where('semester', $request->semester)->where('Student_id', $request->Student_id)->first();
 
-        $update = Sct::where('ccode', $request->ccode)->where('year', $request->year)->
+        $update = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
         where('semester', $request->semester)->where('Student_id', $request->Student_id);
 
         $course = Course::where('ccode', $request->ccode)->first();

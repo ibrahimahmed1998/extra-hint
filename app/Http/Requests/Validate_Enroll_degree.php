@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Validate_SCT_degree extends FormRequest
+class Validate_Enroll_degree extends FormRequest
 {
     public function authorize()
     {

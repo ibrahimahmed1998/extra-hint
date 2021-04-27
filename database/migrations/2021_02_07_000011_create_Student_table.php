@@ -27,7 +27,7 @@ class CreateStudentTable extends Migration
             $table->integer('live_hour');
             $table->float('c_gpa')->nullable();
             $table->integer('lvl')->nullable();
-            $table->integer('adv_id');
+            $table->integer('adv_id')->nullable();
             $table->integer('Dep_id');
             $table->integer('Sec_id');
 

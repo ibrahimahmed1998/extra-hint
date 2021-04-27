@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sct extends Model
+class enroll extends Model
 {
     use HasFactory;
     public $timestamps = false;

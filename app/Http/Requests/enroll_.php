@@ -17,7 +17,6 @@ class enroll_ extends FormRequest
         
         return [
  
-                'Student_id' => 'required|string|exists:Students,student_id',      
                 'semester' =>'required|integer|between:1,3',  // summer = 3 
                 'year' => 'required|integer',  
                 'ccode' => 'required|string|exists:Courses,ccode',  

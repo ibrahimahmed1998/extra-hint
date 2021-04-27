@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use App\Models\Sct;
+use App\Models\enroll;
 use Illuminate\Http\Request;
 
 class GPA extends Controller
@@ -21,6 +21,8 @@ class GPA extends Controller
             'show_deg' => 'integer',
         ]);
 
+        $test=enroll::where('Student_id',$request->Student_id)->first();
+        if(!$test) {return 0;} 
         if($request->choice==1)     // Semester_GPA
         {
             $request->validate(
@@ -29,13 +31,13 @@ class GPA extends Controller
                 'year' => 'required|integer|min:1900',
                 ]);
 
-                $c = Sct::where('Student_id', $request->Student_id)->
+                $c = enroll::where('Student_id', $request->Student_id)->
                 where('semester', $request->semester)->
                 where('year', $request->year)->get();  
         }
         else if ($request->choice==2) // Cumulative_GPA
         {
-            $c = Sct::where('Student_id', $request->Student_id)->get();  
+            $c = enroll::where('Student_id', $request->Student_id)->get();  
         }
 
         $count = $c->count();
@@ -44,12 +46,12 @@ class GPA extends Controller
         $Qulaity = 0.0;
         $total_quality=0;
         $total_cch=0;
-
+        $arr = [];
         for ($i = 0; $i < $count; $i++) 
         {
             $cd = Course::where('ccode', $c[$i]->ccode)->value('dtotal');
             $cch = Course::where('ccode', $c[$i]->ccode)->value('cch');
-            $sd = Sct::where('ccode', $c[$i]->ccode)->where('Student_id', $request->Student_id)->value('htotal_d');
+            $sd = enroll::where('ccode', $c[$i]->ccode)->where('Student_id', $request->Student_id)->value('htotal_d');
             if ($sd >= $cd * 0.90) {
                 $code = 'A';
                 $points = 4.0;

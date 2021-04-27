@@ -15,11 +15,13 @@ class update_user_ extends FormRequest
     public function rules()
     {
         return [
-                'id' => 'required|exists:Users|integer',      // min:3 firstName:Aya
-                'full_name' => 'required|min:3|max:20|string',
+                'id' => 'required|exists:Users|integer',      
+                'first_name' => 'required|min:3|max:20|string',
+                'last_name' => 'required|min:3|max:20|string',
                 'email' => 'required|email:rfc,dns',
                 'type' => 'required|between:1,3|integer', // 1 = admin , 2 = advisor  , 3 = student  
-                'phone' => 'required|numeric|regex:/(01)[0-9]{9}/',
+                'phone' => 'required|numeric|regex:/(01)\d{9}/|digits:11',
+
         ];
     }
 }

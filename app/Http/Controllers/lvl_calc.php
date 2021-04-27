@@ -2,7 +2,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
-use App\Models\Sct;
+use App\Models\enroll;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class lvl_calc extends Controller
     {
         $request->validate(['Student_id' => 'required|exists:Students']);
 
-        $passed_courses = Sct::where('hpass', 1)->where('Student_id', $request->Student_id)->get();
+        $passed_courses = enroll::where('hpass', 1)->where('Student_id', $request->Student_id)->get();
 
         $sum = 0;
         foreach ($passed_courses as $p) 
@@ -41,7 +41,6 @@ class lvl_calc extends Controller
         {
             return response()->json(['error' => 'level calculator has error  '], 400);
         }
-       // return response()->json(['current lvl' => $lvl], 400);
        return $lvl ;
     }
 }

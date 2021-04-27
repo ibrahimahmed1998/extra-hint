@@ -3,8 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\validate_attend;
 use App\Models\Attend;
-use App\Models\Sct;
-use App\Models\Student;
+use App\Models\enroll;
 use Illuminate\Support\Str;
 
 class is_attend extends Controller
@@ -16,7 +15,7 @@ class is_attend extends Controller
 
     public function layer(validate_attend $request)
     {
-        $token = Str::random(6);
+        Str::random(6);
 
         $_SESSION['user_start'] = time();
 
@@ -29,7 +28,7 @@ class is_attend extends Controller
                 return response()->json(['error' => "not student,please use student id "], 400);
             }
 
-            $check_sct = Sct::where('Student_id', $user->id)->where('ccode', $request->ccode)->first();
+            $check_enroll = enroll::where('Student_id', $user->id)->where('ccode', $request->ccode)->first();
 
             $duplicated = Attend::where('Student_id', $user->id)
                 ->where('ccode', $request->ccode)
@@ -41,7 +40,7 @@ class is_attend extends Controller
                  return response()->json(['error' => "Duplicated !"], 400);
              }
              
-            if (!$check_sct)
+            if (!$check_enroll)
              {
                 return response()->json(['error'=>"student not enrolled ".$request->ccode], 400);
             } else {
