@@ -8,7 +8,7 @@ use App\Models\Course;
 use App\Models\Section;
 use App\Models\Department;
 use App\Models\Pre_request;
-use App\Models\SHC;
+use App\Models\Shc;
 use Illuminate\Http\Request;
 
 class Yellow extends Controller
@@ -129,7 +129,7 @@ class Yellow extends Controller
 
     public function SHC(Validate_SHC $request) // Section Has Course //create 
     {
-         SHC::create(
+         Shc::create(
             [
                 'dep_id' => $request->dep_id,
                 'Sec_id' => $request->Sec_id,
@@ -152,7 +152,7 @@ class Yellow extends Controller
             'sec_id' => 'required|integer|exists:Sections',
             'dep_id' => 'required|integer|exists:Departments']);
 
-        $c = SHC::where('c_semester',$request->c_semester)->
+        $c = Shc::where('c_semester',$request->c_semester)->
                   where("c_lvl",$request->c_lvl)->
                   where("Sec_id",$request->Sec_id)->
                   where("dep_id",$request->dep_id)->get();
@@ -171,7 +171,7 @@ class Yellow extends Controller
             'sec_id' => 'required|integer|exists:Sections',
             'dep_id' => 'required|integer|exists:Departments']);
        
-        SHC::where('ccode', $request->ccode)
+        Shc::where('ccode', $request->ccode)
             ->where('sec_id', $request->sec_id)
             ->where('dep_id', $request->dep_id)
             ->delete();
