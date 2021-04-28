@@ -68,6 +68,11 @@ class Yellow extends Controller
         if ($sum2 != $request->dtotal) {
             return response()->json(['error' => 'Total Degree Not Calculated Good => ' . $sum2 . '!=' . $request->dtotal], 400);
         }
+
+        $dclass_work=$request->doral+$request->dlab+$request->dmidterm;
+        $dtotal=$dclass_work+$request->dfinal;
+
+        
         Course::create(
             [
                 'ccode' => $request->ccode,
@@ -76,9 +81,9 @@ class Yellow extends Controller
                 'dmidterm' => $request->dmidterm,
                 'dlab' => $request->dlab,
                 'doral' => $request->doral,
-                'dclass_work' => $request->dclass_work,
+                'dclass_work' => $dclass_work ,
                 'dfinal' => $request->dfinal,
-                'dtotal' => $request->dtotal,
+                'dtotal' => $dtotal ,
                 'instructor' => $request->instructor,
             ]
         );
@@ -105,14 +110,14 @@ class Yellow extends Controller
      
         if ($check)
          {
-            return response()->json(['error' => "Course is added Before in AMS "], 401);
+            return response()->json(['err' => "Course added Before"], 401);
         } else 
         {
 
             Pre_request::create( ['ccode' => $request->ccode, 'pr_ccode' => $request->pr_ccode]);
             
 
-            return response()->json(['message' => 'Pre_request Course Created Sucessfully '], 201);
+            return response()->json(['success' => 'Pre_request Course Created'], 201);
         }
     }
 
@@ -120,28 +125,38 @@ class Yellow extends Controller
     {
         $request->validate([ 
             'ccode' => 'required|string|exists:Courses,ccode',      
-            'pr_ccode' => 'required|string|different:ccode|exists:Courses']);
-            
-        Pre_request::where('ccode', $request->ccode)
-            ->where('pr_ccode', $request->pr_ccode)->delete();
-        return response()->json(['Sucessfully' => " Prerequest Course deleted Sucessfully"], 201);
+            'pr_ccode' => 'required|string|different:ccode|exists:Pre_requests']);
+       
+        $pr=Pre_request::where('ccode', $request->ccode)->where('pr_ccode', $request->pr_ccode);
+        
+        if(!$pr->first()) {  return response()->json(['err' => "Prerequest Course not found"], 201);  }
+
+        $pr->delete();
+        return response()->json(['success' => "Prerequest Course deleted"], 201);
     }
 
-    public function SHC(Validate_SHC $request) // Section Has Course //create 
+    public function SHC(Validate_SHC $request) // add COURSE to SCETION
     {
-         Shc::create(
-            [
-                'dep_id' => $request->dep_id,
-                'Sec_id' => $request->Sec_id,
-                'ccode' => $request->ccode,
-                'c_theoretical_ratio' => $request->c_theoretical_ratio,
-                'c_elective' => $request->c_elective,
-                'c_semester' => $request->c_semester,
-                'c_lvl' => $request->c_lvl,
+        $check = SHC::where('dep_id', $request->dep_id)->
+        where('Sec_id', $request->Sec_id)->where('ccode', $request->ccode)->first();
 
-            ]
-        );
-        return response()->json(['message' => 'Section Has Course Rel Created Sucessfully '], 201);
+        if ($check) {
+            return response()->json(['err' => 'course added before !'], 201);
+        } else {
+            Shc::create(
+                [
+                    'dep_id' => $request->dep_id,
+                    'Sec_id' => $request->Sec_id,
+                    'ccode' => $request->ccode,
+                    'c_theoretical_ratio' => $request->c_theoretical_ratio,
+                    'c_elective' => $request->c_elective,
+                    'c_semester' => $request->c_semester,
+                    'c_lvl' => $request->c_lvl,
+
+                ]
+            );
+            return response()->json(['message' => 'Section Has Course Rel Created Sucessfully '], 201);
+        }
     }
 
     public function list_c_sem(Request $request) // LIST COURSES - WHERE( LVL && SEMESTER && DEPARTMENT && SECITON )

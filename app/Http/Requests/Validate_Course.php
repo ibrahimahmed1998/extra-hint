@@ -22,10 +22,8 @@ class Validate_Course extends FormRequest
                 'dmidterm' =>'required|integer',    
                 'dlab' => 'required|integer',    
                 'doral' =>'required|integer',    
-                'dclass_work' => 'required|integer',    
                 'dfinal' => 'required|integer',    
-                'dtotal' => 'required|integer',    
-                'instructor' => 'required|string',            
+                'instructor' => 'string',            
         ];
     }
 }

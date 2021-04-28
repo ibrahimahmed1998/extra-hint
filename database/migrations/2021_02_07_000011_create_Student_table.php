@@ -32,20 +32,20 @@ class CreateStudentTable extends Migration
             $table->integer('Sec_id');
 
             $table->index(["Sec_id", "Dep_id"], 'fk_Student_Sections1_idx');
-            $table->index(["adv_id"], 'fk_S_Users1_idx');
-            $table->index(["Student_id"], 'fk_S_Users2_idx');
+            $table->index(["adv_id"], 'fk_Students_Users1_idx');
+            $table->index(["Student_id"], 'fk_Students_Users2_idx');
 
-            $table->foreign('adv_id', 'fk_S_User2_idx')
+            $table->foreign('adv_id', 'fk_Students_Users2_idx')
                 ->references('id')->on('Users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-                $table->foreign('Student_id', 'fk_S_Users1_idx')
+                $table->foreign('Student_id', 'fk_Students_Users1_idx')
                 ->references('id')->on('Users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->foreign('Sec_id', 'fk_Student_Sections1_idx')
+            $table->foreign('Sec_id', 'fk_Students_Sections1_idx')
                 ->references('Sec_id')->on('Sections')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

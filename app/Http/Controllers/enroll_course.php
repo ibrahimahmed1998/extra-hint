@@ -7,6 +7,7 @@ use App\Http\Requests\enroll_;
 use App\Models\Course;
 use App\Models\Pre_request;
 use App\Models\enroll;
+use App\Models\Student;
 
 class enroll_course extends Controller
 {
@@ -17,15 +18,17 @@ class enroll_course extends Controller
 
     public function enroll(enroll_ $request)  // student enroll course table
     {
-        $student=auth()->user();
-
-        if($student->type != 1)
+        $user=auth()->user();
+        if($user->type !=1 )
         {
-            return response()->json(['error' => 'request for student only'], 201);
+            return response()->json(['err' => 'request for student only'], 201);
         }
 
+        $check =Student::where('Student_id',$user->id)->first();
+        if(!$check){ return response()->json(['err'=>'student not in his table'],201); }
+
         $x = enroll::where('ccode', $request->ccode)->where('year',$request->year)->
-        where('semester', $request->semester)->where('Student_id',$student->id)->first();
+        where('semester', $request->semester)->where('Student_id',$user->id)->first();
 
         if (!$x) // not enrolld before
         {
@@ -44,7 +47,7 @@ class enroll_course extends Controller
                 {
                     enroll::create(
                         [
-                            'Student_id' => $student->id, 'semester' => $request->semester,
+                            'Student_id' => $user->id, 'semester' => $request->semester,
                             'year' => $request->year, 'ccode' => $request->ccode,
                         ]
                     );
@@ -54,7 +57,7 @@ class enroll_course extends Controller
              //dd($sum);
              if($sum>19 && $request->force != 1)
              {
-                return response()->json(['error' =>"Can't Enroll More ... You enrolled ".$sum." Hours ! "], 400);
+                return response()->json(['err' =>"Can't Enroll More ... You enrolled ".$sum." Hours ! "], 400);
              }
            
             $pre_req = Pre_request::where('ccode', $request->ccode)->get();
@@ -67,26 +70,26 @@ class enroll_course extends Controller
                     $counter = $counter + 1;
                 } else 
                 {
-                    return response()->json(['error' => "Student not passed in pre-request " . $pr->pr_ccode], 400);
+                    return response()->json(['err' => "Student not passed in pre-request " . $pr->pr_ccode], 400);
                 }
             }
 
             if ($counter != $pr_count) 
             {
-                return response()->json(['error' => "can't enroll before it's pre-request". $pre_req->pr_code], 400);
+                return response()->json(['err' => "can't enroll before it's pre-request". $pre_req->pr_code], 400);
             }
              else
              { 
                 $sum=$sum+Course::where('ccode',$request->ccode)->value('cch');
                 if($sum>19  && $request->force != 1 )
                 {
-                   return response()->json(['error' =>"Can't Enroll More ... You enrolled ".$sum." Hours ! "], 400);
+                   return response()->json(['err' =>"Can't Enroll More ... You enrolled ".$sum." Hours ! "], 400);
                 }
                 else // sum
                 {
                     enroll::create(
                         [
-                            'Student_id' => $student->id, 'semester' => $request->semester,
+                            'Student_id' => $user->id, 'semester' => $request->semester,
                             'year' => $request->year, 'ccode' => $request->ccode,
                         ]
                     );
@@ -96,15 +99,16 @@ class enroll_course extends Controller
         }
          else 
         {
-            return response()->json(['error' => "enrolled " . $request->ccode . " before in same SEMESTER,YEAR"], 400);
+            return response()->json(['err' => "enrolled " . $request->ccode . " before in same SEMESTER,YEAR"], 400);
         }
     }
+
 
     public function cancel_course(enroll_ $request)
     {
         $student = auth()->user();
         $check = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
-        where('semester', $request->semester)->where('Student_id', $request->Student_id)->first();
+        where('semester', $request->semester)->where('Student_id', $student->id)->first();
 
         if ($check) 
         {
@@ -113,7 +117,7 @@ class enroll_course extends Controller
             
             return response()->json(['success' => $request->ccode . " Canceled"], 201);
         } else {
-            return response()->json(['error' => $request->ccode . " Not Enrolled ! "], 400);
+            return response()->json(['err' => $request->ccode . " Not Enrolled ! "], 400);
         }
     }
 }

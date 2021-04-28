@@ -36,7 +36,7 @@ class CreateEnrollTable extends Migration
             $table->string('ccode', 10);
 
             $table->index(["Student_id"],'fk_Enrolls_Students1_idx');
-            $table->index(["ccode"], 'fk_Enroll_Courses1_idx');
+            $table->index(["ccode"], 'fk_Enrolls_Courses1_idx');
 
             $table->foreign('Student_id', 'fk_Enrolls_Students1_idx')
                 ->references('Student_id')->on('Students')
