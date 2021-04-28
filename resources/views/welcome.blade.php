@@ -1,100 +1,93 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+        <head>
+            <!-- Required meta tags -->
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+        
+            <link rel="stylesheet" href="resources/fonts/icomoon/style.css">
+        
+            <link rel="stylesheet" href="resources/css/owl.carousel.min.css">
+        
+            <!-- Bootstrap CSS -->
+            <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+            
+            <!-- Style -->
+            <link rel="stylesheet" href="resources/css/style.css">
+        
+            <title>Website Menu #3</title>
+          </head>
+          <body>
+        
+        
+            <div class="site-mobile-menu">
+              <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                  <span class="icon-close2 js-menu-toggle"></span>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+              </div>
+              <div class="site-mobile-menu-body"></div>
             </div>
-        </div>
-    </body>
-</html>
+            
+            <header class="site-navbar" role="banner">
+        
+              <div class="container">
+                <div class="row align-items-center">
+                  
+                  <div class="col-11 col-xl-2">
+                    <h1 class="mb-0 site-logo"><a href="index.html" class="text-white mb-0">Brand</a></h1>
+                  </div>
+                  <div class="col-12 col-md-10 d-none d-xl-block">
+                    <nav class="site-navigation position-relative text-right" role="navigation">
+        
+                      <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
+                        <li class="active"><a href="index.html"><span>Home</span></a></li>
+                        <li class="has-children">
+                          <a href="about.html"><span>Dropdown</span></a>
+                          <ul class="dropdown arrow-top">
+                            <li><a href="#">Menu One</a></li>
+                            <li><a href="#">Menu Two</a></li>
+                            <li><a href="#">Menu Three</a></li>
+                            <li class="has-children">
+                              <a href="#">Dropdown</a>
+                              <ul class="dropdown">
+                                <li><a href="#">Menu One</a></li>
+                                <li><a href="#">Menu Two</a></li>
+                                <li><a href="#">Menu Three</a></li>
+                                <li><a href="#">Menu Four</a></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                        <li><a href="listings.html"><span>Listings</span></a></li>
+                        <li><a href="about.html"><span>About</span></a></li>
+                        <li><a href="blog.html"><span>Blog</span></a></li>
+                        <li><a href="contact.html"><span>Contact</span></a></li>
+                      </ul>
+                    </nav>
+                  </div>
+        
+        
+                  <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+        
+                  </div>
+        
+                </div>
+              </div>
+              
+            </header>
+        
+            <div class="hero" style="background-image: url('images/hero_1.jpg');"></div>
+          
+    
+            <script src="js/jquery-3.3.1.min.js"></script>
+            <script src="js/popper.min.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.sticky.js"></script>
+            <script src="js/main.js"></script>
+          </body>
+        </html> 
+        

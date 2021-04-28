@@ -34,7 +34,9 @@ class CreateEnrollTable extends Migration
             $table->integer('semester')->index();
             $table->integer('year')->index();
             $table->string('ccode', 10);
-
+            $table->integer('signature');
+  
+           
             $table->index(["Student_id"],'fk_Enrolls_Students1_idx');
             $table->index(["ccode"], 'fk_Enrolls_Courses1_idx');
 

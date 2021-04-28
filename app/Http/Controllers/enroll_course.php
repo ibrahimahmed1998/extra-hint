@@ -1,13 +1,14 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\enroll_;
+use App\Http\Requests\signature_;
 use App\Models\Course;
 use App\Models\Pre_request;
 use App\Models\enroll;
 use App\Models\Student;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class enroll_course extends Controller
 {
@@ -49,6 +50,7 @@ class enroll_course extends Controller
                         [
                             'Student_id' => $user->id, 'semester' => $request->semester,
                             'year' => $request->year, 'ccode' => $request->ccode,
+                            'signature'=> 0
                         ]
                     );
                     return response()->json(['success' => 'Student Enrolled ' . $request->ccode], 201);
@@ -91,6 +93,7 @@ class enroll_course extends Controller
                         [
                             'Student_id' => $user->id, 'semester' => $request->semester,
                             'year' => $request->year, 'ccode' => $request->ccode,
+                            'signature'=>0
                         ]
                     );
                     return response()->json(['success' => 'Enrolled ' . $request->ccode], 201);
@@ -103,19 +106,66 @@ class enroll_course extends Controller
         }
     }
 
+    public function signature(signature_ $request)
+    {
+         
+        $get = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
+                where('semester', $request->semester)->where('Student_id',$request->Student_id);
+
+        $check=$get->first();
+
+        $user=auth()->user();
+        $adv=User::where('id',$user->id)->where('type',$user->type)->first();
+
+        if($adv->type!=2 ) { return response()->json(['err'=>'You are not Universtiy stuff !'], 201); }
+
+        if($check)
+        {
+            $get->update(array('signature' => $request->signature,));
+            if($get->value('signature')!=$adv->id)
+            {
+                return response()->json(['warning' =>'please enter your id ' ], 401);
+            }
+            return response()->json(['success' =>'course  signatured' ], 401);
+        }
+        else
+        {
+            return response()->json(['err' => 'Not Enrolled yet ! '], 201);
+
+        }
+    }
 
     public function cancel_course(enroll_ $request)
     {
-        $student = auth()->user();
-        $check = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
-        where('semester', $request->semester)->where('Student_id', $student->id)->first();
+        $user=auth()->user();
 
-        if ($check) 
+        if($user->type !=1 )
         {
-            $check = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
-            where('semester', $request->semester)->where('Student_id', $student->id)->delete();
-            
-            return response()->json(['success' => $request->ccode . " Canceled"], 201);
+            return response()->json(['err' => 'request for student only'], 201);
+        }
+
+        $student =Student::where('Student_id',$user->id)->first();
+        if(!$student){ return response()->json(['err'=>'student not in his table'],201); }
+
+        $check = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
+        where('semester', $request->semester)->where('Student_id', $student->Student_id);
+
+        $test=$check->first();
+        $not_sign=$check->where('signature',0)->first();
+         
+        if ($test) 
+        {
+            if($not_sign)
+            {
+                $check = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
+                where('semester', $request->semester)->where('Student_id', $student->Student_id)->delete();
+                return response()->json(['success' => $request->ccode . " Canceled"], 201);
+            }
+            else
+            {
+                return response()->json(['err' => $request->ccode . " can't canceld at this TIME "], 201);
+            }
+           
         } else {
             return response()->json(['err' => $request->ccode . " Not Enrolled ! "], 400);
         }

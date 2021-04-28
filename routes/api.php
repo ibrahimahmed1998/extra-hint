@@ -60,9 +60,7 @@ Route::group(
         Route::post('delete_feedback', FeadbackController::class . '@delete_feedback');
 
         Route::post('update_student', StudentController::class . '@update_student');
-
         Route::post('update_degree', [update_degree::class,'update_student_degree']);
-        Route::post('cancel_course', [enroll_course::class,'cancel_course']); 
 
     }
 );
@@ -71,6 +69,12 @@ Route::group(
     ['middleware' => 'api', 'prefix' => 'service'],  
     function ($router) 
     {
+        // doctorrrrrrrrrrrrrr
+        
+        Route::post('signature', [enroll_course::class,'signature']); 
+
+        Route::post('cancel_course', [enroll_course::class,'cancel_course']); 
+
         Route::post('list_departemnts', [Yellow::class,'list_departemnts']); // CANOT LIST SCETIONS ONLY => SHC
         Route::post('list_stu', [StudentController::class,'list_stu']); 
 
