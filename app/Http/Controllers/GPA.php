@@ -99,7 +99,7 @@ class GPA extends Controller
         }
         if($request->show_deg == 1 )
         {
-            return  $arr ; 
+            return response()->json([$arr ,'GPA:'=>substr($total_quality/$total_cch,0,5)])   ;
         }
             return substr($total_quality/$total_cch,0,5);  
     }

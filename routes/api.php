@@ -7,9 +7,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\enroll_course;
 use App\Http\Controllers\FeadbackController;
+use App\Http\Controllers\GPA;
 use App\Http\Controllers\intell_alg;
 use App\Http\Controllers\is_attend;
 use App\Http\Controllers\live_hour;
+use App\Http\Controllers\show_s_degree;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\update_degree;
 use App\Http\Controllers\Yellow;
@@ -23,6 +25,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(
     ['middleware' => 'api', 'prefix' => 'auth'],
     function ($router) {
+        Route::get('test', AuthController::class . '@test');
+
+
         Route::post('signup', AuthController::class . '@signup');
         Route::post('login', AuthController::class . '@login');
         Route::post('logout', AuthController::class . '@logout');
@@ -91,6 +96,9 @@ Route::group(
         Route::post('add_feedback', FeadbackController::class . '@add_feedback');
         Route::get('list_feedbacks', FeadbackController::class . '@list_feedbacks');
 
-       // Route::post('gpa', GPA::class.'@gpa_calc'); // GPA - DEGREE
+        Route::post('gpa', GPA::class.'@gpa_calc'); // GPA - DEGREE
+        Route::post('show_s_degree', show_s_degree::class.'@show_s_degree'); // GPA - DEGREE
+
+        
     }
 );
