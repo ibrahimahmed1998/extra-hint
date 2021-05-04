@@ -18,36 +18,33 @@ class StudentController extends Controller
     public function update_student(update_student_ $request)
     {
         $student = Student::where('Student_id', $request->Student_id);
-        
         $lvl = new lvl_calc();
         $C_GPA = new GPA();
-        $hours = new live_hour(); 
-        $advisor = User::where('id',$request->adv_id)->first();
-        if($advisor->type!=2)
+        $hours = new live_hour();
+         
+        if ($request->adv_id) 
         {
-         return response()->json(['err' =>"not advisor id"], 401);
-        }
-        $counter = Student::where('adv_id', $request->adv_id)->get()->count();
+          $advisor = User::where('id', $request->adv_id)->where('type',2)->first();
 
-        if ($counter >= 10) 
-        {
-            return response()->json(['err' => "can't follow this advisor he has ".$counter." Students"], 401);
-        } else 
-        {
-            if ($student)
-             {
-                $student->update(array(
-                    'live_hour' =>$hours->live_hourf($request),
-                    'c_gpa' =>$C_GPA->gpa_calc($request),
-                    'lvl' => $lvl->lvl_calc_f($request),
-                    'roadmap' => $request->roadmap,
-                    'adv_id' => $request->adv_id,
-                    'dep_id' => $request->dep_id,
-                    'sec_id' => $request->sec_id
-                ));
-                return response()->json(['Success' => 'Student Updated'], 201);
+          if (!$advisor) { return response()->json(['err' => "advisor not found"], 401); } 
+          else 
+            {
+                $counter = Student::where('adv_id', $request->adv_id)->get()->count();
+
+                if($counter>=10){return response()->json(['err'=>"can't follow advisor he has ".$counter." Students"],401);} 
+                   
+                else { $student->update(array('adv_id'=>$advisor->id));  }
             }
         }
+
+        if ($request->roadmap) {$student->update(array('roadmap' => $request->roadmap));}
+      
+        if($request->dep_id&&$request->sec_id) { $student->update(array('dep_id' => $request->dep_id,'sec_id' => $request->sec_id));  }
+          
+        $student->update(
+            array('live_hour'=>$hours->live_hourf($request),'c_gpa'=>$C_GPA->gpa_calc($request),'lvl'=>$lvl->lvl_calc_f($request)));
+            
+        return response()->json(['Success' => 'Student Updated'], 201);
     }
 
     public function delete_student(Request  $request)

@@ -15,11 +15,11 @@ class update_student_ extends FormRequest
     public function rules()
     {
         return [
-            'Student_id' => 'required|integer|exists:Students',
-            'roadmap' => 'required|min:1|max:2|integer|between:1,2',
-            'adv_id' => 'required|integer|exists:Users,id|different:Student_id',
-            'dep_id' => 'required|integer|exists:Departments,dep_id',
-            'sec_id' => 'required|integer|exists:Sections,sec_id',
+            'Student_id'=>'required|integer|exists:Students',
+            'roadmap' =>'integer|between:1,2',
+            'adv_id' => 'integer|exists:Users,id|different:Student_id',
+            'dep_id' => 'integer|exists:Departments,dep_id',
+            'sec_id' => 'integer|exists:Sections,sec_id',
         ];
     }
 }
