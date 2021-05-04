@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Enroll_Course;
-
-use App\Http\Controllers\AUTO\Auto_degree;
+use App\Http\Controllers\Auto\Auto_degree ;
 use App\Http\Controllers\Controller;
 use App\Models\enroll;
 use App\Models\Student;
@@ -14,7 +13,6 @@ class Show_degree extends Controller
   public function show_degree(Request $req)
   {
     
-
     $req->validate([
       'Student_id' => 'integer|exists:Students',
       'year' => 'integer',
