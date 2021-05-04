@@ -1,19 +1,19 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\validate_attend;
+use App\Http\Requests\Attend_;
 use App\Models\Attend;
 use App\Models\enroll;
 use Illuminate\Support\Str;
 
-class is_attend extends Controller
+class Attends extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth:api', ['except' =>  [' ']]);
     }
 
-    public function layer(validate_attend $request)
+    public function layer(Attend_ $request)
     {
         Str::random(6);
 

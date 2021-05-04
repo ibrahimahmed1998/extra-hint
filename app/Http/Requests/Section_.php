@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Validate_Section extends FormRequest
+class Section_ extends FormRequest
 {
     public function authorize()
     {

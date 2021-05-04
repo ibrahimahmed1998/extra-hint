@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class enroll_ extends FormRequest
+class Enroll_ extends FormRequest
 {
     public function authorize()
     {
@@ -18,7 +18,7 @@ class enroll_ extends FormRequest
         return [
  
                 'semester' =>'required|integer|between:1,3',  // summer = 3 
-                'year' => 'required|integer',  
+                'year' => 'required|integer|min:1900',
                 'ccode' => 'required|string|exists:Courses,ccode',  
          ];
     }

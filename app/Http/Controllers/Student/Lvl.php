@@ -1,33 +1,28 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\enroll;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
-class lvl_calc extends Controller
+class Lvl extends Controller
 {
-    public function __construct()
+    public function __construct() {   $this->middleware('auth:api', ['except' => []]); }
+  
+    public function lvl(Request $req)
     {
-        $this->middleware('auth:api', ['except' => []]);
-    }
+        $req->validate(['Student_id' => 'required|exists:Students']);
 
-    public function lvl_calc_f(Request $request)
-    {
-        $request->validate(['Student_id' => 'required|exists:Students']);
-
-        $passed_courses = enroll::where('hpass', 1)->where('Student_id', $request->Student_id)->get();
+        $passed_courses = enroll::where('hpass', 1)->where('Student_id', $req->Student_id)->get();
 
         $sum = 0;
-        foreach ($passed_courses as $p) 
-        {
-            $sum = $sum + Course::where('ccode', $p->ccode)->value('cch');
-        }
-
+        
+        foreach ($passed_courses as $p) { $sum = $sum + Course::where('ccode', $p->ccode)->value('cch'); }
+      
         $lvl = 1;
 
-        Student::where('Student_id', $request->Student_id)->first();
+        Student::where('Student_id', $req->Student_id)->first();
 
         if ($sum >= 0 && $sum < 33) {  $lvl = 1; } 
         else if ($sum  >= 33 && $sum < 67) { $lvl = 2; }

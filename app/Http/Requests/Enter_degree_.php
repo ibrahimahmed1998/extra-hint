@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Validate_Enroll_degree extends FormRequest
+class Enter_degree_ extends FormRequest
 {
     public function authorize()
     {
@@ -17,7 +17,7 @@ class Validate_Enroll_degree extends FormRequest
         return [
             'Student_id' => 'required|string|exists:Students,student_id',      
             'semester' =>'required|integer', 
-            'year' => 'required|integer',  
+            'year' => 'required|integer|min:1900',
             'ccode' => 'required|string|exists:Courses,ccode',  
 
             'hmedterm_d' => 'required|integer',      

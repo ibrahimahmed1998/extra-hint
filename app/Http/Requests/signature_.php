@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class signature_ extends FormRequest
+class Signature_ extends FormRequest
 {
     public function authorize()
     {
@@ -19,7 +19,7 @@ class signature_ extends FormRequest
             'signature' => 'required|integer',
             'Student_id'=>'required|integer|exists:Students',
             'semester' =>'required|integer|between:1,3',  
-            'year' => 'required|integer',  
+            'year' => 'required|integer|min:1900',
             'ccode' => 'required|string|exists:Courses'
          ];
     }

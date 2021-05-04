@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class validate_attend extends FormRequest
+class Attend_ extends FormRequest
 {
     public function authorize()
     {

@@ -1,43 +1,45 @@
 <?php
-
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Student;
+use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\enroll;
 use Illuminate\Http\Request;
 
 class GPA extends Controller
 {
-    public function __construct()
+    public function __construct() { $this->middleware('auth:api', ['except' =>  []]); } 
+  
+    public function gpa(Request $req)
     {
-        $this->middleware('auth:api', ['except' =>  []]);
-    }
-
-    public function gpa_calc(Request $request)
-    {
-        $request->validate([
+        $req->validate([
             'choice' =>'required|integer|between:1,2',
             'Student_id' => 'required|integer|exists:Students',
             'show_deg' => 'integer',
         ]);
+        
+        $year=enroll::where('year',$req->year)->first();
+        $semester=enroll::where('semester',$req->semester)->first();
 
-        $test=enroll::where('Student_id',$request->Student_id)->first();
+        if(!$year || !$semester)
+        { return response()->json(['err' => "not Enrolled courses in: ".$req->year." or this semester"], 401); }
+
+        $test=enroll::where('Student_id',$req->Student_id)->first();
         if(!$test) {return 0;} 
-        if($request->choice==1)     // Semester_GPA
+        if($req->choice==1)     // Semester_GPA
         {
-            $request->validate(
+            $req->validate(
                 [
                 'semester' => 'required|integer|between:1,3',
                 'year' => 'required|integer|min:1900',
                 ]);
 
-                $c = enroll::where('Student_id', $request->Student_id)->
-                where('semester', $request->semester)->
-                where('year', $request->year)->get();  
+                $c = enroll::where('Student_id', $req->Student_id)->
+                where('semester', $req->semester)->
+                where('year', $req->year)->get();  
         }
-        else if ($request->choice==2) // Cumulative_GPA
+        else if ($req->choice==2) // Cumulative_GPA
         {
-            $c = enroll::where('Student_id', $request->Student_id)->get();  
+            $c = enroll::where('Student_id', $req->Student_id)->get();  
         }
 
         $count = $c->count();
@@ -51,7 +53,7 @@ class GPA extends Controller
         {
             $cd = Course::where('ccode', $c[$i]->ccode)->value('dtotal');
             $cch = Course::where('ccode', $c[$i]->ccode)->value('cch');
-            $sd = enroll::where('ccode', $c[$i]->ccode)->where('Student_id', $request->Student_id)->value('htotal_d');
+            $sd = enroll::where('ccode', $c[$i]->ccode)->where('Student_id', $req->Student_id)->value('htotal_d');
             if ($sd >= $cd * 0.90) {
                 $code = 'A';
                 $points = 4.0;
@@ -97,7 +99,8 @@ class GPA extends Controller
                     "degree" => $sd,
                 ];
         }
-        if($request->show_deg == 1 )
+        
+        if($req->show_deg == 1 )
         {
             return response()->json([$arr ,'GPA:'=>substr($total_quality/$total_cch,0,5)])   ;
         }

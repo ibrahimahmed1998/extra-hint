@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Events\MessageSent;
 use App\Models\Message as ModelsMessage;
 
-class ChatController extends Controller
+class Chat extends Controller
 {
     public function __construct()
     {
