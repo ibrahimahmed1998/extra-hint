@@ -12,7 +12,7 @@ class ChatController extends Controller
 {
     public function __construct()
     {
-      $this->middleware('auth');
+     // $this->middleware('auth');
     }
     
     /**
@@ -29,6 +29,9 @@ class ChatController extends Controller
      */
     public function fetchMessages()
     {
+      //return response()->json(['hello'=>'world']);
+     //return response()->json(['hello']);
+
       return ModelsMessage::with('user')->get();
     }
     

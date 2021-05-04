@@ -25,13 +25,13 @@ class StudentController extends Controller
         $advisor = User::where('id',$request->adv_id)->first();
         if($advisor->type!=2)
         {
-         return response()->json(['error' =>"not advisor id"], 401);
+         return response()->json(['err' =>"not advisor id"], 401);
         }
         $counter = Student::where('adv_id', $request->adv_id)->get()->count();
 
         if ($counter >= 10) 
         {
-            return response()->json(['error' => "can't follow this advisor he has ".$counter." Students"], 401);
+            return response()->json(['err' => "can't follow this advisor he has ".$counter." Students"], 401);
         } else 
         {
             if ($student)

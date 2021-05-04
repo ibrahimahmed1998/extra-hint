@@ -22,21 +22,15 @@ class CreateUserTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->integer('id',50)->index();
-            $table->string('phone');
+            $table->integer('id',50)->index()->unique();
+            $table->string('phone')->unique();
             $table->string('first_name',30);
             $table->string('last_name',30);
             $table->integer('type');
-            $table->string('email', 50);
+            $table->string('email')->unique();
             $table->string('password');
-            $table->string('rememberToken')->nullable();
-            $table->timestamp('created_at')->nullable();
-
-            $table->unique(["phone"], 'phone_UNIQUE');
-
-            $table->unique(["id"], 'acadmic_id_UNIQUE');
-
-            $table->unique(["email"], 'email_UNIQUE');
+            $table->rememberToken();
+            $table->timestamps();    
         });
     }
 
