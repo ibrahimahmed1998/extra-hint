@@ -1,20 +1,19 @@
 <?php
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers\Auto\Auto_node;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\enroll;
 use App\Models\Student;
-use Illuminate\Http\Request;
 
 class Live_hour extends Controller
 {
     public function __construct() {   $this->middleware('auth:api', ['except' => []]); }
 
-    public function live_hour(Request $req)
+    public function live_hour($id)
     {
-        Student::where('Student_id', $req->Student_id)->first();
+        Student::where('Student_id', $id)->first();
         $live_hours = 12 ; 
-        $enrolled = enroll::where('Student_id', $req->Student_id)->get();
+        $enrolled = enroll::where('Student_id',$id)->get();
         for ($i = 0; $i < $enrolled->count(); $i++) 
         {
             for ($j =$i+1; $j < $enrolled->count(); $j++)

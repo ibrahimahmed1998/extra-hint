@@ -13,11 +13,6 @@ class Cancel_course extends Controller
     {
         $user=auth()->user();
 
-        if($user->type !=1 )
-        {
-            return response()->json(['err' => 'request for student only'], 201);
-        }
-
         $student =Student::where('Student_id',$user->id)->first();
         if(!$student){ return response()->json(['err'=>'student not in his table'],201); }
 

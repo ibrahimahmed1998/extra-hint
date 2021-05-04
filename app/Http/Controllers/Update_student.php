@@ -1,5 +1,7 @@
 <?php
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Auto\Auto_student;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\update_student_;
 use App\Models\Student;
@@ -9,22 +11,17 @@ class Update_student extends Controller
 {
     public function __construct() {  $this->middleware('auth:api', ['except' =>  []]); }
    
-    public function update_student(update_student_ $req) // auto 
+    public function update_student(update_student_ $req)  
     {
         $student = Student::where('Student_id', $req->Student_id);
-        $lvl = new Lvl();
-        $C_GPA = new GPA();
-        $hours = new Live_hour();
-            
-        $student->update(array('live_hour'=>$hours->live_hour($req),
-                                'c_gpa'=>$C_GPA->gpa($req),
-                                'lvl'=>$lvl->lvl($req)));
-            
+        $x = new Auto_student();
+
+        $x->auto_student($req->Student_id);
+
         if ($req->roadmap) {$student->update(array('roadmap' => $req->roadmap));}
 
         if($req->dep_id && $req->sec_id) 
         { $student->update(array('dep_id'=>$req->dep_id,'sec_id'=>$req->sec_id));  }
-
 
         if($req->adv_id) 
          {
@@ -38,7 +35,6 @@ class Update_student extends Controller
             else { $student->update(array('adv_id'=>$advisor->id));  }
             
           }
-
-        return response()->json(['Success' => 'Student Updated'], 201);
+        return response()->json(['Success' => $student->first()], 201);
     }
 }

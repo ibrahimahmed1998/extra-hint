@@ -14,12 +14,7 @@ class Enroll_course extends Controller
     public function enroll_course(Enroll_ $request)  // student enroll course table
     {
         $user=auth()->user();
-        
-        if($user->type !=1 )
-        {
-            return response()->json(['err' => 'request for student only'], 201);
-        }
-
+ 
         $check =Student::where('Student_id',$user->id)->first();
         if(!$check){ return response()->json(['err'=>'student not in his table'],201); }
 
@@ -88,7 +83,7 @@ class Enroll_course extends Controller
                         [
                             'Student_id' => $user->id, 'semester' => $request->semester,
                             'year' => $request->year, 'ccode' => $request->ccode,
-                            'signature'=>0
+                            'signature'=>0, 
                         ]
                     );
                     return response()->json(['success'=>'Enrolled '.$request->ccode], 201);

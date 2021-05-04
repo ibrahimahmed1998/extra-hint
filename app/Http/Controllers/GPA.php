@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllerss;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\enroll;
@@ -19,9 +19,7 @@ class GPA extends Controller
         
         $year=enroll::where('year',$req->year)->first();
         $semester=enroll::where('semester',$req->semester)->first();
-
-        if(!$year || !$semester)
-        { return response()->json(['err' => "not Enrolled courses in: ".$req->year." or this semester"], 401); }
+       
 
         $test=enroll::where('Student_id',$req->Student_id)->first();
         if(!$test) {return 0;} 
@@ -32,6 +30,10 @@ class GPA extends Controller
                 'semester' => 'required|integer|between:1,3',
                 'year' => 'required|integer|min:1900',
                 ]);
+
+                     
+           if(!$year || !$semester)
+           { return response()->json(['err' => "not Enrolled courses in: ".$req->year." or this semester"], 401); }
 
                 $c = enroll::where('Student_id', $req->Student_id)->
                 where('semester', $req->semester)->

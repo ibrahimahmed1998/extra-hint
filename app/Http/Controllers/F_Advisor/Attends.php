@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers\F_Advisor;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Attend_;
 use App\Models\Attend;

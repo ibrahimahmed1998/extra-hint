@@ -1,20 +1,19 @@
 <?php
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers\Auto\Auto_node;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\enroll;
 use App\Models\Student;
-use Illuminate\Http\Request;
 
 class Lvl extends Controller
 {
     public function __construct() {   $this->middleware('auth:api', ['except' => []]); }
   
-    public function lvl(Request $req)
+    public function lvl($id)
     {
-        $req->validate(['Student_id' => 'required|exists:Students']);
-
-        $passed_courses = enroll::where('hpass', 1)->where('Student_id', $req->Student_id)->get();
+        $s=Student::where('Student_id',$id)->first();
+        if(!$s){ return response()->json(['err'=>'student not found'], 400); }
+        $passed_courses = enroll::where('hpass', 1)->where('Student_id', $id)->get();
 
         $sum = 0;
         
@@ -22,20 +21,13 @@ class Lvl extends Controller
       
         $lvl = 1;
 
-        Student::where('Student_id', $req->Student_id)->first();
-
         if ($sum >= 0 && $sum < 33) {  $lvl = 1; } 
         else if ($sum  >= 33 && $sum < 67) { $lvl = 2; }
         else if ($sum  >= 67 && $sum < 100) { $lvl =  3; }
         else if ($sum  >= 100 && $sum < 134) {$lvl =  4;}
-        else if ($sum >= 134) 
-        {
-            response()->json(['success' => 'graduated'], 201);
-        } 
-        else 
-        {
-            return response()->json(['error' => 'level calculator has error  '], 400);
-        }
+        else if ($sum >= 134) { response()->json(['success' => 'graduated'], 201);   }
+        else { return response()->json(['err' => 'level calculator has error  '], 400); }
+
        return $lvl ;
     }
 }

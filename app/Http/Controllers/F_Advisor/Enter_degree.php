@@ -1,5 +1,7 @@
 <?php
-namespace App\Http\Controllers\Enroll_Course;
+namespace App\Http\Controllers\F_Advisor;
+
+use App\Http\Controllers\AUTO\Auto_degree;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Enter_degree_;
 use App\Models\Course;

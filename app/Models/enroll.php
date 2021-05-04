@@ -10,7 +10,7 @@ class enroll extends Model
     use HasFactory;
     public $timestamps = false;
 
-    protected $fillable = ['Student_id','signature','hmedterm_d','hlab_d','horal_d','hclass_work_d','hfinal_d','htotal_d','hpass','semester','year','ccode'];  
+    protected $fillable = ['Student_id','counter','signature','hmedterm_d','hlab_d','horal_d','hclass_work_d','hfinal_d','htotal_d','hpass','semester','year','ccode'];  
     
 
  

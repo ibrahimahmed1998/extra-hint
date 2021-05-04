@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Enroll_Course;
+namespace App\Http\Controllers\F_Advisor;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Signature_;
 use App\Models\enroll;
@@ -15,8 +15,6 @@ class Signature extends Controller
 
         $ie=$ec->first();  /*////// ie = IS Enrolled ???? //////*/
         $user=auth()->user();
-
-        if($user->type != 2) { return response()->json(['err'=>'You are not Universtiy stuff !'], 201); }
 
         if(!$ie) {   return response()->json(['err' => 'Not Enrolled yet ! '], 201);  }
        

@@ -4,11 +4,11 @@ use App\Http\Controllers\Controller;
 use App\Models\User; 
 use Illuminate\Http\Request;
 
-class Delete_user extends Controller
+class Del_user extends Controller
 {
     public function __construct()  {  $this->middleware('auth:api', ['except' =>[]]); }
 
-    public function delete_user(Request  $req) 
+    public function deL_user(Request  $req) 
     {
         $req->validate(['id' => 'required|integer|exists:Users']);
         User::find($req->id)->delete();

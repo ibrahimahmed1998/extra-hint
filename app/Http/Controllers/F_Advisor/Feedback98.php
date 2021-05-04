@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\F_Advisor;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Feedback_;
 use App\Models\Feedbacks;

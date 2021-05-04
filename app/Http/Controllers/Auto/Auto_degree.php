@@ -1,7 +1,5 @@
 <?php
-
-namespace App\Http\Controllers\Enroll_Course;
-
+namespace App\Http\Controllers\Auto;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\enroll;
