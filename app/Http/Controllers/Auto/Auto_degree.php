@@ -11,7 +11,6 @@ class Auto_degree extends Controller
     public function auto_degree()
     {
         $get = enroll::all();
-
         for ($i = 0; $i < $get->count(); $i++) 
         {
             $course = Course::where('ccode', $get[$i]->ccode)->first();
@@ -20,12 +19,10 @@ class Auto_degree extends Controller
             $total = ($get[$i]->hclass_work_d + $get[$i]->hfinal_d);
 
             if ($total >=  ($course->dtotal) * 0.60) {   $is_pass = 1; } 
-              
             else {  $is_pass = 0;  }
-            
+           
             $update = enroll::where('ccode', $get[$i]->ccode)->where('year', $get[$i]->year)->
             where('semester', $get[$i]->semester)->where('Student_id', $get[$i]->Student_id);
-
             $update->update(array("hpass" => $is_pass, "htotal_d" => $total, "hclass_work_d" => $classwork));
         }
     }
