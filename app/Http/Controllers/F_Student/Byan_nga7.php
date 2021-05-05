@@ -10,22 +10,25 @@ class Byan_nga7 extends Controller
 
     public function byan_nga7(Request $req)
     {
-        $req->validate(['Student_id'=>'required|integer|exists:Students',
-                        'year'=>'integer|min:2000',
-                        'semester'=>'integer|between:1,3',
-                        'msg'=>'required|string'
-            ]);
+        $user = auth()->user();
+        $id = $user->id ; 
 
-        $id = $req->Student_id;
-        $year = $req->year;
-        $semester = $req->semester;
-        
-        $class = new GPA();
+        $req->validate(['msg'=>'required|string']);
 
-        $user=autH()->user();   if($user->type==1) {  $id=$user->id; }    
-        
-        if($req->msg=='sgpa') {   return  $class->gpa($id,'sgpa',$year,$semester); }
+        if($user->type != 1 )
+         { 
+            $req->validate(['Student_id'=>'integer|exists:Students']);
+            $id = $req->Student_id;
+         }
+
+        $year = $req->year;         $semester = $req->semester;     $class = new GPA();  
+
+        if($req->msg=='sgpa')
+         { 
+            $req->validate(['year'=>'required|integer|min:2000','semester'=>'required|integer|between:1,3']);
+            return  $class->gpa($id,'sgpa',$year,$semester);
+         }
     
-        else if($req->msg=='cgpa') {  return  $class->gpa($id,'cgpa',$year,$semester); }  
+        else if($req->msg=='cgpa') {  return  $class->gpa($id,'cgpa',0,0); }  
     }
 }

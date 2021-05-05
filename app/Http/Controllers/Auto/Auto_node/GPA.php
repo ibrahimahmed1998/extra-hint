@@ -1,42 +1,56 @@
 <?php
 namespace App\Http\Controllers\Auto\Auto_node;
+
+use App\Http\Controllers\Auto\Auto_degree;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\enroll;
 
 class GPA extends Controller
 {
-    public function __construct() { $this->middleware('auth:api', ['except' =>  []]); } 
-  
-    public function gpa($id,$msg,$year,$semester) // $msg = sgpa || cgpa
+public function __construct() { $this->middleware('auth:api', ['except' =>  []]); } 
+
+public function gpa($id,$msg,$year,$semester) // $msg = sgpa || cgpa
+{
+    $points = 0.0;        $Qulaity = 0.0;            $total_quality=0;       $total_cch=0;      $code = "";
+    $form = [];
+    
+    $auto = new Auto_degree(); $auto->auto_degree();
+
+    $test=enroll::where('Student_id',$id)->first();     
+    if(!$test) {return 0;}     // STUDENT NOT ENROLLED COURSES 
+
+    else
     {
-        $points = 0.0;        $Qulaity = 0.0;            $total_quality=0;       $total_cch=0;      $code = "";
-        $form = [];
-
-        $test=enroll::where('Student_id',$id)->first();     
-        if(!$test) {return 0;}     // if not Enrolled Courses 
-
         $c = enroll::where('Student_id',$id)->get(); 
-        
+
         if($msg=="sgpa")
         {
             $y=enroll::where('year',$year)->first();
             $s=enroll::where('semester',$semester)->first();
 
-           if(!$y || !$s)
-             { return response()->json(['err' => "not Enrolled in: ".$year." or this semester"], 401); }
 
-             $c=enroll::where('Student_id', $id)->where('semester',$semester)->where('year',$year)->get();  
+        if(!$y || !$s) 
+         {
+            return response()->json(['err' => "not Enrolled in: ".$year." or this semester"], 401); 
+         }
+
+         $test_sem =enroll::where('Student_id', $id)->where('semester',$s)->where('year',$y)->first(); 
+
+         if(!$test_sem){ return response()->json(['err' => "not Enrolled Courses in this semester"], 401); }
+
+            $c=enroll::where('Student_id', $id)->where('semester',$semester)->where('year',$year)->get();  
+
         }
 
         for ($i=0; $i <$c->count() ; $i++)   { $arr[] = $c[$i]; }
-              
+            
         for ($i=0; $i<$c->count() ;  $i++) 
         {
             $cd = Course::where('ccode', $arr[$i]->ccode)->value('dtotal'); // Course Degree
         
             $cch = Course::where('ccode', $arr[$i]->ccode)->value('cch'); // Course Credit Hours
-          
+        
             $sd = $arr[$i]->htotal_d;        // Student Degree
 
             if ($sd >= $cd * 0.90) {
@@ -95,6 +109,7 @@ class GPA extends Controller
             return response()->json(["byan_nga7"=>$form,$msg.":"=>substr($total_quality/$total_cch,0,5)])   ;
         }
 
-           return substr($total_quality/$total_cch,0,5); 
-    }
+        return substr($total_quality/$total_cch,0,5); 
+}
+    }     
 }
