@@ -5,7 +5,7 @@ use App\Http\Controllers\AUTH_USERS\Change_pass;
 use App\Http\Controllers\AUTH_USERS\Login;
 use App\Http\Controllers\AUTH_USERS\Reset_pass;
 use App\Http\Controllers\AUTH_USERS\Search_user;
-use App\Http\Controllers\AUTH_USERS\Update_user;
+use App\Http\Controllers\AUTH_USERS\Update_user; // test 
 use App\Http\Controllers\AUTH_USERS\Update_student;
 use App\Http\Controllers\AUTH_USERS\AuthController;
 use App\Http\Controllers\AUTH_USERS\Del_student;

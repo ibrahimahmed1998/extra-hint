@@ -13,6 +13,9 @@ class Auto_student extends Controller
     public function auto_student()   // $id
     {
         $id = 200 ;
+
+        $auto = new Auto_degree() ; $auto->auto_degree(); /*********************** AUTOMATIC ******************************* */
+        
         $student = Student::where('Student_id',$id);
        
         $lvl = new Lvl();         $GPA = new GPA();         $hours = new Live_hour();

@@ -14,7 +14,7 @@ class Update_student extends Controller
     public function update_student(update_student_ $req)  
     {
         $student = Student::where('Student_id', $req->Student_id);
-        $x = new Auto_student();         $x->auto_student($req->Student_id);
+        $x = new Auto_student();         $x->auto_student($req->Student_id);    /********** AUTOMATIC *************/
 
         if ($req->roadmap) {$student->update(array('roadmap' => $req->roadmap));}
 
