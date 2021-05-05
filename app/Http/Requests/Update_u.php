@@ -4,8 +4,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class Update_u extends FormRequest
 {
-    public function authorize() {   return true; }
-     
+    public function authorize() {  return true; } 
     public function rules()
     {
         return 
