@@ -12,7 +12,7 @@ class Change_pass extends Controller
     public function change_pass(Request $req)
     {
         $req->validate(['password' => 'required|min:8',
-                            'new_pass' => 'required|min:8|required_with:conifrm_new_pass|same:conifrm_new_pass']);
+                        'new_pass' => 'required|min:8|required_with:conifrm_new_pass|same:conifrm_new_pass']);
            
         $user = Auth()->user();
 

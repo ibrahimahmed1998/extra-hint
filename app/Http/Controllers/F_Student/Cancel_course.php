@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\Enroll_Course;
+namespace App\Http\Controllers\F_Student;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\enroll_;
 use App\Models\enroll;

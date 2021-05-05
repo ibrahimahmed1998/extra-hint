@@ -18,17 +18,14 @@ class Login extends Controller
 
         $credentials = $req->only('email', 'password');
         
-    
-
       if ($token = auth()->attempt($credentials)) 
         {
             $this->respondWithToken($token);
             return response()->json(["token"=>$token ,"name"=>auth()->user()->first_name , 'type' => auth()->user()->type] );
-        } else {
+        } 
+        else 
+        {
             return response()->json(['err' => "Wrong Credintials , Try a valid E-mail or password"], 401);
         }
-
-        
-
     }
 }

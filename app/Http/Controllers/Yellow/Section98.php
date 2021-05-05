@@ -16,7 +16,7 @@ class Section98 extends Controller
        return response()->json(['Success' => 'Section Created'], 201);
     }
 
-    public function delete_section(Request $req)
+    public function del_sec98(Request $req)
     {
         $req->validate(['sec_id' => 'required|integer|exists:Sections','dep_id' => 'required|exists:Departments']);
         Section::where('sec_id', $req->sec_id)->where('dep_id',$req->dep_id)->delete();

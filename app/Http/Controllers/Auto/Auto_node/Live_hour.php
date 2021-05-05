@@ -4,27 +4,50 @@ use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\enroll;
 use App\Models\Student;
-
+ 
 class Live_hour extends Controller
 {
-    public function __construct() {   $this->middleware('auth:api', ['except' => []]); }
+    public function __construct() {   $this->middleware('auth:api', ['except' => ['live_hour']]); }
 
     public function live_hour($id)
     {
-        Student::where('Student_id', $id)->first();
-        $live_hours = 12 ; 
-        $enrolled = enroll::where('Student_id',$id)->get();
-        for ($i = 0; $i < $enrolled->count(); $i++) 
+        $table = Student::where('Student_id', $id);
+        
+        $live_hours = 12 ;  //$student=$table->first(); $live_hours =  $student->live_hour  ;
+        $ec = enroll::where('Student_id',$id)->get(); // enrolled courses 
+
+        $arr=[]; $new=[]; $filter=[];
+       
+        for ($i=0; $i <  $ec->count() ; $i++) { $arr[]=$ec[$i]; }
+     
+        for ($i = 0; $i < sizeof($arr)-1; $i++) 
         {
-            for ($j =$i+1; $j < $enrolled->count(); $j++)
+            for ($j =$i+1; $j < sizeof($arr); $j++)
              {
-                if ($enrolled[$i]->ccode == $enrolled[$j]->ccode) 
+                if ($arr[$i]->ccode == $arr[$j]->ccode) 
                 { 
-                    $c=Course::where('ccode',$enrolled[$i]->ccode)->value('cch');
-                    $live_hours=$live_hours-$c;
+                    if($arr[$i]->counter !== $arr[$j]->counter)
+                     {
+                         $new[] = $arr[$j]->ccode;
+                         unset($arr[$j]->ccode);
+                     }
                 }
             }
         }
-        return $live_hours;
+
+        for ($i=0; $i<sizeof($new); $i++) 
+        { 
+            if( $new[$i] != null )  {   $filter[]= $new[$i];  }   
+        } 
+        
+        for ($i=0; $i<sizeof($filter); $i++) 
+        { 
+            $cch=Course::where('ccode',$filter[$i])->value('cch');
+            $live_hours=$live_hours-$cch;    
+        }  
+        
+       // $table->update(array('live_hour'=> $live_hours));  return  $student->first();
+       if($live_hours < 0 ) { $live_hours = 0 ; }
+       return  $live_hours;
     }
 }

@@ -13,7 +13,6 @@ class Add_user extends Controller
    
     public function add_user(Signup_ $req)
     {
-        //  $vcode = Str::random(70);
         $user = User::create([
             'id' => $req->id,
             'first_name' => $req->first_name,
@@ -43,13 +42,6 @@ class Add_user extends Controller
                 return response()->json(['success' => 'Student joins...AMS'], 201);
              }
         }
-
         return response()->json(['success' => 'joins...AMS'], 201);
-
-        /* Mail::to($user)->send(new verifyEmail($user->firstname, $vcode));
-
-        return response()->json(['message' => 'Successfully sign up ,Look at your email inbox'], 201);
-        */
     }
-
 }

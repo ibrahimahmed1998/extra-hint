@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class Department98 extends Controller
 {
-    public function __construct() { $this->middleware('auth:api', ['except' => []]);    }
+    public function __construct() { $this->middleware('auth:api', ['except' => ['list_departemnts']]);    }
   
     public function department98(Request $req) //create 
     {

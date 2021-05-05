@@ -6,39 +6,32 @@ use App\Http\Controllers\AUTH_USERS\Login;
 use App\Http\Controllers\AUTH_USERS\Reset_pass;
 use App\Http\Controllers\AUTH_USERS\Search_user;
 use App\Http\Controllers\AUTH_USERS\Update_user;
+use App\Http\Controllers\AUTH_USERS\Update_student;
 use App\Http\Controllers\AUTH_USERS\AuthController;
 use App\Http\Controllers\AUTH_USERS\Del_student;
 use App\Http\Controllers\AUTH_USERS\Del_user;
-use App\Http\Controllers\AUTH_USERS\test_verify_user;
-/********************************************************/
-use App\Http\Controllers\Enroll_Course\Enroll_course;
-use App\Http\Controllers\Enroll_Course\Cancel_course;
-use App\Http\Controllers\Enroll_Course\Show_degree;
-/********************************************************/
-use App\Http\Controllers\Student\GPA;
-use App\Http\Controllers\F_Advisor\Search_student;
-use App\Http\Controllers\Student\Update_student;
 /********************************************************/
 use App\Http\Controllers\Yellow\Course98;
 use App\Http\Controllers\Yellow\Department98;
 use App\Http\Controllers\Yellow\Pre_req98;
 use App\Http\Controllers\Yellow\Section98;
 use App\Http\Controllers\Yellow\SHC98;
-use App\Http\Controllers\Yellow\test_list_sem;
+use App\Http\Controllers\Yellow\List_C;
 /********************************************************/
-use App\Http\Controllers\Chat;
+use App\Http\Controllers\F_Student\Enroll_course;
+use App\Http\Controllers\F_Student\Cancel_course;
+use App\Http\Controllers\F_Student\Show_degree;
 /********************************************************/
 use App\Http\Controllers\F_Advisor\Enter_degree;
 use App\Http\Controllers\F_Advisor\Feedback98;
 use App\Http\Controllers\F_Advisor\Attends;
 use App\Http\Controllers\F_Advisor\Signature;
- 
+use App\Http\Controllers\F_Advisor\Search_student;
 /********************************************************/
-use App\Http\Controllers\intell_alg;
-use App\Http\Controllers\Student\CGPA;
-
-/********************************************************/
-use App\Http\Controllers\Test;
+use App\Http\Controllers\Chat;
+use App\Http\Controllers\F_Student\Byan_nga7;
+use App\Http\Controllers\Intell_advise;
+use App\Http\Controllers\Z_CODEBASE\Test as Z_CODEBASETest;
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 use App\Http\Middleware\type_s;
 use App\Http\Middleware\type_adv;
@@ -52,33 +45,28 @@ Route::middleware('auth:api')->get('/user', function (Request $request)
     return $request->user();
 });
 
-Route::group(
-    ['middleware' => 'api', 'prefix' => 'auth'],
-    function ($router) 
-    {
-        Route::post('add_user', Add_user::class . '@add_user');
-        Route::post('login', Login::class . '@login');
-        Route::post('change_pass', Change_pass::class . '@change_pass');
-      
-        Route::post('sendresetpasswordemail',Reset_pass::class . '@sendresetpasswordemail');
-        Route::post('reset_pass',Reset_pass::class.'@resetpassword');
+Route::group(['middleware' => 'api', 'prefix' => 'auth'],function ($router) 
+ {
+    Route::post('add_user', Add_user::class . '@add_user');
+    Route::post('login', Login::class . '@login');
+    Route::post('change_pass', Change_pass::class . '@change_pass');
+    Route::post('sendresetpasswordemail',Reset_pass::class . '@sendresetpasswordemail');
+    Route::post('reset_pass',Reset_pass::class.'@resetpassword');
+    Route::post('logout', AuthController::class . '@logout');
+    Route::post('refresh', AuthController::class . '@refresh');
+    Route::post('me', AuthController::class . '@me');
+ });
 
-        Route::post('logout', AuthController::class . '@logout');
-        Route::post('refresh', AuthController::class . '@refresh');
-        Route::post('me', AuthController::class . '@me');
-    }
-);
-
-Route::group(
-    ['middleware' => type_admin::class, 'prefix' => 'auth'],
-    function ($router) 
-    {
+Route::group(['middleware' => type_admin::class, 'prefix' => '98'],function ($router) 
+ {
         Route::post('update_user', Update_user::class . '@update_user');
         Route::post('del_user', Del_user::class . '@del_user');
         Route::post('del_student', Del_student::class . '@del_student');
         Route::post('search_user',Search_user::class.'@search_user');
-    }
-);
+        Route::post('update_student', Update_student::class . '@update_student');
+
+ });
+
 
 Route::group(
     ['middleware' => type_admin::class, 'prefix' => 'private'],
@@ -88,7 +76,7 @@ Route::group(
         Route::post('del_dep98', [Department98::class,'del_dep98']); 
 
         Route::post('section98', [Section98::class,'section98']);
-        Route::post('delete_section', [Section98::class,'delete_section']);  
+        Route::post('del_sec98', [Section98::class,'del_sec98']);  
 
         Route::post('course98', [Course98::class,'course98']); 
         Route::post('del_Course', [Course98::class,'del_Course']);  
@@ -97,13 +85,9 @@ Route::group(
         Route::post('del_pr98', [Pre_req98::class,'del_pr98']);  
 
         Route::post('shc98', [SHC98::class,'shc98']);  
-        Route::post('del_shc', [SHC98::class,'del_shc']);  
+        Route::post('del_shc98', [SHC98::class,'del_shc98']);  
 
         // can't list all COURSES without link it with SHC [ SHC DISPLAY ]   
-        Route::post('update_student', Update_student::class . '@update_student');
-
-        Route::post('cgpa', [CGPA::class,'cgpa']);
-        Route::post('gpa', [GPA::class,'gpa']);
     }
 );
 
@@ -116,6 +100,8 @@ Route::group(
         Route::post('search_student', Search_student::class . '@search_student')->middleware(type_adv::class); 
         Route::post('feedback98', Feedback98::class . '@feedback98');
         Route::post('del_feedback98', Feedback98::class . '@del_feedback98');
+
+        Route::post('layer', [Attends::class,'layer']); // for attend LAYER 1   /////////////////////////////////////////////
     }
 );
 
@@ -123,26 +109,36 @@ Route::group(
     ['middleware' => 'api', 'prefix' => 'service'],  
     function ($router) 
     {
-        Route::post('list_departemnts', [Department98::class,'list_departemnts']); 
-        /***************** CANOT LIST SCETIONS ONLY => SHC ****************************/
+        Route::get('list_departemnts', [Department98::class,'list_departemnts']); 
+        Route::get('list_feedbacks', Feedback98::class . '@list_feedbacks');
+        Route::post('list_c', [List_C::class,'list_c']);  // all courses must DEPARTMENT [OPTIONAL::SECTION-LVL-SEMESTER]
+        /*****************  CAN NOT LIST SCETIONS ONLY => SHC ****************************/
         Route::post('enroll_course', [Enroll_course::class,'enroll_course'])->middleware(type_s::class);   
         Route::post('cancel_course', [Cancel_course::class,'cancel_course'])->middleware(type_s::class);
-
-        Route::post('layer', [Attends::class,'layer']); // for attend LAYER 1   /////////////////////////////////////////////
-
-        Route::post('list_c_sem', [test_list_sem::class,'list_c_sem']);  
-        Route::get('list_courses', [Yellow::class,'list_courses']); 
-        Route::post('show_courses', [intell_alg::class,'show_courses']);
-
-        Route::get('list_feedbacks', Feedback98::class . '@list_feedbacks');
-
-        Route::post('gpa', GPA::class.'@gpa'); // GPA - DEGREE
+        /*****************************************************************************/
         Route::post('show_degree', Show_degree::class.'@show_degree'); // GPA - DEGREE
-
-        Route::post('test', Test::class.'@test');     
-
-        /************************* chat ****************************/
-        Route::get('messages', Chat::class . '@fetchMessages');
-        Route::post('messages', Chat::class . '@sendMessage');
+        /*****************************************************************************/
+        Route::post('byan_nga7', Byan_nga7::class.'@byan_nga7'); // GPA - DEGREE
+        /*****************************************************************************/
+        /*****************************************************************************/
+        Route::post('intell_advise', [Intell_advise::class,'intell_advise']);
+        /*****************************************************************************/
+        /*****************************************************************************/
     }
 );
+
+Route::group(['middleware' => 'api', 'prefix' => 'chat'],function ($router)   
+    {
+        Route::get('messages', Chat::class . '@fetchMessages');
+        Route::post('messages', Chat::class . '@sendMessage');
+    });
+
+Route::group(['middleware' => 'api', 'prefix' => 'testing'],function ($router) 
+    {
+        Route::post('test', Z_CODEBASETest::class.'@test'); 
+        Route::post('auto_student', Auto_student::class.'@auto_student'); 
+        
+        
+    });
+
+

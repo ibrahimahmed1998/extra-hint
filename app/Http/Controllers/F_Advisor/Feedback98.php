@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class Feedback98 extends Controller
 {
-    public function __construct() { $this->middleware('auth:api', ['except' =>  []]); }
+    public function __construct() { $this->middleware('auth:api', ['except' =>  ['list_feedbacks']]); }
  
     public function feedback98(Feedback_ $req)
     {

@@ -5,7 +5,7 @@ use App\Models\Course;
 use App\Models\enroll;
 use App\Models\Shc;
 use Illuminate\Http\Request;
-class intell_alg extends Controller
+class Intell_advise extends Controller
 {
     public function __construct()
     {
@@ -60,9 +60,10 @@ class intell_alg extends Controller
 
                 for ($i = 0; $i < $pc_num; $i++) 
                 {
-                    if (($key = array_search($pass[$i], $not_pass)) !== false) {
+                    if (($key = array_search($pass[$i], $not_pass)) !== false)
+                     {
                         unset($not_pass[$key]);
-                    }
+                     }
                 }
                 print_r($not_pass);
                 break;

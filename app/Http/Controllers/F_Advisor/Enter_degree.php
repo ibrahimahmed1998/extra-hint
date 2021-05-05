@@ -11,7 +11,7 @@ class Enter_degree extends Controller
 {
     public function __construct() { $this->middleware('auth:api', ['except' => [] ]); }
 
-    public function Enter_degree(Enter_degree_ $req)
+    public function enter_degree(Enter_degree_ $req)
     {
         $ec = enroll::where('ccode', $req->ccode)->where('year', $req->year)-> /*////// ec = Enrolled Course //////*/
         where('semester', $req->semester)->where('Student_id', $req->Student_id);

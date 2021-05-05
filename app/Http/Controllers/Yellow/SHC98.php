@@ -33,7 +33,7 @@ class SHC98 extends Controller
         }
     }
 
-    public function del_shc(Request $request)
+    public function del_shc98(Request $request)
     {
         $request->validate([ 
             'ccode' => 'required|string|exists:Courses',     
