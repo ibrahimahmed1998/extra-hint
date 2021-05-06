@@ -22,30 +22,58 @@ class Enter_degree extends Controller
 
         if ($ie) 
         {
-            if 
-              (
-                $req->hmedterm_d > $course->dmidterm || $req->hmedterm_d<0 ||
-                $req->hlab_d > $course->dlab  || $req->hlab_d<0 ||
-                $req->horal_d > $course->doral || $req->horal_d<0 ||
-                $req->hfinal_d > $course->dfinal  || $req->hfinal_d<0 
-               
-              ) 
-              {
-                return response()->json(['err' =>'Degrees > Course expected Degrees or < 0 '], 201);
-              } 
-            else 
-              {
-                $ec->update(array(
-                    'hmedterm_d' => $req->hmedterm_d,
-                    'hlab_d' => $req->hlab_d,
-                    'horal_d' =>  $req->horal_d,
-                    'hfinal_d' => $req->hfinal_d,
-                ));
-              }
+          if($req->hmedterm_d)
+          {
+            $req->validate(['hmedterm_d'=>"integer"]);
 
-              $class = new Auto_degree() ; $class->auto_degree();
+            if( $req->hmedterm_d > $course->dmidterm || $req->hmedterm_d < 0 )
+            {
+              return response()->json(['err' =>'MEDTERM Degrees > Course expected Degrees or < 0 '], 201);
+            }
 
-            return response()->json(['Success' => 'Degrees updated'], 201);
+            $ec->update(array('hmedterm_d' => $req->hmedterm_d));
+          }
+
+          else if($req->hlab_d)
+          {
+            $req->validate(['hlab_d'=>"integer"]);
+
+            if( $req->hlab_d > $course->dlab  || $req->hlab_d<0 )
+           
+            {
+              return response()->json(['err' =>'LAB Degrees > Course expected Degrees or < 0 '], 201);
+            }
+
+            $ec->update(array('hlab_d' => $req->hlab_d));
+          }
+
+          elseif($req->horal_d)
+          {
+            $req->validate(['horal_d'=>"integer"]);
+
+            if( $req->horal_d > $course->doral || $req->horal_d<0 )
+           
+            {
+              return response()->json(['err' =>' ORAL Degrees > Course expected Degrees or < 0 '], 201);
+            }
+
+            $ec->update(array('horal_d' => $req->horal_d));
+          }
+
+          else if($req->hfinal_d)
+          {
+            $req->validate(['hfinal_d'=>"integer"]);
+
+            if($req->hfinal_d > $course->dfinal  || $req->hfinal_d<0   )
+            {
+              return response()->json(['err' =>'Finals Degrees > Course expected Degrees or < 0 '], 201);
+            }
+            $ec->update(array('hfinal_d' => $req->hfinal_d));
+
+          }
+    
+          $class = new Auto_degree() ; $class->auto_degree();
+          return response()->json(['Success' =>$ec->first()], 201);
         }
          else 
         {
