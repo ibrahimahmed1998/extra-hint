@@ -14,8 +14,9 @@ class Section_ extends FormRequest
 
     public function rules()
     {
-        return [
-                 'Sec_id' => 'required|integer|unique:Sections',       
+        return
+         [
+                'Sec_id' => 'required|integer|unique:Sections',       
                 'dep_id' => 'required|integer|exists:Departments,dep_id',       
                 'sec_name' => 'required|string|unique:Sections',
                

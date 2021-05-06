@@ -15,8 +15,8 @@ class Signature_ extends FormRequest
     public function rules()
     {
         
-        return [
-            'signature' => 'required|integer',
+        return
+         [
             'Student_id'=>'required|integer|exists:Students',
             'semester' =>'required|integer|between:1,3',  
             'year' => 'required|integer|min:1900',
