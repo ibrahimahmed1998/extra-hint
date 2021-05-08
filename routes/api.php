@@ -116,7 +116,7 @@ Route::group(
         /*****************  CAN NOT LIST SCETIONS ONLY => SHC ****************************/
         Route::post('enroll_course', [Enroll_course::class,'enroll_course'])->middleware(type_s::class);   
         Route::post('cancel_course', [Cancel_course::class,'cancel_course'])->middleware(type_s::class);
-        Route::post('current_courses', [Current_courses::class,'current_courses'])->middleware(type_s::class);
+        Route::get('current_courses', [Current_courses::class,'current_courses'])->middleware(type_s::class);
 
       
         /*****************************************************************************/
