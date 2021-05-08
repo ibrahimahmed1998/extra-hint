@@ -30,6 +30,7 @@ use App\Http\Controllers\F_Advisor\Search_student;
 /********************************************************/
 use App\Http\Controllers\Chat;
 use App\Http\Controllers\F_Student\Byan_nga7;
+use App\Http\Controllers\F_Student\Current_courses;
 use App\Http\Controllers\Intell_advise;
 use App\Http\Controllers\Z_CODEBASE\Test as Z_CODEBASETest;
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
@@ -115,6 +116,9 @@ Route::group(
         /*****************  CAN NOT LIST SCETIONS ONLY => SHC ****************************/
         Route::post('enroll_course', [Enroll_course::class,'enroll_course'])->middleware(type_s::class);   
         Route::post('cancel_course', [Cancel_course::class,'cancel_course'])->middleware(type_s::class);
+        Route::post('current_courses', [Current_courses::class,'current_courses'])->middleware(type_s::class);
+
+      
         /*****************************************************************************/
         Route::post('show_degree', Show_degree::class.'@show_degree'); // GPA - DEGREE
         /*****************************************************************************/
