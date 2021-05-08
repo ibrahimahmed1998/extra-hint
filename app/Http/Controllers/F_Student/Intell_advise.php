@@ -1,17 +1,12 @@
 <?php
 namespace App\Http\Controllers\F_Student;
 use App\Http\Controllers\Controller;
-use App\Models\Course;
 use App\Models\enroll;
 use App\Models\Shc;
 use App\Models\Student;
-use Illuminate\Http\Request;
 class Intell_advise extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' =>  []]);
-    }
+    public function __construct() {  $this->middleware('auth:api', ['except' =>  []]);  }
     
     public function intell_advise()
     {
@@ -28,37 +23,24 @@ class Intell_advise extends Controller
         for($i = 0; $i < $c->count();  $i++){$not[$i+1 ]=$c[$i]->ccode; }
         for($i = 0; $i < $cc->count(); $i++){$not[$i+1 ]=$cc[$i]->ccode;}
  
-       //return $not ;
-
         for ($i=0; $i < sizeof($pass); $i++) 
         {
-            if( $key = array_search( $pass[$i+1] , $not) ) 
-            {
-                 unset($not[$key]);
-            }
+            if( $key = array_search( $pass[$i+1] , $not) )  {  unset($not[$key]);   }
         }
 
         return  $this->suggestion_courses($not,$s->roadmap);
-       // return ($not);
     }
     
     public function suggestion_courses($not,$roadmap)
     {
-         $new = [] ;
+        foreach ($not  as $key => $value   )  {     $new[]=$value ;   }
     
-         foreach ($not  as $key => $value   )  {     $new[]=$value ;   }
-       
-         for ($i=0; $i <sizeof($new); $i++) { $c[] = Shc::where('ccode',$new[$i])->first();  }
+        for ($i=0; $i <sizeof($new); $i++) { $c[] = Shc::where('ccode',$new[$i])->first();  }
          
-        if($roadmap == 1 )
-        {
-            $array = collect($c)->sortBy('c_theoretical_ratio')->reverse()->toArray();
-        }
-        else
-        {
-            $array = collect($c)->sortBy('c_theoretical_ratio')->toArray();
-        }
-
+        if($roadmap == 1 ) { $array = collect($c)->sortBy('c_theoretical_ratio')->reverse()->toArray(); }
+       
+        else {  $array = collect($c)->sortBy('c_theoretical_ratio')->toArray(); }
+    
         return $array ; 
      }
 }
