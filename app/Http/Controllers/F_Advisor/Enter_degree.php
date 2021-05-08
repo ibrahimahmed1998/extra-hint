@@ -71,7 +71,7 @@ class Enter_degree extends Controller
 
           }
     
-          $class = new Auto_degree() ; $class->auto_degree();
+         $class = new Auto_degree() ; $class->auto_degree();
           return response()->json(['Success' =>$ec->first()], 201);
         }
          else 

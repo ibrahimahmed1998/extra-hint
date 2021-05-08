@@ -28,6 +28,7 @@ class CreateEnrollTable extends Migration
             $table->integer('hfinal_d')->nullable();
             $table->integer('htotal_d')->nullable();
             $table->tinyInteger('hpass')->nullable();
+            $table->timestamps();    
 
             $table->integer('signature');
 /*************************************************************************************************************/
