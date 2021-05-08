@@ -11,10 +11,11 @@ class iss extends Controller
         $student =  Student::where('Student_id',$id)->first() ;
 
         $user=auth()->user();
-        
+      
+       
         if($user->type == 1)
         {
-            $student =  Student::where('Student_id',$user->$id)->first() ;
+            $student = Student::where('Student_id',$user->id)->first() ;
         }
         
         if(!$student)
