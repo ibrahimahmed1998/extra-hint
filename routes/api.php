@@ -31,8 +31,7 @@ use App\Http\Controllers\F_Advisor\Search_student;
 use App\Http\Controllers\Chat;
 use App\Http\Controllers\F_Student\Byan_nga7;
 use App\Http\Controllers\F_Student\Current_courses;
-use App\Http\Controllers\Intell_advise;
-use App\Http\Controllers\Z_CODEBASE\Test as Z_CODEBASETest;
+use App\Http\Controllers\F_Student\Intell_advise;
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 use App\Http\Middleware\type_s;
 use App\Http\Middleware\type_adv;
