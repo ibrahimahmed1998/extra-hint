@@ -4,7 +4,7 @@ use App\Http\Controllers\AUTH_USERS\Add_user;
 use App\Http\Controllers\AUTH_USERS\Change_pass;
 use App\Http\Controllers\AUTH_USERS\Login;
 use App\Http\Controllers\AUTH_USERS\Reset_pass;
-use App\Http\Controllers\AUTH_USERS\Search_user;
+use App\Http\Controllers\AUTH_USERS\Deep_search;
 use App\Http\Controllers\AUTH_USERS\Update_user; // test 
 use App\Http\Controllers\AUTH_USERS\Update_student;
 use App\Http\Controllers\AUTH_USERS\AuthController;
@@ -56,6 +56,8 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'],function ($router)
     Route::post('logout', AuthController::class . '@logout');
     Route::post('refresh', AuthController::class . '@refresh');
     Route::post('me', AuthController::class . '@me');
+    Route::post('deep_search',Deep_search::class.'@deep_search');
+
  });
 
 Route::group(['middleware' => type_admin::class, 'prefix' => '98'],function ($router) 
@@ -63,9 +65,7 @@ Route::group(['middleware' => type_admin::class, 'prefix' => '98'],function ($ro
         Route::post('update_user', Update_user::class . '@update_user');
         Route::post('del_user', Del_user::class . '@del_user');
         Route::post('del_student', Del_student::class . '@del_student');
-        Route::post('search_user',Search_user::class.'@search_user');
         Route::post('update_student', Update_student::class . '@update_student');
-
  });
 
 
@@ -117,8 +117,6 @@ Route::group(
         Route::post('enroll_course', [Enroll_course::class,'enroll_course'])->middleware(type_s::class);   
         Route::post('cancel_course', [Cancel_course::class,'cancel_course'])->middleware(type_s::class);
         Route::get('current_courses', [Current_courses::class,'current_courses'])->middleware(type_s::class);
-
-      
         /*****************************************************************************/
         Route::post('show_degree', Show_degree::class.'@show_degree'); // GPA - DEGREE
         /*****************************************************************************/
