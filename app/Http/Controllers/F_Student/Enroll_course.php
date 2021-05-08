@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
         $req->validate(['ccode' => 'required|string|exists:Courses']);
         $user=auth()->user();  
         $gt=new Get_time();  $time=$gt->get_time();  
-        $iss = new iss(); if($q=$iss->qn()) {return $q;}
+        $iss = new iss(); if($q=$iss->q($user->id)) {return $q;}
         $sum=0;      
         $counter = 0;
         $sem=$time['sem'];  
