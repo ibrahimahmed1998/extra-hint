@@ -14,7 +14,7 @@ class Auto_student extends Controller
     {
         $id = 200 ;
 
-        $auto = new Auto_degree() ; $auto->auto_degree(); /*********************** AUTOMATIC ******************************* */
+        $auto = new Auto_degree() ; $auto->auto_degree();  /**************** AUTOMATIC ***************** */
         
         $student = Student::where('Student_id',$id);
        
@@ -22,7 +22,5 @@ class Auto_student extends Controller
 
         $student->update(array('live_hour'=>$hours->live_hour($id),
                                 'c_gpa'=>$GPA->gpa($id,'msg',0,0),
-                                'lvl'=>$lvl->lvl($id)
-                            )); 
-    } 
-}
+                                'lvl'=>$lvl->lvl($id) )); 
+}}

@@ -10,6 +10,7 @@ class Signature extends Controller
 
     public function signature(Signature_ $req)
     {
+        
         $ec = enroll::where('ccode', $req->ccode)->where('year', $req->year)->  /*////// ec = Enrolled Course //////*/
                 where('semester', $req->semester)->where('Student_id',$req->Student_id);
 

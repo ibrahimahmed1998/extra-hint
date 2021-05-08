@@ -21,6 +21,7 @@ class Login extends Controller
       if ($token = auth()->attempt($credentials)) 
         {
             $this->respondWithToken($token);
+          //  return redirect('/');
             return response()->json(["token"=>$token ,"name"=>auth()->user()->first_name , 'type' => auth()->user()->type] );
         } 
         else 

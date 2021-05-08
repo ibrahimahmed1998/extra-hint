@@ -42,12 +42,8 @@ class List_C extends Controller
             $c = Shc::where("dep_id", $req->dep_id)->
                       where("Sec_id", $req->sec_id)->
                       where("c_lvl", $req->c_lvl)->
-                      where('c_semester', $req->c_semester)->get();
-                      
+                      where('c_semester', $req->c_semester)->get();            
          }
 
         foreach ($c as $cc)  {  $arr[]=$cc ;    }
-        
-        return response()->json(['success' => $arr ], 201);
-    }
-}
+        return response()->json(['success' => $arr ], 201);}}

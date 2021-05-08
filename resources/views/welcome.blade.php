@@ -86,7 +86,9 @@
 
                             <li><a href="http://127.0.0.1:8000/api/auth/test"><span>Listings</span></a></li>
                             <li><a href="http://127.0.0.1:8000/api/service/messages"><span>Chat</span></a></li>
-                            <li><a href="#" id="login98h" onclick="myFunction();"   ><span>Login</span></a></li>
+                            <li><a  id="login98h" onclick="myFunction();"   ><span>Login</span></a></li>
+                            <li><a href="/s" id="signup"    ><span>signup</span></a></li>
+
 
                         </ul>
                     </nav>
@@ -95,20 +97,20 @@
                 <div id="login98" style="display:none">
                     <div class="card">
                         <div class="card-body">
-                            <form method="post" action="http://127.0.0.1:8000/api/auth/login" >
+                            <form method="POST" action="api/auth/login" >
                                 <br><br>
                                 <div class="input-group form-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="username">
+                                    <input type="text" class="form-control" placeholder="email" name="email">
 
                                 </div>
                                 <div class="input-group form-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                                     </div>
-                                    <input type="password" class="form-control" placeholder="password">
+                                    <input type="password" class="form-control" placeholder="password" name="password">
                                 </div>
                                 <div class="row align-items-center remember">
                                     <input type="checkbox">Remember Me

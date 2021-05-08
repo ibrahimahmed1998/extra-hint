@@ -14,21 +14,11 @@ class SHC98 extends Controller
         $check = model::where('dep_id', $request->dep_id)->
         where('Sec_id', $request->Sec_id)->where('ccode', $request->ccode)->first();
 
-        if ($check) {
-            return response()->json(['err' => 'course added before !'], 201);
-        } else {
-            model::create(
-                [
-                    'dep_id' => $request->dep_id,
-                    'Sec_id' => $request->Sec_id,
-                    'ccode' => $request->ccode,
-                    'c_theoretical_ratio' => $request->c_theoretical_ratio,
-                    'c_elective' => $request->c_elective,
-                    'c_semester' => $request->c_semester,
-                    'c_lvl' => $request->c_lvl,
-
-                ]
-            );
+        if ($check) {  return response()->json(['err' => 'course added before !'], 201); }
+      
+         else 
+        {
+            model::create(['dep_id' => $request->dep_id,'Sec_id' => $request->Sec_id,'ccode' => $request->ccode,'c_theoretical_ratio' => $request->c_theoretical_ratio,'c_elective' => $request->c_elective,'c_semester' => $request->c_semester,'c_lvl' => $request->c_lvl]);
             return response()->json(['message' => 'Section Has Course Rel Created Sucessfully '], 201);
         }
     }

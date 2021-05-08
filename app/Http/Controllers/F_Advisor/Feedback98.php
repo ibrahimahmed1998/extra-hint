@@ -13,15 +13,8 @@ class Feedback98 extends Controller
     {
         $user = auth()->user();
         
-         Feedbacks::create(
-            [
-                'User_id' =>  $user->id,
-                'ccode' => $req->ccode,
-                'fheader' => $req->fheader,
-                'fbody' => $req->fbody,
-                'fvote' => $req->fvote,
-             ]
-        );
+         Feedbacks::create(['User_id' =>  $user->id,'ccode' => $req->ccode,'fheader' => $req->fheader,'fbody' => $req->fbody,'fvote' => $req->fvote,]);
+        
         return response()->json(['Success' => 'Feedback added'], 201);
     }
 

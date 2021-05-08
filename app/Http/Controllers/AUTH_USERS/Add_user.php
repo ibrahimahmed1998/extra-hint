@@ -12,18 +12,9 @@ class Add_user extends Controller
     public function __construct() {  $this->middleware('auth:api', ['except' => ['add_user']]); }
    
     public function add_user(Signup_ $req)
-    {
-        $user = User::create([
-            'id' => $req->id,
-            'first_name' => $req->first_name,
-            'last_name' => $req->last_name,
-            'password' => $req->password,
-            'email' => $req->email,
-            'type' => $req->type,
-            'phone' => $req->phone,
-            'created_at'=>now()
-        ]);
-
+    {        
+        $user = User::create(['id' => $req->id,'first_name' => $req->first_name,'last_name' => $req->last_name,'password' => $req->password,'email' => $req->email,'type' => $req->type, 'phone' => $req->phone, 'created_at'=>now() ]);
+      
         if ($user->type == 1) 
         {
             $sec = Section::where('Sec_id', $req->sec_id)->first();
@@ -36,12 +27,12 @@ class Add_user extends Controller
              } 
             else
              {
-                Student::create(['Student_id' => $req->id, 'roadmap' => 1 , 'live_hour' => 12,
-                                 'c_gpa' => 0, 'dep_id' => $req->dep_id, 'sec_id' => $req->sec_id  ]);   
-                                
+                Student::create(['Student_id' => $req->id, 'roadmap' => 1 , 'live_hour' => 12,'c_gpa' => 0, 'dep_id' => $req->dep_id, 'sec_id' => $req->sec_id  ]);                  
                 return response()->json(['success' => 'Student joins...AMS'], 201);
              }
         }
-        return response()->json(['success' => 'joins...AMS'], 201);
-    }
-}
+       // return redirect('/');
+       //alert('Student')
+       return response()->json(['success' => 'joins...AMS'], 201);
+      }
+   }

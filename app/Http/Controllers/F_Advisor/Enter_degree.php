@@ -78,6 +78,4 @@ class Enter_degree extends Controller
         {
             return response()->json(['err' => 'Degree not updated ! , may doesn\'t enrolled '.
             $req->ccode.' at SEM:'.$req->semester.' YEAR:'.$req->year], 400);
-        }
-    }
-}
+        }}}

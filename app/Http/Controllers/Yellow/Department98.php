@@ -31,7 +31,4 @@ class Department98 extends Controller
     {
         $d = Department::all();
         return response()->json(['all Departments' =>  $d], 201);
-    }
-
-
-}
+    }}

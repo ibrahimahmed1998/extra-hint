@@ -22,5 +22,4 @@ class Section98 extends Controller
         Section::where('sec_id', $req->sec_id)->where('dep_id',$req->dep_id)->delete();
         return response()->json(['Success'=>"Section deleted"], 201);
     }
-
 }

@@ -7,7 +7,7 @@ use App\Models\Student;
  
 class Live_hour extends Controller
 {
-    public function __construct() {   $this->middleware('auth:api', ['except' => ['live_hour']]); }
+    public function __construct() {   $this->middleware('auth:api', ['except' => []]); }
 
     public function live_hour($id)
     {

@@ -1,42 +1,35 @@
 <?php
 namespace App\Http\Controllers\F_Student;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\enroll_;
+use App\Http\Controllers\Helpers\Get_time;
+use App\Http\Controllers\Helpers\iss;
 use App\Models\enroll;
-use App\Models\Student;
-
+use Illuminate\Http\Request;
 class Cancel_course extends Controller
 {
     public function __construct() { $this->middleware('auth:api', ['except' => []]); } 
    
-    public function cancel_course(enroll_ $request)
+    public function cancel_course(Request $req)
     {
+        $req->validate(['ccode'=>'required|string|exists:Courses']);
         $user=auth()->user();
+        $gt=new Get_time();  $time=$gt->get_time();  $sem=$time['sem'];    $year=$time['year']; 
+        $iss = new iss(); if($q=$iss->q($user->id)) {return $q;}
+        
+        $is_enrolled = enroll::where('ccode', $req->ccode)->where('year', $req->year)->
+        where('semester', $req->semester)->where('Student_id', $user->id);
 
-        $student =Student::where('Student_id',$user->id)->first();
-        if(!$student){ return response()->json(['err'=>'student not in his table'],201); }
-
-        $check = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
-        where('semester', $request->semester)->where('Student_id', $student->Student_id);
-
-        $test=$check->first();
-        $not_sign=$check->where('signature',0)->first();
+        $test=$is_enrolled->first();
+        $not_sign=$is_enrolled->where('signature',0)->first();
          
         if ($test) 
         {
             if($not_sign)
             {
-                $check = enroll::where('ccode', $request->ccode)->where('year', $request->year)->
-                where('semester', $request->semester)->where('Student_id', $student->Student_id)->delete();
-                return response()->json(['success' => $request->ccode . " Canceled"], 201);
+                enroll::where('ccode', $req->ccode)->where('year', $req->year)->
+                where('semester', $req->semester)->where('Student_id', $user->id)->delete();
+                return response()->json(['success'=>$req->ccode." Canceled"],201);
             }
-            else
-            {
-                return response()->json(['err' => $request->ccode . " can't canceld at this TIME "], 201);
-            }
-           
-        } else {
-            return response()->json(['err' => $request->ccode . " Not Enrolled ! "], 400);
-        }
-    }
-}
+            else{return response()->json(['err' => $req->ccode . " can't canceld at this TIME "], 201); }
+        } 
+        else{return response()->json(['err'=>$req->ccode." Not Enrolled !"], 400);}}}     
