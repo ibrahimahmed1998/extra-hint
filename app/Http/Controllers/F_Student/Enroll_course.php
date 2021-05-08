@@ -17,12 +17,12 @@ use Illuminate\Http\Request;
     {
         $req->validate(['ccode' => 'required|string|exists:Courses']);
         $user=auth()->user();  
-        $gt=new Get_time();  $time=$gt->get_time();  
+        $gt=new Get_time();  $time=$gt->get_time(); 
+        $sem=$time['sem'];  
+        $year=$time['year'];  
         $iss = new iss(); if($q=$iss->q($user->id)) {return $q;}
         $sum=0;      
         $counter = 0;
-        $sem=$time['sem'];  
-        $year=$time['year']; 
         $ise = new ise(); if($q=$ise->q($user->id,$req->ccode,$sem,$year)) {return $q;}
         $enrolling = new enrolling();  
         $prs = Pre_request::where('ccode', $req->ccode)->get();

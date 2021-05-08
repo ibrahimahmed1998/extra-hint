@@ -1,8 +1,10 @@
 <?php
 namespace App\Http\Controllers\F_Advisor;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Helpers\Get_time;
 use App\Http\Requests\Signature_;
 use App\Models\enroll;
+use App\Models\User;
 
 class Signature extends Controller
 {
@@ -10,9 +12,12 @@ class Signature extends Controller
 
     public function signature(Signature_ $req)
     {
+        $gt=new Get_time();  $time=$gt->get_time(); 
+        $sem=$time['sem'];  
+        $year=$time['year']; 
         
-        $ec = enroll::where('ccode', $req->ccode)->where('year', $req->year)->  /*////// ec = Enrolled Course //////*/
-                where('semester', $req->semester)->where('Student_id',$req->Student_id);
+        $ec = enroll::where('ccode', $req->ccode)->where('year', $year)->  /*////// ec = Enrolled Course //////*/
+                where('semester', $sem)->where('Student_id',$req->Student_id);
 
         $ie=$ec->first();  /*////// ie = IS Enrolled ???? //////*/
         $user=auth()->user();
@@ -21,6 +26,12 @@ class Signature extends Controller
        
         $ec->update(array('signature' => $user->id));
 
-        return response()->json(['success' =>$ec->ccode.' Signatured for Student '.$ec->Student_id], 401);
+        $name=User::where('id',$req->Student_id)->value('first_name');
+        return response()->json(['success' =>
+        ["Course Code"=>$ie->ccode,
+         "Name:"=>$name,
+         'ID:'=>$ie->Student_id,
+         'Signatured with:'=>$user->id
+         ]], 200);
     }
 }
