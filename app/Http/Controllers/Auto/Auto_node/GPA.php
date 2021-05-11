@@ -102,6 +102,8 @@ public function gpa($id,$msg,$year,$semester) // $msg = sgpa || cgpa
                 'horal_d'=> $c[$i]->horal_d,'hclass_work_d'=> $c[$i]->hclass_work_d,
                 'hfinal_d'=> $c[$i]->hfinal_d
             ];
+            
+            if($msg=="cgpa") { $form = collect($form)->sortBy('year')->sortBy('semester')->toArray(); }
         }
 
         if($msg=="cgpa" || $msg=="sgpa" ) // FOR BYAN EL NGAAAAAAAAAAAAAAA7777777

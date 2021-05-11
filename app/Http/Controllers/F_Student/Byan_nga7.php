@@ -29,6 +29,5 @@ class Byan_nga7 extends Controller
             return  $class->gpa($id,'sgpa',$year,$semester);
          }
     
-        else if($req->msg=='cgpa') {  return  $class->gpa($id,'cgpa',0,0); }  
-    }
-}
+        else if($req->msg=='cgpa') {  return  $class->gpa($id,'cgpa',0,0);   }  
+}}
