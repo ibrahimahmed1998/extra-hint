@@ -16,7 +16,7 @@
 							{
 								"key": "Accept",
 								"value": "application/json",
-								"type": "text"
+								"type": "text" 
 							}
 						],
 						"body": {
