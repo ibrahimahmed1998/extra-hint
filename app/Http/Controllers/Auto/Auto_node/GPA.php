@@ -42,7 +42,6 @@ public function gpa($id,$msg,$year,$semester) // $msg = sgpa || cgpa
             $c=enroll::where('Student_id', $id)->where('semester',$semester)->where('year',$year)->get();  
 
         }
-
         for ($i=0; $i <$c->count() ; $i++)   { $arr[] = $c[$i]; }
             
         for ($i=0; $i<$c->count() ;  $i++) 
@@ -53,7 +52,8 @@ public function gpa($id,$msg,$year,$semester) // $msg = sgpa || cgpa
         
             $sd = $arr[$i]->htotal_d;        // Student Degree
 
-            if ($sd >= $cd * 0.90) {
+            if ($sd >= $cd * 0.90) 
+            {
                 $code = 'A';
                 $points = 4.0;
                 $Qulaity = $points * $cch;
@@ -91,22 +91,54 @@ public function gpa($id,$msg,$year,$semester) // $msg = sgpa || cgpa
             $total_quality = $total_quality + $Qulaity;
             $total_cch = $total_cch + $cch;
             
-            $form[] =
-            [
-                "Course code=" => $c[$i]->ccode,"Grade=" => $code,
-                "Points=" => $points,"degree" => $sd,
-                "hpass" => $c[$i]->hpass,"semester" =>$c[$i]->semester,
-                "year" => $c[$i]->year,
-                "******" => "******",   ////////////////////////////////////////////////
-                'hmedterm_d'=> $c[$i]->year, 'hlab_d'=> $c[$i]->hlab_d,
-                'horal_d'=> $c[$i]->horal_d,'hclass_work_d'=> $c[$i]->hclass_work_d,
-                'hfinal_d'=> $c[$i]->hfinal_d
-            ];
+        //dd($c->count());
+
+        
+        $form[] =
+        [
+            "Course code=" => $c[$i]->ccode,"Grade=" => $code,
+            "Points=" => $points,"degree" => $sd,
+            "hpass" => $c[$i]->hpass,"semester" =>$c[$i]->semester,
+            "year" => $c[$i]->year,
+            "******" => "******",   ////////////////////////////////////////////////
+            'hmedterm_d'=> $c[$i]->year, 'hlab_d'=> $c[$i]->hlab_d,
+            'horal_d'=> $c[$i]->horal_d,'hclass_work_d'=> $c[$i]->hclass_work_d,
+            'hfinal_d'=> $c[$i]->hfinal_d
+        ];
+
+            for ($i=0; $i <$c->count() ; $i++) 
+            { 
+                if($c[$i]->semester == 1)
+                {
+                    $aaa[] = $c[$i] ;
+                }
+                else if ($c[$i]->semester == 2)
+                {
+                    $bbb[] =$c[$i] ;
+                }
+                else if ($c[$i]->semester == 3)
+                {
+                    $ccc[] =$c[$i] ;
+                }
+            } 
+
+            $ddd = [] ;
+          $sss= ["CGPA = "=>substr($total_quality/$total_cch,0,5)];
+             array_push($ddd,$aaa,$bbb,$ccc,$sss);
+
             
-            if($msg=="cgpa") { $form = collect($form)->sortBy('year')->sortBy('semester')->toArray(); }
+
+           // if($msg=="cgpa") { $form = collect($form)->sortBy('year')->sortBy('semester')->toArray(); }  
+        }
+       
+
+        if($msg=="cgpa") // FOR BYAN EL NGAAAAAAAAAAAAAAA7777777
+        {
+            return $ddd   ;
         }
 
-        if($msg=="cgpa" || $msg=="sgpa" ) // FOR BYAN EL NGAAAAAAAAAAAAAAA7777777
+
+        if($msg=="sgpa" ) // FOR BYAN EL NGAAAAAAAAAAAAAAA7777777
         {
             return response()->json(["byan_nga7"=>$form,$msg.":"=>substr($total_quality/$total_cch,0,5)])   ;
         }
