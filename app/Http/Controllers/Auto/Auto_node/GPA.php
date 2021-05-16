@@ -96,13 +96,18 @@ public function gpa($id,$msg,$year,$semester) // $msg = sgpa || cgpa
         
         $form[] =
         [
-            "Course code=" => $c[$i]->ccode,"Grade=" => $code,
-            "Points=" => $points,"degree" => $sd,
-            "hpass" => $c[$i]->hpass,"semester" =>$c[$i]->semester,
+            "Course code=" => $c[$i]->ccode,
+            "Grade=" => $code,
+            "Points=" => $points,
+            "degree" => $sd,
+            "hpass" => $c[$i]->hpass,
+            "semester" =>$c[$i]->semester,
             "year" => $c[$i]->year,
             "******" => "******",   ////////////////////////////////////////////////
-            'hmedterm_d'=> $c[$i]->year, 'hlab_d'=> $c[$i]->hlab_d,
-            'horal_d'=> $c[$i]->horal_d,'hclass_work_d'=> $c[$i]->hclass_work_d,
+            'hmedterm_d'=> $c[$i]->year, 
+            'hlab_d'=> $c[$i]->hlab_d,
+            'horal_d'=> $c[$i]->horal_d,
+            'hclass_work_d'=> $c[$i]->hclass_work_d,
             'hfinal_d'=> $c[$i]->hfinal_d
         ];
 
@@ -110,15 +115,62 @@ public function gpa($id,$msg,$year,$semester) // $msg = sgpa || cgpa
             { 
                 if($c[$i]->semester == 1)
                 {
-                    $aaa[] = $c[$i] ;
+                    $aaa []= 
+                    [
+                        "semester"=>$c[$i]->semester,
+                        "year"=> $c[$i]->year,
+                        "ccode"=>$c[$i]->ccode,
+                        "hmedterm_d"=> $c[$i]->hmedterm_d,
+                        "hlab_d"=>$c[$i]->hlab_d,
+                        "horal_d"=> $c[$i]->horal_d,
+                        "hclass_work_d"=> $c[$i]->hclass_work_d,
+                        "hfinal_d"=> $c[$i]->hfinal_d,
+                        "htotal_d"=> $c[$i]->htotal_d,
+                        "hpass"=> $c[$i]->hpass,
+                        "points"=>$points,
+                        "Degrees"=>$sd,
+                        "Grade Code"=>$code
+                    ] ;
+                   // array_push($aaa,$points,$sd,$code);
+                  // return ($aaa);
                 }
                 else if ($c[$i]->semester == 2)
                 {
-                    $bbb[] =$c[$i] ;
+                    $bbb[] =  
+                    [
+                        "semester"=>$c[$i]->semester,
+                        "year"=> $c[$i]->year,
+                        "ccode"=>$c[$i]->ccode,
+                        "hmedterm_d"=> $c[$i]->hmedterm_d,
+                        "hlab_d"=>$c[$i]->hlab_d,
+                        "horal_d"=> $c[$i]->horal_d,
+                        "hclass_work_d"=> $c[$i]->hclass_work_d,
+                        "hfinal_d"=> $c[$i]->hfinal_d,
+                        "htotal_d"=> $c[$i]->htotal_d,
+                        "hpass"=> $c[$i]->hpass,
+                        "points"=>$points,
+                        "Degrees"=>$sd,
+                        "Grade Code"=>$code
+                    ] ; ;
                 }
                 else if ($c[$i]->semester == 3)
                 {
-                    $ccc[] =$c[$i] ;
+                    $ccc[] = 
+                     [
+                        "semester"=>$c[$i]->semester,
+                        "year"=> $c[$i]->year,
+                        "ccode"=>$c[$i]->ccode,
+                        "hmedterm_d"=> $c[$i]->hmedterm_d,
+                        "hlab_d"=>$c[$i]->hlab_d,
+                        "horal_d"=> $c[$i]->horal_d,
+                        "hclass_work_d"=> $c[$i]->hclass_work_d,
+                        "hfinal_d"=> $c[$i]->hfinal_d,
+                        "htotal_d"=> $c[$i]->htotal_d,
+                        "hpass"=> $c[$i]->hpass,
+                        "points"=>$points,
+                        "Degrees"=>$sd,
+                        "Grade Code"=>$code
+                    ] ;;
                 }
             } 
 
