@@ -30,29 +30,32 @@ class GPA extends Controller
         $auto->auto_degree();
 
         $test = enroll::where('Student_id', $id)->first();
-        if (!$test) {
-            return 0;
-        }     // STUDENT NOT ENROLLED COURSES 
 
-        else {
+        
+        if (!$test) {return 0; }     // STUDENT NOT ENROLLED COURSES 
+
+       
+        else 
+        {
             $c = enroll::where('Student_id', $id)->get();
 
-            if ($msg == "sgpa") {
+            if ($msg == "sgpa")
+             {
                 $y = enroll::where('year', $year)->first();
                 $s = enroll::where('semester', $semester)->first();
 
-
-                if (!$y || !$s) {
-                    return response()->json(['err' => "not Enrolled in: " . $year . " or this semester"], 401);
+              
+                if (!$y || !$s) 
+                {
+                    return response()->json(['err'=>"not Enrolled in: ".$year." or this semester"], 401);
                 }
 
-                $test_sem = enroll::where('Student_id', $id)->where('semester', $s)->where('year', $y)->first();
-
-                if (!$test_sem) {
+                $test_sem = enroll::where('Student_id',$id)->where('semester',$semester)->where('year',$year)->first();
+                 if (!$test_sem) 
+                {
                     return response()->json(['err' => "not Enrolled Courses in this semester"], 401);
                 }
-
-                $c = enroll::where('Student_id', $id)->where('semester', $semester)->where('year', $year)->get();
+                 $c = enroll::where('Student_id', $id)->where('semester', $semester)->where('year', $year)->get();
             }
 
             for ($i = 0; $i < $c->count(); $i++) {

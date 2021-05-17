@@ -23,6 +23,7 @@ class Byan_nga7 extends Controller
 
         $year = $req->year;         $semester = $req->semester;     $class = new GPA();  
 
+       // dd($semester);
         if($req->msg=='sgpa')
          { 
             $req->validate(['year'=>'required|integer|min:2000','semester'=>'required|integer|between:1,3']);
