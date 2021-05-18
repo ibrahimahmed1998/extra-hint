@@ -15,18 +15,18 @@ class Current_courses extends Controller
         $req->validate(['Student_id'=>'exists:Students|integer']);
 
         $user = auth()->user();
-
-    
+        $id= $user->id ; 
+        $arr= [] ;
         
-        if($req->id)
+        if($req->Student_id)
         {
-            $id=$req->id;
+            $id=$req->Student_id;
             $user=Student::where('Student_id',$id)->first(); 
         }
 
         $gt=new Get_time();  $time=$gt->get_time();   $sem=$time['sem'];   $year=$time['year']; 
 
-        $my_c = enroll::where('Student_id',$user->id)->where('year',$year)->where('semester',$sem)->get();
+        $my_c = enroll::where('Student_id',$id)->where('year',$year)->where('semester',$sem)->get();
 
         for ($i=0; $i <$my_c->count(); $i++) 
         { 
