@@ -12,9 +12,7 @@ class Enter_degree_ extends FormRequest
     {
         return [
             'Student_id' => 'required|string|exists:Students,student_id',      
-            'semester' =>'required|integer', 
-            'year' => 'required|integer|min:1900',
-            'ccode' => 'required|string|exists:Courses,ccode',    
+             'ccode' => 'required|string|exists:Courses,ccode',    
         ];
     }
 }

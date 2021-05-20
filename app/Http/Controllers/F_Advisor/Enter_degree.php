@@ -3,6 +3,7 @@ namespace App\Http\Controllers\F_Advisor;
 
 use App\Http\Controllers\Auto\Auto_degree;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Helpers\Get_time;
 use App\Http\Requests\Enter_degree_;
 use App\Models\Course;
 use App\Models\enroll;
@@ -13,9 +14,13 @@ class Enter_degree extends Controller
 
     public function enter_degree(Enter_degree_ $req)
     {
-        $ec = enroll::where('ccode', $req->ccode)->where('year', $req->year)-> /*////// ec = Enrolled Course //////*/
-        where('semester', $req->semester)->where('Student_id', $req->Student_id);
+      $gt=new Get_time();  $time=$gt->get_time();  $sem=$time['sem'];   $year=$time['year'];
 
+
+        $ec = enroll::where('ccode', $req->ccode)->where('year', $year)-> /*////// ec = Enrolled Course //////*/
+        where('semester', $sem)->where('Student_id', $req->Student_id);
+
+        
         $ie =  $ec->first();  /*////// ie = IS Enrolled ???? //////*/
 
         $course = Course::where('ccode', $req->ccode)->first();
@@ -77,5 +82,5 @@ class Enter_degree extends Controller
          else 
         {
             return response()->json(['err' => 'Degree not updated ! , may doesn\'t enrolled '.
-            $req->ccode.' at SEM:'.$req->semester.' YEAR:'.$req->year], 400);
+            $req->ccode.' at SEM:'.$sem.' YEAR:'.$year], 400);
         }}}
