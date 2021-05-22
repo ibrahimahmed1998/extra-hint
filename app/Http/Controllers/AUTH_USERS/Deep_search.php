@@ -11,7 +11,7 @@ class Deep_search extends Controller
   
     public function deep_search(Request $req)  
     {
-        $arr2= [] ; 
+        $arr= [] ; $arr2= [] ; 
         $q =auth()->user();
         if($q->type==1)
         {
