@@ -22,7 +22,15 @@ class Login extends Controller
         {
             $this->respondWithToken($token);
           //  return redirect('/');
-            return response()->json(["token"=>$token ,"name"=>auth()->user()->first_name , 'type' => auth()->user()->type] );
+            return response()->json(["token"=>$token ,
+            "id"=>auth()->user()->id , 
+            "first_name"=>auth()->user()->first_name , 
+            "last_name"=>auth()->user()->last_name , 
+            "phone"=>auth()->user()->phone , 
+            "email"=>auth()->user()->email , 
+            'type' => auth()->user()->type
+            ]
+         );
         } 
         else 
         {

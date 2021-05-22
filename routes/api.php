@@ -72,6 +72,8 @@ Route::group(
     ['middleware' => type_admin::class, 'prefix' => 'private'],
     function ($router) 
     {
+        Route::post('enter_degree', [Enter_degree::class,'enter_degree']);
+
         Route::post('department98', [Department98::class,'department98']); 
         Route::post('del_dep98', [Department98::class,'del_dep98']); 
 
@@ -96,7 +98,6 @@ Route::group(
     function ($router) 
     {
         Route::post('signature', [Signature::class,'signature'])->middleware(type_adv::class);   
-        Route::post('enter_degree', [Enter_degree::class,'enter_degree']);
         Route::post('search_student', Search_student::class . '@search_student')->middleware(type_adv::class); 
         Route::post('feedback98', Feedback98::class . '@feedback98');
         Route::post('del_feedback98', Feedback98::class . '@del_feedback98');
