@@ -76,19 +76,19 @@ Route::group(
         Route::post('enter_degree', [Enter_degree::class,'enter_degree']); 
 
         Route::post('department98', [Department98::class,'department98']); 
-        Route::post('del_dep98', [Department98::class,'del_dep98']); 
+      //  Route::post('del_dep98', [Department98::class,'del_dep98']); 
 
         Route::post('section98', [Section98::class,'section98']);
-        Route::post('del_sec98', [Section98::class,'del_sec98']);  
+      //  Route::post('del_sec98', [Section98::class,'del_sec98']);  
 
         Route::post('course98', [Course98::class,'course98']); 
-        Route::post('del_Course', [Course98::class,'del_Course']);  
+      //  Route::post('del_Course', [Course98::class,'del_Course']);  
 
         Route::post('pre_req98', [Pre_req98::class,'pre_req98']);  
-        Route::post('del_pr98', [Pre_req98::class,'del_pr98']);  
+     //   Route::post('del_pr98', [Pre_req98::class,'del_pr98']);  
 
         Route::post('shc98', [SHC98::class,'shc98']);  
-        Route::post('del_shc98', [SHC98::class,'del_shc98']);  
+     //   Route::post('del_shc98', [SHC98::class,'del_shc98']);  
 
         // can't list all COURSES without link it with SHC [ SHC DISPLAY ]   
     }
