@@ -27,7 +27,7 @@ class Add_user extends Controller
              } 
             else
              {
-                Student::create(['Student_id' => $req->id, 'roadmap' => 1 , 'live_hour' => 12,'c_gpa' => 0, 'dep_id' => $req->dep_id, 'sec_id' => $req->sec_id  ]);                  
+                Student::create(['Student_id' => $req->id, 'lvl' =>1, 'roadmap' => 1 , 'live_hour' => 12,'c_gpa' => 0, 'dep_id' => $req->dep_id, 'sec_id' => $req->sec_id  ]);                  
                 return response()->json(['success' => 'Student joins...AMS'], 201);
              }
         }
