@@ -72,7 +72,8 @@ Route::group(
     ['middleware' => type_admin::class, 'prefix' => 'private'],
     function ($router) 
     {
-        Route::post('enter_degree', [Enter_degree::class,'enter_degree']);
+        
+        Route::post('enter_degree', [Enter_degree::class,'enter_degree']); 
 
         Route::post('department98', [Department98::class,'department98']); 
         Route::post('del_dep98', [Department98::class,'del_dep98']); 
