@@ -1,5 +1,7 @@
 <?php
 namespace App\Http\Controllers\AUTH_USERS;
+
+use App\Http\Controllers\Auto\Refresh;
 use App\Http\Controllers\Controller;;
 use Illuminate\Http\Request;
 
@@ -14,6 +16,9 @@ class Login extends Controller
         
     public function login(Request $req)
     {
+        $refresh = new Refresh() ;  $refresh->refresh();
+        
+        
         $req->validate(['email' => 'required|email:rfc,dns', 'password' => 'required|min:8']);
 
         $credentials = $req->only('email', 'password');

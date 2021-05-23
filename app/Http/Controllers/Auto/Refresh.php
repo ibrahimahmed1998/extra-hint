@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers\Auto;
 use App\Http\Controllers\Controller;
-class Auto_student extends Controller
+class Refresh extends Controller
 {
     public function __construct() { $this->middleware('auth:api', ['except' => []]); }
 
@@ -11,4 +11,8 @@ class Auto_student extends Controller
         $c3 = new Auto_cancel(); $c3->auto_cancel();
         $c4 = new Auto_student();$c4->auto_student();
     } 
+
+
+   
 }
+
