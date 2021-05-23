@@ -21,7 +21,9 @@ class Layer extends Controller
          
          $req->validate(['value'=>'required|integer|between:0,1' ,
                         'token'=>'required|string|unique:sessions',
-                        'is_lec'=>'required|integer|between:0,1'
+                        'is_lec'=>'required|integer|between:0,1',
+                        'ccode' => 'required|string|exists:Courses',      
+
                        ]);
        
 
@@ -29,6 +31,9 @@ class Layer extends Controller
 
         if($req->value==1)
         {
+            $ccode = Session::where('ccode',$req->ccode)->first();
+            if($ccode){ return response()->json(['err'=>"must delete last tokens with this courses "]);  }
+            
             Session::create(['layer_value'=>$req->value,'token'=>$req->token,
             'ccode'=>$req->ccode,'is_lec'=>$req->is_lec , 'date'=>$date] );
 
