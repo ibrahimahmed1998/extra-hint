@@ -6,6 +6,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request ;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 class Reset_pass extends Controller
@@ -67,7 +68,7 @@ class Reset_pass extends Controller
             $users = User::where('email', $req->email);
             $user=  $users->first();
 
-            $users->update(['password' => $req->password]); 
+            $users->update(['password' => Hash::make($req->password)]); 
 
             password_resets::where('email', $req->email)->delete();
 
