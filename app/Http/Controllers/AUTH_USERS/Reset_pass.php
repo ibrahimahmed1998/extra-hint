@@ -58,24 +58,27 @@ class Reset_pass extends Controller
         return response()->json(['token'=>$token,'expires_in'=>auth()->factory()->getTTL()*60]);
     }
     
-    public function resetpassword(Request $request)
+    public function resetpassword(Request $req)
     {
-        $email = password_resets::where('token', $request->token)->where('email', $request->email)->first();
+        $email = password_resets::where('token', $req->token)->where('email', $req->email)->first();
         
         if ($email)
          {
-            $user = User::where('email', $request->email)->first();
-            $user->password = $request->password;   
-            $user->save();
-         
-            password_resets::where('email', $request->email)->delete();
+            $users = User::where('email', $req->email);
+            $user=  $users->first();
 
-            $credentials = $request->only(['email', 'password']);
+            $users->update(['password' => $req->password]); 
+
+            password_resets::where('email', $req->email)->delete();
+
+            $credentials = $req->only(['email', 'password']);
 
             if ($token = auth()->attempt($credentials)) {   return $this->respondWithToken($token);    }
             
             else { return response()->json('login failed'); }
+        
          } 
-        else {  return response()->json(["err" => "Pin is not valid"], 422);  }
+        else
+         {  return response()->json(["err" => "Pin is not valid"], 422);  }
     }
 }
