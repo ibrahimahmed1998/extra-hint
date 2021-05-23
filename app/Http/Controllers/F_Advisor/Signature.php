@@ -5,13 +5,19 @@ use App\Http\Controllers\Helpers\Get_time;
 use App\Http\Requests\Signature_;
 use App\Models\enroll;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class Signature extends Controller
 {
     public function __construct() { $this->middleware('auth:api', ['except' => []]); } 
 
-    public function signature(Signature_ $req)
+    public function signature(Request $req)
     {
+        $req->validate([
+            'Student_id' => 'required|integer|exists:Students',
+            'ccode' => 'required|string|exists:Courses'
+        ]);
+      
         $gt=new Get_time();  $time=$gt->get_time(); 
         $sem=$time['sem'];  
         $year=$time['year']; 
