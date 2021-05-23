@@ -16,13 +16,14 @@ class Login extends Controller
         
     public function login(Request $req)
     {
-        $refresh = new Refresh() ;  $refresh->refresh();
-        
-        
+        $refresh = new Refresh();  $refresh->refresh_f();
+
         $req->validate(['email' => 'required|email:rfc,dns', 'password' => 'required|min:8']);
 
         $credentials = $req->only('email', 'password');
         
+
+
       if ($token = auth()->attempt($credentials)) 
         {
             $this->respondWithToken($token);
