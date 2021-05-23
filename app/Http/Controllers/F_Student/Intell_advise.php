@@ -36,6 +36,8 @@ class Intell_advise extends Controller
     
     public function suggestion_courses($not,$roadmap)
     {
+        $new = [] ; 
+        
         foreach ($not  as $key => $value   )  {     $new[]=$value ;   }
     
         for ($i=0; $i <sizeof($new); $i++) { $c[] = Shc::where('ccode',$new[$i])->first();  }
