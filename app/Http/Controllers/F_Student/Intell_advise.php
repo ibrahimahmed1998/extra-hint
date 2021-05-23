@@ -28,18 +28,10 @@ class Intell_advise extends Controller
  
         for ($i=0; $i < sizeof($pass); $i++) 
         {
-            if( $key = array_search( $pass[$i+1] , $not) )  {  unset($not[$key]);   }
+            if( $key = array_search( $pass[$i+1],$not) )  {  unset($not[$key]);   }
         }
-
-     //   return  $this->suggestion_courses($not,$s->roadmap);
-
-
-  //  }
-    
-  //  public function suggestion_courses($not,$roadmap)
-  //  {
-    
         
+        $new = [] ; 
         foreach ($not  as $key => $value) 
          {     $new[]=$value ;   }
     
