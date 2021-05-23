@@ -20,7 +20,6 @@ class Layer extends Controller
         $t=Carbon::now(); $date=substr($t,0,10); 
          
          $req->validate(['value'=>'required|integer|between:0,1' ,
-                        'token'=>'required|string|unique:sessions',
                         'is_lec'=>'required|integer|between:0,1',
                         'ccode' => 'required|string|exists:Courses',      
 
@@ -30,7 +29,10 @@ class Layer extends Controller
          if($user->type!=2) {return response()->json(['err'=>"not advisor"]); }
 
         if($req->value==1)
-        {
+        {     
+           $req->validate(['token'=>'required|string|unique:sessions',]);
+
+
             $ccode = Session::where('ccode',$req->ccode)->first();
             if($ccode){ return response()->json(['err'=>"must delete last tokens with this courses "]);  }
             
