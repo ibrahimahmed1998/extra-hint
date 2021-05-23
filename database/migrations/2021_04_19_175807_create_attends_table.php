@@ -24,9 +24,10 @@ class CreateAttendsTable extends Migration
             $table->engine = 'InnoDB';
             $table->string('ccode');
             $table->integer('Student_id');
-            $table->date('day_date');
-            $table->tinyInteger('is_attend');
-            $table->tinyInteger('is_lecture');
+            $table->integer('is_lec');
+            $table->string('date');
+
+            $table->timestamps();    
 
             $table->foreign('Student_id', 'fk_Attends_Students1_idx')
                 ->references('Student_id')->on('Students')
@@ -38,7 +39,7 @@ class CreateAttendsTable extends Migration
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-            $table->primary(array('Student_id','ccode','day_date','is_attend','is_lecture'));
+            //$table->primary(array('Student_id','ccode',));// ,'is_lecture' 'day_date','is_attend'
 
         });
     }

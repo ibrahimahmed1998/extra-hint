@@ -1,10 +1,11 @@
 <?php
 namespace App\Http\Controllers\F_Advisor;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Attend_;
+use App\Http\Controllers\Helpers\Get_time;
 use App\Models\Attend;
-use App\Models\enroll;
-use Illuminate\Support\Str;
+use App\Models\Session;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class Attends extends Controller
 {
@@ -13,56 +14,45 @@ class Attends extends Controller
         $this->middleware('auth:api', ['except' =>  [' ']]);
     }
 
-    public function layer(Attend_ $request)
+    public function attends(Request $req)
     {
-        Str::random(6);
+        $user =auth()->user();
 
-        $_SESSION['user_start'] = time();
+        $req->validate(['token'=>'required|string|exists:sessions']);
 
-        if (time() - $_SESSION['user_start'] < 3) 
+        $Session = Session::where('token',$req->token);
+        $now = $Session->first();
+        $ccode = $Session->value('ccode');
+
+        $t=Carbon::now(); $date=substr($t,0,10); 
+
+        
+        $is_found = Attend::where('Student_id',$user->id)->
+                            where('ccode',$ccode)->
+                            where('is_lec',$now->is_lec)->
+                            where('date',$date)->first();
+
+        if($is_found)
         {
-            $user = auth()->user();
+            return response()->json(['err'=> $user->first_name." you can't attend twice at  : ".$ccode ]);
 
-            if($user->type!=1)
-            {
-                return response()->json(['error' => "not student,please use student id "], 400);
-            }
-
-            $check_enroll = enroll::where('Student_id', $user->id)->where('ccode', $request->ccode)->first();
-
-            $duplicated = Attend::where('Student_id', $user->id)
-                ->where('ccode', $request->ccode)
-                ->where('day_date', $request->day_date)->where('is_attend', $request->is_attend)
-                ->where('is_lecture', $request->is_lecture)->first();
-
-            if ($duplicated)
-             {
-                 return response()->json(['error' => "Duplicated !"], 400);
-             }
-             
-            if (!$check_enroll)
-             {
-                return response()->json(['error'=>"student not enrolled ".$request->ccode], 400);
-            } else {
-                Attend::create(
-                    [
-                        'Student_id' =>  $user->id,
-                        'ccode' => $request->ccode,
-                        'day_date' => $request->day_date,
-                        'is_attend' => $request->is_attend,
-                        'is_lecture' => $request->is_lecture,
-                    ]
-                );
-                return response()->json(['success' => 'Attended'], 201);
-            }
-        } else 
-        {
-            // sorry, you're out of time
-            unset($_SESSION['user_start']); // and unset any other session vars for this task
-
-            dd("okay");
         }
-        // 'expires_in' => auth()->factory()->getTTL() * 60
 
+        
+
+        Attend::create(
+            [
+                'Student_id' =>  $user->id,
+                'ccode' => $ccode,
+                'is_lec'=> $now->is_lec ,
+                'date'=> $date ,
+
+            ]
+        );
+
+        return response()->json(['success'=> $user->first_name." is attend ccode : ".$ccode ]);
+    
+      
     }
+
 }

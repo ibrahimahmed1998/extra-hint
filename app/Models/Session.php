@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attend extends Model
+class Session extends Model
 {
-    use HasFactory;
     public $timestamps = true;
+
     
-    protected $fillable = [ 'ccode','Student_id','is_lec','date' ];  
-        
+    use HasFactory;
+
+    
+    protected $fillable = ['layer_value','token','ccode','is_lec','date'] ; 
+  
+
+ 
 }

@@ -13,8 +13,12 @@ class CreateSessionTable extends Migration
      */
     public function up()
     {
-        Schema::create('session', function (Blueprint $table) {
+        Schema::create('sessions', function (Blueprint $table) {
+            $table->integer('layer_value');
             $table->string('token');
+            $table->string('ccode');
+            $table->integer('is_lec');
+            $table->string('date');
             $table->timestamps();
         });
     }

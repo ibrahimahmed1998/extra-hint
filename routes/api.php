@@ -29,6 +29,7 @@ use App\Http\Controllers\F_Advisor\Signature;
 use App\Http\Controllers\F_Advisor\Search_student;
 /********************************************************/
 use App\Http\Controllers\Chat;
+use App\Http\Controllers\F_Advisor\Layer;
 use App\Http\Controllers\F_Student\Byan_nga7;
 use App\Http\Controllers\F_Student\Current_courses;
 use App\Http\Controllers\F_Student\Intell_advise;
@@ -102,8 +103,9 @@ Route::group(
         Route::post('search_student', Search_student::class . '@search_student')->middleware(type_adv::class); 
         Route::post('feedback98', Feedback98::class . '@feedback98');
         Route::post('del_feedback98', Feedback98::class . '@del_feedback98');
+        Route::post('Layer_f', Layer::class . '@Layer_f');
 
-        Route::post('layer', [Attends::class,'layer']); // for attend LAYER 1   /////////////////////////////////////////////
+        
     }
 );
 
@@ -111,6 +113,8 @@ Route::group(
     ['middleware' => 'api', 'prefix' => 'service'],  
     function ($router) 
     {
+        Route::post('attends', [Attends::class,'attends'])->middleware(type_s::class); // for attend LAYER 1   /////////////////////////////////////////////
+
         Route::get('list_departemnts', [Department98::class,'list_departemnts']); 
         Route::get('list_feedbacks', Feedback98::class . '@list_feedbacks');
         Route::post('list_c', [List_C::class,'list_c']);  // all courses must DEPARTMENT [OPTIONAL::SECTION-LVL-SEMESTER]

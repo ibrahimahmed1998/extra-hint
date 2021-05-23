@@ -22,7 +22,7 @@ class Intell_advise extends Controller
          {
              return response()->json(["err"=>"courses not found in Section or he not passes lvl 1 yet ! "]);
          }
-         
+
         for($i = 0; $i < $pc->count(); $i++){$pass[$i+1]=$pc[$i]->ccode;}
         for($i = 0; $i < $c->count();  $i++){$not[$i+1 ]=$c[$i]->ccode; }
         for($i = 0; $i < $cc->count(); $i++){$not[$i+1 ]=$cc[$i]->ccode;}
