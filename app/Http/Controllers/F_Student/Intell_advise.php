@@ -18,10 +18,11 @@ class Intell_advise extends Controller
          $cc = Shc::where('dep_id', $s->Dep_id)->where('Sec_id',0)->get(); // all shared Courses
          $pc = enroll::where('hpass',1)->where('Student_id', $s->Student_id)->get(); // pc  = PASSED COURSES
 
-         if(!$c||!$cc||!$pc)
+         if(!$c->first()  || !$cc->first()  || !$pc->first() )
          {
-             return response()->json(["err"=>"Courses have not uploaded WELL! "]);
+             return response()->json(["err"=>"courses not found in Section or he not passes lvl 1 yet ! "]);
          }
+         
         for($i = 0; $i < $pc->count(); $i++){$pass[$i+1]=$pc[$i]->ccode;}
         for($i = 0; $i < $c->count();  $i++){$not[$i+1 ]=$c[$i]->ccode; }
         for($i = 0; $i < $cc->count(); $i++){$not[$i+1 ]=$cc[$i]->ccode;}
