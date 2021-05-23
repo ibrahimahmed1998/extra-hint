@@ -11,7 +11,8 @@ class Deep_search extends Controller
   
     public function deep_search(Request $req)  
     {
-        $arr= [] ; $arr2= [] ; 
+        $arr= [] ; $arr2= [] ;
+
         $q =auth()->user();
         if($q->type==1)
         {
@@ -50,10 +51,16 @@ class Deep_search extends Controller
             $user = User::where('phone', $req->phone)->get();
         }
 
-        if ($req->dep_id && $req->sec_id ) 
+        if ($req->dep_id) 
         {
-           $req->validate(['dep_id' => 'integer|exists:Departments','sec_id' => 'integer|exists:Sections']);
-           $user = Student::where('dep_id', $req->dep_id)->where('sec_id', $req->sec_id)->get();
+
+            if (! $req->sec_id) 
+            {
+                return response()->json(['err'=>"please enter sec_id"]);
+            }
+            
+            $req->validate(['dep_id' => 'integer|exists:Departments', 'sec_id' => 'integer|exists:Sections']);
+            $user = Student::where('dep_id', $req->dep_id)->where('sec_id', $req->sec_id)->get();
         } 
 
          else if ($req->all) 
@@ -77,6 +84,10 @@ class Deep_search extends Controller
          } 
 
 
+         if($user==null)
+         {
+            return response()->json(['err'=>"please choose option"]);
+         }
 
         for ($i=0; $i <$user->count() ; $i++) 
        { 
