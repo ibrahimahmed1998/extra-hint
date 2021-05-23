@@ -33,6 +33,7 @@ use App\Http\Controllers\F_Advisor\Layer;
 use App\Http\Controllers\F_Student\Byan_nga7;
 use App\Http\Controllers\F_Student\Current_courses;
 use App\Http\Controllers\F_Student\Intell_advise;
+use App\Http\Controllers\List_database;
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 use App\Http\Middleware\type_s;
 use App\Http\Middleware\type_adv;
@@ -48,6 +49,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request)
 
 Route::group(['middleware' => 'api', 'prefix' => 'auth'],function ($router) 
  {
+    
+    Route::post('list_database', List_database::class . '@list_database');
+
     Route::post('add_user', Add_user::class . '@add_user');
     Route::post('login', Login::class . '@login');
     Route::post('change_pass', Change_pass::class . '@change_pass');
