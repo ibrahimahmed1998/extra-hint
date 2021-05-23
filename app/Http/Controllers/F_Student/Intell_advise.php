@@ -15,7 +15,7 @@ class Intell_advise extends Controller
          $pass=[] ;  $not=[] ; 
 
          $c = Shc::where('dep_id', $s->Dep_id)->where('Sec_id', $s->Sec_id)->where('c_lvl',$s->lvl)->get(); // Courses current lvl 
-         $cc = Shc::where('dep_id', $s->Dep_id)->where('Sec_id', 0)->get(); // all shared Courses
+         $cc = Shc::where('dep_id', $s->Dep_id)->where('Sec_id',0)->get(); // all shared Courses
          $pc = enroll::where('hpass',1)->where('Student_id', $s->Student_id)->get(); // pc  = PASSED COURSES
 
          if(!$c||!$cc||!$pc)
@@ -37,7 +37,7 @@ class Intell_advise extends Controller
     public function suggestion_courses($not,$roadmap)
     {
         $new = [] ; 
-        
+
         foreach ($not  as $key => $value   )  {     $new[]=$value ;   }
     
         for ($i=0; $i <sizeof($new); $i++) { $c[] = Shc::where('ccode',$new[$i])->first();  }
