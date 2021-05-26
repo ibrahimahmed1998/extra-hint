@@ -22,7 +22,7 @@ class Login extends Controller
 
         $credentials = $req->only('email', 'password');
         
-
+      //  dd($req->email);
 
       if ($token = auth()->attempt($credentials)) 
         {

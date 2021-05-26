@@ -34,10 +34,10 @@ use Illuminate\Http\Request;
 
         $current_enroll = Course::where('ccode',$req->ccode)->value('cch') ;
 
-
+        //enroled courses in SAME SEMESTER YEARS 
         $ecsy = enroll::where('semester', $sem)->
                         where('year', $year)->
-                        where('Student_id', $user->id)->get(); //enroled courses in SAME SEMESTER YEARS 
+                        where('Student_id', $user->id)->get();
 
         foreach ($ecsy  as $c )  { $sum=$sum+Course::where('ccode',$c->ccode)->value('cch') ; }   
       
