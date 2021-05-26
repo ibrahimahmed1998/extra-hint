@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\enroll;
-class ise extends Controller // IS ENROLLED  ? 
+class ise extends Controller        // IS ENROLLED  ? 
 {
     public function __construct() { $this->middleware('auth:api', ['except' => []]); }
 

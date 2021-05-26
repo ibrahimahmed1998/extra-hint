@@ -23,12 +23,21 @@ use Illuminate\Http\Request;
         $iss = new iss(); if($q=$iss->q($user->id)) {return $q;}
         $sum=0;      
         $counter = 0;
+
         $ise = new ise(); if($q=$ise->q($user->id,$req->ccode,$sem,$year)) {return $q;}
-        $enrolling = new enrolling();  
+
+
+        $enrolling = new enrolling(); 
+
         $prs = Pre_request::where('ccode', $req->ccode)->get();
         $pr_count=$prs->count();
+
         $current_enroll = Course::where('ccode',$req->ccode)->value('cch') ;
-        $ecsy = enroll::where('semester', $sem)->where('year', $year)->get(); //enroled courses in SAME SEMESTER YEARS 
+
+
+        $ecsy = enroll::where('semester', $sem)->
+                        where('year', $year)->
+                        where('Student_id', $user->id)->get(); //enroled courses in SAME SEMESTER YEARS 
 
         foreach ($ecsy  as $c )  { $sum=$sum+Course::where('ccode',$c->ccode)->value('cch') ; }   
       
