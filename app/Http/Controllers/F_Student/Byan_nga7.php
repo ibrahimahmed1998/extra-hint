@@ -58,8 +58,7 @@ class Byan_nga7 extends Controller
 
      // $years = DB::select('SELECT DISTINCT year FROM enrolls WHERE student_id='.$id.';', [1]);
      $years = enroll::where('student_id',$id)->distinct()->pluck('year');
-       dd($years);
-
+ 
 
       $all_semester= [1,2,3];
 
@@ -72,8 +71,7 @@ class Byan_nga7 extends Controller
        } 
       
 
-      return $years_array ; 
-
+ 
       $arrz = [] ; 
 
                    //   $arrz[] =   $class->gpa($id, 'sgpa', 2021, 2);
