@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\F_Advisor;
 
 use App\Http\Controllers\Auto\Auto_degree;
+use App\Http\Controllers\Auto\Refresh;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helpers\Get_time;
 use App\Http\Requests\Enter_degree_;
@@ -15,6 +16,7 @@ class Enter_degree extends Controller
     public function enter_degree(Enter_degree_ $req)
     {
       $gt=new Get_time();  $time=$gt->get_time();  $sem=$time['sem'];   $year=$time['year'];
+      $refresh = new Refresh();  $refresh->refresh_f();
 
 
         $ec = enroll::where('ccode', $req->ccode)->where('year', $year)-> /*////// ec = Enrolled Course //////*/

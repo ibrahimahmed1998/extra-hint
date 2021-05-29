@@ -117,6 +117,9 @@ Route::group(
     ['middleware' => 'api', 'prefix' => 'service'],  
     function ($router) 
     {
+
+        
+
         Route::post('attends', [Attends::class,'attends'])->middleware(type_s::class); // for attend LAYER 1   /////////////////////////////////////////////
 
         Route::get('list_departemnts', [Department98::class,'list_departemnts']); 
@@ -130,6 +133,10 @@ Route::group(
         Route::post('show_degree', Show_degree::class.'@show_degree'); // GPA - DEGREE
         /*****************************************************************************/
         Route::post('byan_nga7', Byan_nga7::class.'@byan_nga7'); // GPA - DEGREE
+
+        Route::post('Student_Records', Byan_nga7::class.'@Student_Records'); // GPA - DEGREE
+
+
         /*****************************************************************************/
         /*****************************************************************************/
         Route::get('intell_advise', [Intell_advise::class,'intell_advise'])->middleware(type_s::class);

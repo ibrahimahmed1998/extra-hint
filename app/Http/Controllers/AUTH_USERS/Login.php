@@ -2,7 +2,10 @@
 namespace App\Http\Controllers\AUTH_USERS;
 
 use App\Http\Controllers\Auto\Refresh;
-use App\Http\Controllers\Controller;;
+use App\Http\Controllers\Controller;
+use App\Models\Student;
+
+;
 use Illuminate\Http\Request;
 
 class Login extends Controller
@@ -24,17 +27,39 @@ class Login extends Controller
         
       //  dd($req->email);
 
+        
       if ($token = auth()->attempt($credentials)) 
         {
             $this->respondWithToken($token);
           //  return redirect('/');
+
+            $user =auth()->user();
+
+            if($user->type==1)
+            {   
+                $s = Student::where('Student_id',$user->id)->first();
+
+                return response()->json(["token"=>$token ,
+                "first_name"=> $user->first_name , 
+                "last_name"=> $user->last_name , 
+                "phone"=> $user->phone , 
+                "email"=> $user->email , 
+                'type' =>  $user->type , 
+                "S_data"=>$s
+                ]
+             );
+
+               // 'Student_data'=> $s ,
+
+            }   
+           // return $user ; 
             return response()->json(["token"=>$token ,
             "id"=>auth()->user()->id , 
-            "first_name"=>auth()->user()->first_name , 
-            "last_name"=>auth()->user()->last_name , 
-            "phone"=>auth()->user()->phone , 
-            "email"=>auth()->user()->email , 
-            'type' => auth()->user()->type
+            "first_name"=> $user->first_name , 
+            "last_name"=> $user->last_name , 
+            "phone"=> $user->phone , 
+            "email"=> $user->email , 
+            'type' =>  $user->type , 
             ]
          );
         } 
