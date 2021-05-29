@@ -56,17 +56,23 @@ class Byan_nga7 extends Controller
          $id = $req->Student_id;
       }
 
-      $years = DB::select('SELECT DISTINCT year FROM enrolls WHERE student_id='.$id.';', [1]);
+     // $years = DB::select('SELECT DISTINCT year FROM enrolls WHERE student_id='.$id.';', [1]);
+     $years = enroll::where('student_id',$id)->distinct()->pluck('year');
+       dd($years);
 
-      
+
       $all_semester= [1,2,3];
 
 
       $years_array = [] ; 
 
-      for ($i=0; $i < sizeof($years) ; $i++)    { $years_array[] = $years[$i]->year  ;  }
+      for ($i=0; $i < $years->count() ; $i++)   
+       { // echo "1 ";
+          $years_array[] = $years[$i]  ;  
+       } 
+      
 
- //     return $years_array ; 
+      return $years_array ; 
 
       $arrz = [] ; 
 
