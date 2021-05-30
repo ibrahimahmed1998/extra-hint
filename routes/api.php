@@ -34,6 +34,7 @@ use App\Http\Controllers\F_Student\Byan_nga7;
 use App\Http\Controllers\F_Student\Current_courses;
 use App\Http\Controllers\F_Student\Intell_advise;
 use App\Http\Controllers\List_database;
+use App\Http\Controllers\Z_CODEBASE\Test;
 /*||||||||||||||||||||||||||||||||||||||||||||||||||||||*/
 use App\Http\Middleware\type_s;
 use App\Http\Middleware\type_adv;
@@ -135,7 +136,7 @@ Route::group(
         Route::post('byan_nga7', Byan_nga7::class.'@byan_nga7'); // GPA - DEGREE
 
         Route::post('Student_Records', Byan_nga7::class.'@Student_Records'); // GPA - DEGREE
-
+        
 
         /*****************************************************************************/
         /*****************************************************************************/
@@ -153,9 +154,9 @@ Route::group(['middleware' => 'api', 'prefix' => 'chat'],function ($router)
 
 Route::group(['middleware' => 'api', 'prefix' => 'testing'],function ($router) 
     {
-        Route::post('test', Z_CODEBASETest::class.'@test'); 
+        Route::post('test', Test::class.'@test'); 
         Route::post('auto_student', Auto_student::class.'@auto_student'); 
-        
+
         
     });
 

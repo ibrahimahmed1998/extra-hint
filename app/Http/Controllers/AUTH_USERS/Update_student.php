@@ -20,8 +20,7 @@ class Update_student extends Controller
 
         if($req->dep_id && $req->sec_id) 
           {
-           $student->update(array('dep_id'=>$req->dep_id,'sec_id'=>$req->sec_id)); 
-                                
+            $student->update(array('dep_id'=>$req->dep_id,'sec_id'=>$req->sec_id));                    
           }
 
         if($req->adv_id) 
