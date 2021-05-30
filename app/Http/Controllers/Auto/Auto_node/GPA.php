@@ -36,24 +36,24 @@ class GPA extends Controller
                 $y = enroll::where('year', $year)->first();
                 $s = enroll::where('semester', $semester)->first();
 
-
+        /*
                 if (!$y || !$s)
                  {
                     return response()->json(['err' => "not Enrolled in: " . $year . " or this semester".$semester], 401);
                  }
-
+        */
+            
                 $test_sem = enroll::where('Student_id', $id)->where('semester', $semester)->where('year', $year)->first();
+
                 if (!$test_sem)
                  {
-                    return response()->json(['err' => "not Enrolled Courses in this semester".$semester], 401);
+                    return response()->json(['err' => "not Enrolled in SEM: ".$semester." YEAR: ".$year], 401);
                 }
+
                 $c = enroll::where('Student_id', $id)->where('semester', $semester)->where('year', $year)->get();
             }
 
-            for ($i = 0; $i < $c->count(); $i++) 
-            {
-                $arr[] = $c[$i];
-            }
+            for ($i = 0; $i < $c->count(); $i++)   {   $arr[] = $c[$i];  }
 
             for ($i = 0; $i < $c->count(); $i++) {
                 $cd = Course::where('ccode', $arr[$i]->ccode)->value('dtotal'); // Course Degree
@@ -124,7 +124,9 @@ class GPA extends Controller
            
             if ($msg == "sgpa") // FOR BYAN EL NGAAAAAAAAAAAAAAA7777777
             {
-                return response()->json(["year"=>$year,"semester"=>$semester,"Courses"=>$form,$msg.":"=>substr($total_quality/$total_cch,0,5)]);
+                return response()->json(["year"=>$year,
+                                         "semester"=>$semester,
+                                         "Courses"=>$form,$msg.":"=>substr($total_quality/$total_cch,0,5)]);
             }
 
             return substr($total_quality / $total_cch, 0, 5);
