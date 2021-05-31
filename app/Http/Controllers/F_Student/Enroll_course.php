@@ -15,17 +15,14 @@ use Illuminate\Http\Request;
     
     public function enroll_course(Request $req)  
     {
-        $req->validate(['ccode' => 'required|string|exists:Courses']);
+        $req->validate(['ccode'=>'required|string|exists:Courses']);
         $user=auth()->user();  
-        $gt=new Get_time();  $time=$gt->get_time(); 
-        $sem=$time['sem'];  
-        $year=$time['year'];  
+        $gt=new Get_time();      $time=$gt->get_time(); 
+        $sem=$time['sem'];       $year=$time['year'];  
+        $sum=0;          $counter = 0;
+
         $iss = new iss(); if($q=$iss->q($user->id)) {return $q;}
-        $sum=0;      
-        $counter = 0;
-
         $ise = new ise(); if($q=$ise->q($user->id,$req->ccode,$sem,$year)) {return $q;}
-
 
         $enrolling = new enrolling(); 
 
@@ -60,7 +57,12 @@ use Illuminate\Http\Request;
        
         else if(($sem==2||$sem==1) && ($limit>19) ) // $req->force != 1 
            
-          {return response()->json(['err' =>"Can't Enroll (".$req->ccode.") You Passed Limit Hours ! "], 400); }
+          {return response()->json(['err' =>"Can't Enroll !",
+                                    "ccode"=>$req->ccode  , 
+                                    "[ccode+old] houres"=>$sum +$current_enroll,
+                                    "Current Hours:"=>$sum,
+                                    "Limited Hours"=>19
+                                    ], 400); }
            
         else if(($sem==2||$sem==1) && ($limit<=19) ) {return $enrolling->q($user->id,$req->ccode,$sem,$year);}                              
 }}

@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
-class iss extends Controller
+class iss extends Controller // is student ???
 {
     public function __construct() { $this->middleware('auth:api', ['except' => []]); }
 

@@ -10,6 +10,8 @@ use App\Http\Controllers\AUTH_USERS\Update_student;
 use App\Http\Controllers\AUTH_USERS\AuthController;
 use App\Http\Controllers\AUTH_USERS\Del_student;
 use App\Http\Controllers\AUTH_USERS\Del_user;
+use App\Http\Controllers\Auto\Refresh;
+
 /********************************************************/
 use App\Http\Controllers\Yellow\Course98;
 use App\Http\Controllers\Yellow\Department98;
@@ -137,7 +139,8 @@ Route::group(
 
         Route::post('Student_Records', Byan_nga7::class.'@Student_Records'); // GPA - DEGREE
         
-
+        /*****************************************************************************/
+        Route::post('refresh_f', Refresh::class.'@refresh_f'); 
         /*****************************************************************************/
         /*****************************************************************************/
         Route::get('intell_advise', [Intell_advise::class,'intell_advise'])->middleware(type_s::class);

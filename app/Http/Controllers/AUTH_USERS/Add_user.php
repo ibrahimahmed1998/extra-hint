@@ -31,8 +31,6 @@ class Add_user extends Controller
                 return response()->json(['success' => 'Student joins...AMS'], 201);
              }
         }
-       // return redirect('/');
-       //alert('Student')
        return response()->json(['success' => 'joins...AMS'], 201);
       }
    }
