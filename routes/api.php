@@ -10,6 +10,8 @@ use App\Http\Controllers\AUTH_USERS\Update_student;
 use App\Http\Controllers\AUTH_USERS\AuthController;
 use App\Http\Controllers\AUTH_USERS\Del_student;
 use App\Http\Controllers\AUTH_USERS\Del_user;
+use App\Http\Controllers\Auto\Auto_cancel;
+use App\Http\Controllers\Auto\Auto_enroll;
 use App\Http\Controllers\Auto\Refresh;
 
 /********************************************************/
@@ -138,6 +140,11 @@ Route::group(
         Route::post('byan_nga7', Byan_nga7::class.'@byan_nga7'); // GPA - DEGREE
 
         Route::post('Student_Records', Byan_nga7::class.'@Student_Records'); // GPA - DEGREE
+
+        /*****************************************************************************/
+        Route::post('auto_enroll', Auto_enroll::class.'@auto_enroll'); // auto enroll
+        Route::post('auto_cancel', Auto_cancel::class.'@auto_cancel'); // auto enroll
+
         
         /*****************************************************************************/
         Route::post('refresh_f', Refresh::class.'@refresh_f'); 

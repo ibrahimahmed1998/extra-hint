@@ -8,8 +8,8 @@ class Refresh extends Controller
 
     public function refresh_f()
     {
+       //  $c3 = new Auto_cancel(); $c3->auto_cancel();
        // $c1 = new Auto_enroll(); $c1->auto_enroll();
-      //  $c3 = new Auto_cancel(); $c3->auto_cancel();
         $c4 = new Auto_student(); $c4->auto_student();
     } 
 

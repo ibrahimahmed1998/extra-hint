@@ -23,6 +23,7 @@ class enrolling extends Controller
             $sum = $sum + Course::where('ccode', $c->ccode)->value('cch');
         }
         $new_c =  Course::where('ccode', $ccode)->value('cch');
+        
         enroll::create(
             [
                 'Student_id' => $id,
