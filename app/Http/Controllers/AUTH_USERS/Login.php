@@ -4,7 +4,10 @@ namespace App\Http\Controllers\AUTH_USERS;
 
 use App\Http\Controllers\Auto\Refresh;
 use App\Http\Controllers\Controller;
-use App\Models\Student;;
+use App\Models\Student;
+use App\Models\User;
+
+;
 
 use Illuminate\Http\Request;
 
@@ -22,6 +25,14 @@ class Login extends Controller
 
     public function login(Request $req)
     {
+        $test_database=User::first();
+         
+        if(!$test_database)
+        {
+            $root = User::create(['id' => 19980218,'first_name' =>'Ibrahim','last_name' =>'Ahmed','password' => 12345678,'email' => 'hema.1998.man@gmail.com','type' => 3 , 'phone' => "01207053244" , 'created_at'=>now() ]);
+            return response()->json(['Root User'=> $root  ]);
+        }
+
         $req->validate(['email' => 'required|email:rfc,dns', 'password' => 'required|min:8']);
         $credentials = $req->only('email', 'password');
 
