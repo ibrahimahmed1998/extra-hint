@@ -147,7 +147,7 @@ Route::group(
 
         
         /*****************************************************************************/
-        Route::post('refresh_f', Refresh::class.'@refresh_f'); 
+        Route::post('refresh_f', Refresh::class.'@refresh_f')->middleware(type_admin::class); 
         /*****************************************************************************/
         /*****************************************************************************/
         Route::get('intell_advise', [Intell_advise::class,'intell_advise']);
