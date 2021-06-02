@@ -4,14 +4,32 @@ use App\Http\Controllers\Controller;
 use App\Models\enroll;
 use App\Models\Shc;
 use App\Models\Student;
+use Illuminate\Http\Request;
+
 class Intell_advise extends Controller
 {
     public function __construct() {  $this->middleware('auth:api', ['except' =>  []]);  }
     
-    public function intell_advise()
+    public function intell_advise(Request $req)
     {
+        
          $user=auth()->user();
-         $s=Student::where('Student_id',$user->id)->first();
+
+         if($user->type != 1 )
+         {
+             if($user->type == 3)
+             {
+                 return response()->json(["err"=>"Student & Advisor Only Can Access "]);
+             }
+            $req->validate(["Student_id"=>"required|integer|exists:Students"]);
+            $s=Student::where('Student_id',$req->Student_id)->first();
+         }
+         else
+         {
+            $s=Student::where('Student_id',$user->id)->first();
+         }
+
+
          $pass=[] ;  $not=[] ; 
 
         // Courses current lvl 
