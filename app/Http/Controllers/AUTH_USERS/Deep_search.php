@@ -24,16 +24,23 @@ class Deep_search extends Controller
 
         if ($req->first_name) 
         {
+            if($req->last_name)
+            {
+                $req->validate(['last_name' => 'string|exists:Users','first_name' => 'string|exists:Users']);
+
+                $user = User::where('first_name', $req->first_name)->where('last_name', $req->last_name)->get();
+            }
+            
             $req->validate(['first_name' => 'string|exists:Users']);
             $user = User::where('first_name', $req->first_name)->get();
 
         } 
         else if ( $req->first_name  && $req->last_name ) 
         {
-            $req->validate(['last_name' => 'string|exists:Users','first_name' => 'string|exists:Users']);
             $user = User::where('first_name', $req->first_name)->where('last_name', $req->last_name)->get();
 
         } 
+        
         else if ($req->id)
          {
             $req->validate(['id' => 'integer|exists:Users']);
