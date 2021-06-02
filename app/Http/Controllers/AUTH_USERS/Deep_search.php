@@ -91,7 +91,7 @@ class Deep_search extends Controller
 
         for ($i=0; $i <$user->count() ; $i++) 
        { 
-            if($user[$i]->type==1)
+            if($user[$i]->type==1 || $user[$i]->lvl )
             {
                 $arr[]=$user[$i] ; 
             }

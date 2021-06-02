@@ -8,16 +8,16 @@ class Get_time extends Controller
 
     public function get_time()
     {
-        $t=Carbon::now();
+        $t=Carbon::now(); // 2021-06-12 //
         $sem=0;
         $year=substr($t,0,4); 
         $month=substr($t,5,2);
 
-        $sem1 =['09','10','11','00']; 
-        $sem2= ['01','02','03','05']; 
-        $sem3 =['06','07','08','00']; 
+        $sem1 =['09','10','11','12','1']; 
+        $sem2= ['02','03','04','05','06']; 
+        $sem3 =['07','08','99','99','99']; 
        
-        for ($i=0; $i < 4; $i++) 
+        for ($i=0; $i < sizeof($sem1); $i++) 
         { 
             if($month===$sem1[$i]){$sem=1;} 
             else if($month===$sem2[$i]){$sem=2;} 
