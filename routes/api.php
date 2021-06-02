@@ -57,7 +57,7 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'],function ($router)
     
     Route::post('list_database', List_database::class . '@list_database');
 
-    Route::post('add_user', Add_user::class . '@add_user');
+    Route::post('add_user', Add_user::class . '@add_user')->middleware(type_admin::class);   
     Route::post('login', Login::class . '@login');
     Route::post('change_pass', Change_pass::class . '@change_pass');
     Route::post('sendresetpasswordemail',Reset_pass::class . '@sendresetpasswordemail');
