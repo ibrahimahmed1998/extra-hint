@@ -7,7 +7,6 @@ use App\Http\Controllers\Auto\Refresh;
 use App\Http\Controllers\Controller;
 use App\Models\enroll;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class Byan_nga7 extends Controller
 {
@@ -20,7 +19,7 @@ class Byan_nga7 extends Controller
    {
       $user = auth()->user();
       $id = $user->id;
-      $refresh = new Refresh();  $refresh->refresh_f();
+      //$refresh = new Refresh();  $refresh->refresh_f(); //////////////////////////////
 
       $req->validate(['msg' => 'required|string']);
 
@@ -32,10 +31,6 @@ class Byan_nga7 extends Controller
       $year = $req->year;
       $semester = $req->semester;
       $class = new GPA();
-
-     
-   
-
       
       if ($req->msg == 'sgpa') 
       {
@@ -70,12 +65,7 @@ class Byan_nga7 extends Controller
           $years_array[] = $years[$i]  ;  
        } 
       
-
- 
       $arrz = [] ; 
-
-                   //   $arrz[] =   $class->gpa($id, 'sgpa', 2021, 2);
-
 
       for ($i=0; $i <sizeof($years) ; $i++)
        { 
@@ -94,8 +84,5 @@ class Byan_nga7 extends Controller
        return $arrz; 
 
       
-   }
-
- 
-   
+   } 
 }
