@@ -6,11 +6,11 @@
 <body>
 
 <div>
-    Hi {{ $name }},
-    <br> this is reset password page from AMS <br>
-
-    <a href="{{ url('api/auth/reset_pass',$token)}}">click HERE to set password</a>  <br/>
-
+    <h1>Hi {{ $name }}, </h1>
+    <h1> this is reset password page from AMS  </h1>
+    <h1 style="color:red"> {{$token}}</h1>
+    <h1> please copy above token and paste it in your AMS app   </h1>
+ 
 </div>
 
 </body></html>

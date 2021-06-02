@@ -26,11 +26,11 @@ class Reset_pass extends Controller
                 [ 'email' => $request->email,   'token' => $token,     'created_at' => Carbon::now(),   ]);
             
             $email = $request->email;
-            $name = $user->firstname;
+            $name = $user->first_name;
             $subject = 'Resetting Password';
             Mail::send(
                 'sendrestpassemail',
-                ['name' => $user->firstname, 'token' => $token],
+                ['name' => $user->first_name, 'token' => $token],
                 function ($mail) use ($email, $name, $subject)
                  {
                     $mail->from('backend@ams.com');  $mail->to($email, $name);   $mail->subject($subject);
