@@ -9,7 +9,7 @@ use App\Models\User;
 
 class Add_user extends Controller
 {
-    public function __construct() {  $this->middleware('auth:api', ['except' => ['add_user']]); }
+    public function __construct() {  $this->middleware('auth:api', ['except' => ['']]); }
    
     public function add_user(Signup_ $req)
     {        
