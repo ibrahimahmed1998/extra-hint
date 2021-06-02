@@ -10,23 +10,8 @@ use App\Models\Message as ModelsMessage;
 
 class Chat extends Controller
 {
-    public function __construct()
-    {
-     // $this->middleware('auth');
-    }
+    public function __construct()  {  $this->middleware('auth');  }
     
-    /**
-     * Show chats
-     *
-     * @return \Illuminate\Http\Response
-     */
-     
-    
-    /**
-     * Fetch all messages
-     *
-     * @return Message
-     */
     public function fetchMessages()
     {
       //return response()->json(['hello'=>'world']);
@@ -34,27 +19,17 @@ class Chat extends Controller
 
       return ModelsMessage::with('user')->get();
     }
-    
-    /**
-     * Persist message to database
-     *
-     * @param  Request $request
-     * @return Response
-     */
-    public function sendMessage(Request $request)
-{
-  $user = Auth::user();
 
-  $message = $user->messages()->create(['message' => $request->input('message')]);
 
-  
+  public function sendMessage(Request $request)
+  {
+    $user = Auth::user();
 
-  broadcast(new MessageSent($user, $message))->toOthers();
+    $message = $user->messages()->create(['message' => $request->input('message')]);
 
-  return $this->fetchMessages();
-  //return ['status' => 'Message Sent!'];
+    broadcast(new MessageSent($user, $message))->toOthers();
 
-}
-
-    
+    return $this->fetchMessages();
+    //return ['status' => 'Message Sent!'];
+  }
 }
