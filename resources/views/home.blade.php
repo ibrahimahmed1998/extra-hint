@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+
+
 <html> <head id="head"> <title>Blog System</title>
 <link rel="stylesheet" href={{ asset('css/main.css') }}>
 <link rel="stylesheet" href={{ asset('css/login.css') }}>
