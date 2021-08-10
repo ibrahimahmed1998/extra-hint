@@ -9,10 +9,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-
+    
     public $timestamps = false;
 
-
+    
     protected $fillable=['id','first_name','last_name','phone','email','password','type',
                          'remember_token','created_at'/*,'updated_at'//'email_verified_at',*/];
 
@@ -51,5 +51,5 @@ class User extends Authenticatable implements JWTSubject
     }
 }
 
-
-
+ 
+ 
