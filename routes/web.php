@@ -13,12 +13,12 @@
 |
 */
 
-Route::get('/', function () 
+Route::get('/', function ()
 {
-    return view('welcome');
+    return view('home');
 });
 
-Route::get('/s', function () 
+Route::get('/s', function ()
 {
     return view('s');
 });

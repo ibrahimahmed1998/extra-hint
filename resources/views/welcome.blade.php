@@ -6,10 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
-    <link rel="stylesheet" href={{ asset('fonts/icomoon/style.css') }}>
-    <link rel="stylesheet" href={{ asset('css/owl.carousel.min.css') }}>
-    <link rel="stylesheet" href={{ asset('css/bootstrap.min.css') }}>
-    <link rel="stylesheet" href={{ asset('css/style.css') }}>
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -18,29 +14,28 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href={{ asset('css/login.css') }}>
 
     <script type="text/javascript">
 
-        function myFunction() 
+        function myFunction()
         {
             var x = document.getElementById("login98");
             var y = document.getElementById("login98h");
 
-          
-            if (x.style.display === "none") 
+
+            if (x.style.display === "none")
             {
-                x.style.display = "block"; /// appper 
-            } else 
+                x.style.display = "block"; /// appper
+            } else
             {
                 x.style.display = "none";
             }
 
-            
-            if (y.style.display === "none") 
+
+            if (y.style.display === "none")
             {
-                y.style.display = "block"; /// appper 
-            } else 
+                y.style.display = "block"; /// appper
+            } else
             {
                 y.style.display = "none";
             }
@@ -129,7 +124,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                     </div>
                 </div>
 

@@ -15,12 +15,24 @@ height: 100%;
 align-content: center;
 }
 
+.card-footer
+{
+    padding-top: 50px;
+    margin-top:50px ;
+    background-color:red
+}
 .card{
 height: 370px;
-margin-top: auto;
-margin-bottom: auto;
 width: 400px;
-background-color: rgba(0,0,0,0.5) !important;
+background-color: rgba(0,0,0,0.3) !important;
+
+width:500px;
+margin-top: 20%;
+margin-bottom: 50;
+margin-left: auto;
+margin-right: auto;
+
+
 }
 
 .social_icon span{
