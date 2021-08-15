@@ -11,19 +11,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav" >
 
-                <div class="btn-group">
-                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Action
-                    </button>
-                    <div class="dropdown-menu">
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Separated link</a>
-                    </div>
-                  </div>
-
 
                     <li class="nav-item"><a id="mypanel" class="nav-link" href="#">My Panel</a> </li>
                     <li class="nav-item">
@@ -34,7 +21,6 @@
 
                         <li class="nav-link" id="Name" > User Name</li>
                         <li class="nav-link" id="Type" > User Type</li>
-
 
                         <li class="nav-item"> <a class="nav-link" id="#"  href="https://ibrahimahmed1998.github.io/QuickAccess/HTML/index.html">Useful Links</a> </li>
 
