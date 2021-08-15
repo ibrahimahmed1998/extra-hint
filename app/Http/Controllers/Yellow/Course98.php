@@ -4,15 +4,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Course_;
 use App\Models\Course;
 use Illuminate\Http\Request;
-class Course98 extends Controller
+class Course98 extends Controller // CRUD
 {
     public function __construct() { $this->middleware('auth:api', ['except' => []]);    }
-  
-    public function course98(Course_ $request)  
+
+    public function create(Course_ $request)
     {
         $sum1 = $request->dmidterm + $request->dlab + $request->doral;
 
-        if ($sum1  !=  $request->dclass_work) 
+        if ($sum1  !=  $request->dclass_work)
         {
             return response()->json(['error' => 'dclass_work Not Calculated Good => ' . $sum1 . '!=' . $request->dclass_work], 400);
         }
@@ -30,7 +30,7 @@ class Course98 extends Controller
         return response()->json(['Success' =>'Course Created'], 201);
     }
 
-    public function del_Course(Request $request)
+    public function delete(Request $request)
     {
         $request->validate(['ccode' => 'required|string|exists:Courses']);
         Course::where('ccode', $request->ccode)->delete();

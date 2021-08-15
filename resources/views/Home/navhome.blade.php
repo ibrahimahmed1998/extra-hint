@@ -28,7 +28,7 @@
                     <li class="nav-item"><a id="mypanel" class="nav-link" href="#">My Panel</a> </li>
                     <li class="nav-item">
 
-                        <li class="nav-item"> <a id="Show_Sections" class="nav-link" href="api/service/department">Show Sections</a> </li>
+                        <li class="nav-item"> <a id="Show_Sections" class="nav-link" href="service/department">Show Sections</a> </li>
 
                         <a id="create" data-bs-toggle="collapse" class="nav-link" href="#collapseExample">Log-In</a> </li>
 

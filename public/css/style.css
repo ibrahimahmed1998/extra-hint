@@ -1,18 +1,36 @@
-#dep_test{
-    float:left;
-    width:  5%;
-    height: 5%;
-    margin:5%;
+#body {
+    background-color: rgb(182, 240, 230);
+}
 
-  }
-
-  #sec_style{
-    float:left;
-    width: 5%;
-    height:5%;
-    margin:5%;
-   }
-
-#body{
-     background-color: rgb(240, 236, 200);
+nav{
+    padding-bottom: 5%;
+}
+li{
+    margin-right: 5%;
  }
+
+ #card{
+    margin-bottom:5%;
+ }
+ #layout {
+    float: left;
+    /* width: 40%;
+    height: 50%; */
+    margin: 5%;
+
+}
+
+
+div div div .dropdown-item:hover {
+    background: rgb(255, 255, 193);
+    cursor: pointer;
+    font-weight: bold
+}
+
+div div .dropdown-item:hover {
+    background: rgb(255, 255, 193);
+
+    cursor: pointer;
+    display: block;
+    font-weight: bold
+}

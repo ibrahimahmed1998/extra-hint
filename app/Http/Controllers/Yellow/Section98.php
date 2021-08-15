@@ -8,19 +8,13 @@ use Illuminate\Support\Facades\View;
 
 class Section98 extends Controller
 {
-    public function __construct() {         $this->middleware('auth:api', ['except' => ['list_section']]);    }
+    public function __construct() { $this->middleware('auth:api', ['except' => ['list_section']]);    }
 
 
     public function list_section(Request $req) //create
     {
        $section = Section::where('dep_id', $req->dep_id)->get();
-
-     //  return View::make("Dep_Sec/create_department", compact('section'));
-
-         return View::make("Dep_Sec/create_section",compact('section'));
-
-      // return response()->json(["section" => $section]) ;
-
+       return View::make("Dep_Sec/sec",compact('section'));
     }
 
     public function section98(Section_ $req) //create

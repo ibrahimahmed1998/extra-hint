@@ -2,7 +2,7 @@
 <head id="head"><title>AMS System</title>
     @include('Home.layout')
     @include('Home.navhome')
-</head><body>
+</head><body style="background-color: rgb(240, 236, 200);">
 
 <div class="collapse" id="collapseExample"> <div class="card"><div class="card-body">
     <div class="input-group form-group">
