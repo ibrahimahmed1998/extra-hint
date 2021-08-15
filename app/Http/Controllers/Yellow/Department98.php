@@ -3,19 +3,20 @@ namespace App\Http\Controllers\Yellow;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class Department98 extends Controller
 {
     public function __construct() { $this->middleware('auth:api', ['except' => ['list_departemnts']]);    }
-  
-    public function department98(Request $req) //create 
+
+    public function department98(Request $req) //create
     {
         $req->validate([
-             'dname' => 'required|string|unique:Departments',       
+             'dname' => 'required|string|unique:Departments',
              'dep_id' => 'required|integer|unique:Departments']);
-        
+
         Department::create(['dname' => $req->dname,'dep_id' => $req->dep_id]);
-           
+
         return response()->json(['Success' => 'Department Created'], 201);
     }
 
@@ -29,6 +30,8 @@ class Department98 extends Controller
 
     public function list_departemnts()
     {
-        $d = Department::all();
-        return response()->json(['all Departments' =>  $d], 201);
+        $dep = Department::all();
+
+        return View::make("Dep_Sec/create_department", compact('dep'));
+        //return response()->json(['all Departments' =>  $dep], 201);
     }}
