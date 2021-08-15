@@ -6,6 +6,6 @@
 
     <div id="layout">
         <div id="get_course" > </div>
+        <div id="snackbar" > </div>
     </div>
-
 </body></html>

@@ -1,8 +1,11 @@
-<link rel="stylesheet" href="/css/popup.css">
-<script src="{{ asset('/js/popup.js') }} "></script>
+{{-- <link rel="stylesheet" href="/css/popup.css">
+<script src="{{ asset('/js/popup.js') }} "></script> --}}
 
-<!-- Use a button to open the snackbar -->
-<button onclick="myFunction()">Show Snackbar</button>
+{{-- <button onclick="myFunction()">Show Snackbar</button> --}}
 
-<!-- The actual snackbar -->
-<div id="snackbar">Some text some message..</div>
+<div >
+        <h4>Course name : {{$course->cname}} </h4>
+        <h4>Course cch : {{$course->cch}}</h4>
+        <h4>Course instructor : {{$course->instructor}}</h4>
+        <h4>Total Degree : {{$course->dtotal}}</h4>
+</div>

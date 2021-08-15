@@ -20,16 +20,12 @@ class Department98 extends Controller
         return response()->json(['Success' => 'Department Created'], 201);
     }
 
-    public function del_dep98(Request $req)
-    {
+    public function del_dep98(Request $req){
         $req->validate(['dep_id' => 'required|exists:Departments']);
-
         Department::where('dep_id', $req->dep_id)->delete();
-        return response()->json(['Success'=>"Department deleted"], 201);
-    }
+        return response()->json(['Success'=>"Department deleted"], 201);}
 
-    public function list_departemnt()
-    {
+    public function list_departemnt(){
         $dep = Department::all();
         return View::make("Dep_Sec/main_ds", compact('dep'));
     }}

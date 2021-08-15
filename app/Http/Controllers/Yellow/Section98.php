@@ -6,16 +6,14 @@ use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
-class Section98 extends Controller
+class Section98 extends Controller // Crud
 {
     public function __construct() { $this->middleware('auth:api', ['except' => ['list_section']]);    }
 
 
-    public function list_section(Request $req) //create
-    {
+    public function list_section(Request $req){
        $section = Section::where('dep_id', $req->dep_id)->get();
-       return View::make("Dep_Sec/sec",compact('section'));
-    }
+       return View::make("Dep_Sec/sec",compact('section')); }
 
     public function section98(Section_ $req) //create
     {

@@ -6,14 +6,20 @@ function myFunction(ccode) {
 
     const data = { ccode : ccode};
 
-    axios.post("list_course",data)  // axios(url,data)
-     .then( response =>  get_dep(response.data)    )    // response.data.map( elm => "sec id" + elm.Sec_id )
+    axios.post("couuse_data",data)  // axios(url,data)
+     .then( response =>  course_data(response.data)    )    // response.data.map( elm => "sec id" + elm.Sec_id )
      .catch(error =>{
        this.errorMessage = error.message;
        console.error("There was an error!", error);
      });
 
+     function course_data(data)
+        {
+        this.data = data ;
+        console.log(this.data);
+        var sec = document.getElementById("snackbar").innerHTML=this.data;
 
+        }
     // Add the "show" class to DIV
     x.className = "show";
 
