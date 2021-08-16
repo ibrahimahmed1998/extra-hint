@@ -7,25 +7,25 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" onclick="" href="#"><h3>Login</h3></a>
+          <li  class="nav-item active" style="padding-right:2%">
+            <a class="btn-dingours" class="nav-link" onclick="" href="#"><h3>Login</h3></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><h3>About</h3></a>
+          <li class="nav-item" style="padding-right:2%">
+            <a class="btn-dingours" class="nav-link" href="#"><h3>About</h3></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><h3>Portfolio</h3></a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="service/department"><h3>Sections</h3></a>
+          <li class="nav-item" style="padding-right:2%">
+            <a class="btn-dingours" class="nav-link" href="#"><h3>Portfolio</h3></a>
           </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="#"><h3>Services</h3></a>
+          <li class="nav-item" style="padding-right:2%">
+            <a class="btn-dingours" class="nav-link" href="service/department"><h3>Sections</h3></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><h3>Contact</h3></a>
+
+          <li class="nav-item" style="padding-right:2%">
+            <a class="btn-dingours" class="nav-link" href="#"><h3>Services</h3></a>
+          </li>
+          <li class="nav-item" style="padding-right:2%">
+            <a class="btn-dingours" class="nav-link" href="#"><h3>Contact</h3></a>
           </li>
         </ul>
       </div>
@@ -40,21 +40,21 @@
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img class="d-block w-100" src="https://i.postimg.cc/bNQp0RDW/1.jpg" alt="First slide">
+        <img class="d-block w-100" src="{{asset('/ASU-Cairo.jpg')}}" alt="First slide">
         <div class="carousel-caption d-none d-md-block">
           <h5>Slider One Item</h5>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="https://i.postimg.cc/pVzg3LWn/2.jpg" alt="Second slide">
+        <img class="d-block w-100" src="{{asset('/ain2.jpg')}}" alt="Second slide">
         <div class="carousel-caption d-none d-md-block">
           <h5>Slider One Item</h5>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
         </div>
       </div>
       <div class="carousel-item">
-        <img class="d-block w-100" src="https://i.postimg.cc/0y2F6Gpp/3.jpg" alt="Third slide">
+        <img class="d-block w-100" src="{{asset('/ain1.jpg')}}" alt="Third slide">
         <div class="carousel-caption d-none d-md-block">
           <h5>Slider One Item</h5>
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, nulla, tempore. Deserunt excepturi quas vero.</p>
