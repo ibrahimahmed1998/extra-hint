@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">AMS_ASU </a>
+      <a  class="navbar-brand" href="#">AMS_ASU </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -8,24 +8,24 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li  class="nav-item active" style="padding-right:2%">
-            <a class="btn-dingours" class="nav-link" onclick="" href="#"><h3>Login</h3></a>
+            <a class="btn btn-outline-info" class="nav-link" onclick="" href="#">Login</a>
           </li>
           <li class="nav-item" style="padding-right:2%">
-            <a class="btn-dingours" class="nav-link" href="#"><h3>About</h3></a>
+            <a class="btn btn-outline-info" class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item" style="padding-right:2%">
-            <a class="btn-dingours" class="nav-link" href="#"><h3>Portfolio</h3></a>
-          </li>
-
-          <li class="nav-item" style="padding-right:2%">
-            <a class="btn-dingours" class="nav-link" href="service/department"><h3>Sections</h3></a>
+            <a class="btn btn-outline-info" class="nav-link" href="#">Portfolio</a>
           </li>
 
           <li class="nav-item" style="padding-right:2%">
-            <a class="btn-dingours" class="nav-link" href="#"><h3>Services</h3></a>
+            <a class="btn btn-outline-info" class="nav-link" href="service/department">Sections</a>
+          </li>
+
+          <li class="nav-item" style="padding-right:2%">
+            <a class="btn btn-outline-info" class="nav-link" href="#">Services</a>
           </li>
           <li class="nav-item" style="padding-right:2%">
-            <a class="btn-dingours" class="nav-link" href="#"><h3>Contact</h3></a>
+            <a class="btn btn-outline-info" class="nav-link" href="#">Contact</a>
           </li>
         </ul>
       </div>
