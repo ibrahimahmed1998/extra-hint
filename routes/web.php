@@ -5,6 +5,8 @@
 
 // home
 Route::get('/', function (){ return view('Home.main'); });
+Route::get('/welcome', function (){ return view('welcome'); });
+
 Route::get('/sec', function (){ return view('Dep_Sec.create_section'); });
 
 Route::get('/here', function (){ return view('Home.new_temp'); });
