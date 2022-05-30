@@ -3,8 +3,7 @@
 <body>
     @include('Home.new_temp')
 
-    @include('Auth.login')
-
+ 
 
     {{-- @include('Home.navhome') --}}
 
