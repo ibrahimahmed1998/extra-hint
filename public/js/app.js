@@ -19406,7 +19406,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({});
 app.component('hello-world', _components_Welcome_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
-app.mount('#app');
+app.mount('#app'); // https://techvblogs.com/blog/how-to-install-vue3-laravel
 
 /***/ }),
 

@@ -11,3 +11,6 @@ app.component('hello-world', HelloWorld)
 
 app.mount('#app')
 
+
+
+// https://techvblogs.com/blog/how-to-install-vue3-laravel
