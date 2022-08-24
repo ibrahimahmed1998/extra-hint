@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class Login extends Controller{
 
@@ -20,7 +21,6 @@ class Login extends Controller{
             return response()->json(['Root User'=> $root  ]);}
 
         $req->validate(['email' => 'required|email:rfc,dns', 'password' => 'required|min:8']);
-
         
         $credentials = $req->only('email', 'password');
         
@@ -41,27 +41,26 @@ class Login extends Controller{
                             'type' =>  $user->type,
                             "S_data" => $s
             ]);}
+ 
+            return View::make ("Home/main",['data' => [
+                "token" => $token,
+                "id" => auth()->user()->id,
+                "first_name" => $user->first_name,
+                "last_name" => $user->last_name,
+                "phone" => $user->phone,
+                "email" => $user->email,
+                'type' =>  $user->type   ]
+             ]);  
+             }
+      
 
-            return response()->json([
-                    "token" => $token,
-                    "id" => auth()->user()->id,
-                    "first_name" => $user->first_name,
-                    "last_name" => $user->last_name,
-                    "phone" => $user->phone,
-                    "email" => $user->email,
-                    'type' =>  $user->type,   ]);}
-
-
-// instead of return [ response ( view and data ;_))))) ]
-// instead of return [ response ( view and data ;_))))) ]
-
-// instead of return [ response ( view and data ;_))))) ]
-
-// instead of return [ response ( view and data ;_))))) ]
-
-// instead of return [ response ( view and data ;_))))) ]
+        
+        //  return response()->json(["token" => $token,"id" => auth()->user()->id,"first_name" => $user->first_name,"last_name" => $user->last_name,"phone" => $user->phone,"email" => $user->email,'type' =>  $user->type,   ]);}
 
 
         else{
-        return response()->json(['err' => "Wrong Credintials , Try a valid E-mail or password"], 401);}
+            return View::make("Home/main",['err' => "Wrong Credintials ,Please Try a valid E-mail or password"]);
+            //return response()->json(['err' => "Wrong Credintials , Try a valid E-mail or password"], 401);
+         }
+
 }}

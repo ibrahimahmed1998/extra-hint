@@ -6,7 +6,7 @@
     <div class="container">
 
         <a class="navbar-brand" style="color:black" href="#">
-            <a class="" class="nav-link" href="#">
+            <a class="" class="nav-link" href="/">
                 <img width="100px" src="{{ asset('image/ams-min.jpg') }}">
             </a>
         </a>
@@ -18,7 +18,7 @@
 
                 {{-- when logiin logn hidden and logout apper --}}
                 <li class="nav-item">
-                    <a href="#popup0" class="btn btn-dark" class="nav-link" href="#">Login</a>
+                    <a id="loginbtn" href="#popup0" class="btn btn-dark" class="nav-link" href="#">Login</a>
                 </li>
 
                 <li class="nav-item">
@@ -27,7 +27,7 @@
 
                 {{-- hiiden and apper when login --}}
                 <li class="nav-item">
-                    <a class="btn btn-dark" class="nav-link" href="#">My Services</a>
+                    <a class="btn btn-dark" class="nav-link" href="myserivce">My Services</a>
                 </li>
 
                 <li class="nav-item">
