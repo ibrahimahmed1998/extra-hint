@@ -168,7 +168,7 @@ a.socialIcon:hover,
     align-content: center;
 
     animation: fadeIn 1s; 
-    animation: fadeOut 3s; 
+    animation: fadeOut 4s; 
 }
 
 @keyframes fadeIn {

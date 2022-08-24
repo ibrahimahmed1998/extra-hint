@@ -26,7 +26,7 @@
      localStorage.setItem("user_data",  JSON.stringify(arr));
      const welcome_login = document.querySelector('#welcome_login');
      setTimeout(() => {
-        welcome_login.style.display = "none";}, 3000);
+        welcome_login.style.display = "none";}, 4000);
     window.location.href="/"
 
 </script>
