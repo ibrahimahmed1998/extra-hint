@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<head id="head"><title>AMS System</title>   @include('Home.layout')   </head>
+<head id="head"> <title>AMS</title>  
+    <link rel="icon" href="image/Sign-check-icon.png" type="image/icon type">
+
+     @include('Home.layout')   
+</head>
 <body>
-    @include('Home.new_temp')
-
- 
-
-    {{-- @include('Home.navhome') --}}
-
+    @include('Home.nav')
+    @include('Home.slider')
+    @include('Home.login')
 </body></html>

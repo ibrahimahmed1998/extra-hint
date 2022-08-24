@@ -1,0 +1,15 @@
+#nav98{
+    margin-top: 21px;
+    font-weight: bold;
+    
+}
+.nav-item{
+    padding-right:5% !important;
+    /* min-width:150px!important ; */
+
+}
+.btn .btn-dark{
+    min-width:150px;
+    font-weight: bold;
+
+}

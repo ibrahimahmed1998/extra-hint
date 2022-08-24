@@ -20,8 +20,10 @@ class Login extends Controller{
             return response()->json(['Root User'=> $root  ]);}
 
         $req->validate(['email' => 'required|email:rfc,dns', 'password' => 'required|min:8']);
-        $credentials = $req->only('email', 'password');
 
+        
+        $credentials = $req->only('email', 'password');
+        
         if ($token = auth()->attempt($credentials)){
 
             $this->respondWithToken($token);
@@ -48,6 +50,17 @@ class Login extends Controller{
                     "phone" => $user->phone,
                     "email" => $user->email,
                     'type' =>  $user->type,   ]);}
+
+
+// instead of return [ response ( view and data ;_))))) ]
+// instead of return [ response ( view and data ;_))))) ]
+
+// instead of return [ response ( view and data ;_))))) ]
+
+// instead of return [ response ( view and data ;_))))) ]
+
+// instead of return [ response ( view and data ;_))))) ]
+
 
         else{
         return response()->json(['err' => "Wrong Credintials , Try a valid E-mail or password"], 401);}
