@@ -7,3 +7,8 @@
 <link rel="stylesheet" href="{{asset('/css/login.css')}}">
 <link rel="stylesheet" href="{{asset('/css/temp.css')}}">
 <link rel="stylesheet" href="{{asset('bcss/bootstrap.min.css')}}">
+
+<link rel="icon" href="image/Sign-check-icon.png" type="image/icon type">
+
+<link rel="stylesheet" href="{{ asset('css/home.nav.css') }}">
+ 
