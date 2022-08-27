@@ -171,6 +171,21 @@ a.socialIcon:hover,
     animation: fadeOut 4s; 
 }
 
+#validation{
+    font-weight: bold;
+    position: absolute;
+    display: inline-block;
+    left: 16%;
+    right: 55;
+    padding: 2%;
+    top: 61%;
+    align-items: center;
+    align-content: center;
+
+    animation: fadeIn 1s; 
+    animation: fadeOut 3s; 
+}
+
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }

@@ -1,38 +1,33 @@
 <nav id="nav98" class="navbar navbar-expand-lg navbar-light fixed-top">
     <div class="container">
 
-        <a class="navbar-brand" style="color:black" href="#">
-            <a class="" class="nav-link" href="/">
-                <img width="100px" src="{{ asset('image/ams-min.jpg') }}">
-            </a>
-        </a>
+        <a class="navbar-brand" style="color:black" href="#"><a class="" class="nav-link" href="/">
+                <img width="100px" src="{{ asset('image/ams-min.jpg') }}"></a></a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
 
-                <li class="nav-item">
-                    <a id="loginbtn" href="#popup0" class="btn btn-dark" class="nav-link" href="#">Login</a>
-                </li>
+@guest
+<li class="nav-item"><a id="loginbtn" href="#popup0" class="btn btn-dark" class="nav-link"href="#">Login</a></li>
+@endguest
 
-                <li class="nav-item">
-                    <a class="btn btn-dark" class="nav-link" href="service/department">Sections</a>
-                </li>
+<li class="nav-item"><a class="btn btn-dark" class="nav-link" href="service/department">Departments</a></li>
 
-                <li class="nav-item">
-                    <a id="user_serivce"  class="btn btn-dark" class="nav-link" href="myserivce">My Services</a>
-                </li>
+@auth
+<li class="nav-item"><a id="user_serivce" class="btn btn-dark" class="nav-link" href="myserivce">My Services</a></li>
+@endauth
 
-                <li class="nav-item">
-                    <a class="btn btn-dark" class="nav-link" href="https://github.com/ibrahimahmed1998">Contact Us</a>
-                </li>
+<li class="nav-item"><a class="btn btn-dark" class="nav-link" href="https://github.com/ibrahimahmed1998">Contact Us</a></li>
 
-                <li class="nav-item">
-        
-                        <button type="submit" name="logout" id="logout" class="btn btn-dark"
-                            class="nav-link">Logout
-                        </button>
+@auth
+<li class="nav-item"><a href="logout" type="submit" name="logout" id="logout" class="btn btn-dark"class="nav-link">Logout</a></li>
+@endauth
+            </ul>
+        </div>
+    </div>
+</nav>
 
-                        <script>
+{{-- <script>  OLLLLLLLLLLLLLLLLLD CODE 
                             data = localStorage.getItem('user_data');
                             data = JSON.parse(data);
                             var test = data[0]
@@ -42,8 +37,8 @@
 
                                 console.log("test: "+token);
                                         $.ajax({
-                                                url: "/api/auth/logout",
-                                                type: 'POST',
+                                                url: "logout",
+                                                type: 'get',
                                                 contentType:'application/json',
                                                 headers: {"Authorization": "Bearer "+token},
                                                 async: false,
@@ -57,9 +52,4 @@
                                             }
                                         });
                                     })
-                        </script>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+                        </script> --}}

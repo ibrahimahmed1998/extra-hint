@@ -1,15 +1,7 @@
-require('./bootstrap');
+import './bootstrap';
 
+import Alpine from 'alpinejs';
 
-import { createApp } from 'vue'
+window.Alpine = Alpine;
 
-import HelloWorld from './components/Welcome.vue';
-
-const app = createApp({});
-
-app.component('hello-world', HelloWorld)
-
-app.mount('#app')
-
-
-// https://techvblogs.com/blog/how-to-install-vue3-laravel
+Alpine.start();

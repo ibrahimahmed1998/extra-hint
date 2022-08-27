@@ -1,17 +1,26 @@
 <?php
 namespace App\Http\Controllers\AUTH_USERS;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
-
+ 
+ 
 class Login extends Controller{
 
     public function __construct(){ $this->middleware('auth:api', ['except' => ['login']] );}
 
-    protected function respondWithToken($token){
-        return response()->json(['token'=>$token,'expires_in' => auth()->factory()->getTTL() * 60]);}
+    protected function respondWithToken($token)
+    {
+        // return response()->json(['token'=>$token,'expires_in' => auth()->factory()->getTTL() * 60]);
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            // 'expires_in' => auth('api')->factory()->getTTL() * 60
+        ]);
+    }
 
     public function login(Request $req){
         $test_database=User::first();
@@ -29,6 +38,23 @@ class Login extends Controller{
             $this->respondWithToken($token);
             $user = auth()->user();
 
+            if (Auth::attempt($credentials)) {  // \AUTH or use Auth; in first line
+
+                $req->session()->regenerate();
+            }
+           
+            $test = auth()->login($user); 
+
+            // dd( \Auth::check() );  
+            Auth::login($user);
+
+            // dd( Auth::login($user));
+
+            $user = Auth::user();
+            dd(  Auth::login($user)        );
+            // dd(auth()->user()->first_name);
+             
+            
             if ($user->type == 1){
                 $s = Student::where('Student_id', $user->id)->first();
 
@@ -41,7 +67,9 @@ class Login extends Controller{
                             'type' =>  $user->type,
                             "S_data" => $s
             ]);}
- 
+            
+            // session()->flash('success','Your are Login ...');
+
             return View::make ("Home/main",['data' => [
                 "token" => $token,
                 "id" => auth()->user()->id,

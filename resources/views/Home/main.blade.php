@@ -1,6 +1,12 @@
 <!DOCTYPE html><head id="head"><title>AMS</title>@include('Home.layout')</head>
-<body>@include('Home.nav')
-    <script src="js/home.main.js"></script>
+
+<body>
+ 
+    @include('Home.nav')
     @include('Home.slider')
     @include('Home.login')
-</body></html>
+
+    {{-- {{ dd(auth()->user()->first_name)}} --}}
+    {{-- {{ dd(auth()->user())}} --}}
+
+ </body></html>
