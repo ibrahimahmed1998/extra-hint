@@ -1,12 +1,15 @@
-<!DOCTYPE html><head id="head"><title>AMS</title>@include('Home.layout')</head>
-
+<!DOCTYPE html>@include('Home._header')
 <body>
- 
-    @include('Home.nav')
+    @include('Home._nav')
     @include('Home.slider')
     @include('Home.login')
+    {{-- {{ dd(auth()->user()->first_name)}} --}}{{-- {{ dd(auth()->user())}} --}}
 
-    {{-- {{ dd(auth()->user()->first_name)}} --}}
-    {{-- {{ dd(auth()->user())}} --}}
+    {{-- {{auth()->guard()->user()->first_name}} --}}
+
+   {{-- {{auth("user")}} --}}
+
+   {{-- {{  Auth::guard('jwt')->user()    }} --}}
+ 
 
  </body></html>

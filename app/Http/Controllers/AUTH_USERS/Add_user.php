@@ -9,8 +9,6 @@ use App\Models\User;
 
 class Add_user extends Controller
 {
-    public function __construct() {  $this->middleware('auth:api', ['except' => ['']]); }
-   
     public function add_user(Signup_ $req)
     {        
         $user = User::create(['id' => $req->id,'first_name' => $req->first_name,'last_name' => $req->last_name,'password' => $req->password,'email' => $req->email,'type' => $req->type, 'phone' => $req->phone, 'created_at'=>now() ]);

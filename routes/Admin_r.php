@@ -1,7 +1,4 @@
 <?php
-/********************************************************/
-
-use App\Http\Controllers\AUTH_USERS\Add_user;
 use App\Http\Middleware\type_admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,8 +14,6 @@ use App\Http\Controllers\Yellow\Section98;
 use App\Http\Controllers\Yellow\SHC98;
 
 Route::group([ 'middleware' => type_admin::class ],function ($router){
-
-    Route::post('add_user', Add_user::class . '@add_user')->middleware(type_admin::class); ////////
 
     //Route::post('enter_degree', [Enter_degree::class,'enter_degree']);
 
@@ -46,3 +41,16 @@ Route::group(['middleware' => type_admin::class, 'prefix' => '98'],function ($ro
         Route::post('update_student', Update_student::class . '@update_student');
  });
 
+
+
+ Route::group(
+    ['middleware' => type_adv::class , 'api', 'prefix' => 'advisor'],
+    function ($router)
+    {
+       Route::post('signature', [Signature::class,'signature'])->middleware(type_adv::class);
+       Route::post('search_student', Search_student::class . '@search_student')->middleware(type_adv::class);
+       Route::post('feedback98', Feedback98::class . '@feedback98');
+       Route::post('del_feedback98', Feedback98::class . '@del_feedback98');
+       Route::post('Layer_f', Layer::class . '@Layer_f');
+    }
+);
