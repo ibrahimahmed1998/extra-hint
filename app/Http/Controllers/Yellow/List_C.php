@@ -37,6 +37,6 @@ class List_C extends Controller{ // CRUD
 
         foreach ($c as $cc)  {  $arr[]=$cc;  }
 
-        return View::make("Dep_Sec/get_course", compact('arr'));
+        return View::make("Department/get_course", compact('arr'));
         //return response()->json($arr );
 }}

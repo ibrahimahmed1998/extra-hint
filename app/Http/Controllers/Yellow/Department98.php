@@ -27,5 +27,5 @@ class Department98 extends Controller
 
     public function list_departemnt(){
         $dep = Department::all();
-        return View::make("Dep_Sec/main_ds", compact('dep'));
+        return View::make("Department/main_ds", compact('dep'));
     }}

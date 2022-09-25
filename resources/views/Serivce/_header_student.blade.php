@@ -1,4 +1,4 @@
-<title>AMS</title>
+<title>User | AMS</title>
 {{-- @include('Home._header') --}}
 <link rel="icon" href="../image/Sign-check-icon.png" type="image/icon type">
 

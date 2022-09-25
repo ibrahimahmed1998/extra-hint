@@ -13,7 +13,7 @@ class Section98 extends Controller // Crud
 
     public function list_section(Request $req){
        $section = Section::where('dep_id', $req->dep_id)->get();
-       return View::make("Dep_Sec/sec",compact('section')); }
+       return View::make("Department/sec",compact('section')); }
 
     public function section98(Section_ $req) //create
     {

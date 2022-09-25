@@ -22,7 +22,7 @@ class CreateStudentTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->integer('Student_id');
+            $table->unsignedBigInteger('user_id');
             $table->integer('roadmap');
             $table->integer('live_hour');
             $table->float('c_gpa')->nullable();
@@ -33,17 +33,8 @@ class CreateStudentTable extends Migration
 
             $table->index(["Sec_id", "Dep_id"], 'fk_Student_Sections1_idx');
             $table->index(["adv_id"], 'fk_Students_Users1_idx');
-            $table->index(["Student_id"], 'fk_Students_Users2_idx');
 
-            $table->foreign('adv_id', 'fk_Students_Users2_idx')
-                ->references('id')->on('Users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-                $table->foreign('Student_id', 'fk_Students_Users1_idx')
-                ->references('id')->on('Users')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->foreign('Sec_id', 'fk_Students_Sections1_idx')
                 ->references('Sec_id')->on('Sections')
@@ -51,14 +42,5 @@ class CreateStudentTable extends Migration
                 ->onUpdate('cascade');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-     public function down()
-     {
-       Schema::dropIfExists($this->tableName);
-     }
+     public function down(){Schema::dropIfExists($this->tableName);}
 }

@@ -6,42 +6,38 @@ use App\Models\Section;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
- use Illuminate\Support\Facades\View;
 
 class Deep_search extends Controller
-{
-    // public function __construct() { $this->middleware('auth:api', ['except' =>[] ]);}
+{  // public function __construct() { $this->middleware('auth:api', ['except' =>[] ]);}
   
-    public function all_users()  
-    {
+    public function all_users(){
         $all_users = User::all();
         return view('Serivce.general', ['all_users' => $all_users]);
     }
 
-    public function student_data(Request $req)  
-    {
-            $req->validate(['id' => 'integer|exists:Users']);
+    public function student_data(Request $req){
+        $req->validate(['id' => 'integer|exists:Users']);
 
-            $user = User::where('id',$req->id)->get();
+        $user = User::where('id',$req->id)->get();
 
-            $student = Student::where('Student_id',$user->first()->id)->get();
+        $student = Student::where('Student_id',$user->first()->id)->get();
 
-            $adv_name =" ";$dname =" ";$sname =" ";
+        $adv_name =" ";$dname =" ";$sname =" ";
 
-             if( $student->first() )
-            {
-                $adv_name = User::where('id',$student->first()->adv_id)->first()->first_name ;
-                $dname = Department::where('dep_id',$student->first()->Dep_id)->get()->first()->dname ; 
-                $sname = Section::where('Sec_id',$student->first()->Sec_id)->first()->sec_name ; 
-            }
-            
+            if( $student->first() )
+        {
+            $adv_name = User::where('id',$student->first()->adv_id)->first()->first_name ;
+            $dname = Department::where('dep_id',$student->first()->Dep_id)->get()->first()->dname ; 
+            $sname = Section::where('Sec_id',$student->first()->Sec_id)->first()->sec_name ; 
+        }
+        
 
-          return view('Serivce.user_data', 
-          ['user' => $user->first(),
-           'student'=>$student->first(),
-           'adv_name'=>$adv_name,
-           'dname'=>$dname,
-           'sname'=>$sname ]);
+        return view('Serivce.user_data', 
+        ['user' => $user->first(),
+        'student'=>$student->first(),
+        'adv_name'=>$adv_name,
+        'dname'=>$dname,
+        'sname'=>$sname ]);
     }
 
 
@@ -69,13 +65,11 @@ class Deep_search extends Controller
             
             $req->validate(['first_name' => 'string|exists:Users']);
             $user = User::where('first_name', $req->first_name)->get();
-
         } 
         
         else if ( $req->first_name  && $req->last_name ) 
         {
             $user = User::where('first_name', $req->first_name)->where('last_name', $req->last_name)->get();
-
         } 
         
         else if ($req->id)

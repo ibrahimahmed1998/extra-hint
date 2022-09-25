@@ -14,9 +14,9 @@ class CreateEnrollTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table)
          {
             $table->engine = 'InnoDB';
+            $table->unsignedBigInteger('student_id');
 
             $table->increments('counter');
-            $table->integer('Student_id')->index();
             $table->integer('semester')->index();
             $table->integer('year')->index();
             $table->string('ccode', 10)->index();
@@ -32,10 +32,7 @@ class CreateEnrollTable extends Migration
 
             $table->integer('signature');
 /*************************************************************************************************************/
-            $table->foreign('Student_id', 'fk_Enrolls_Students1_idx')
-                ->references('Student_id')->on('Students')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            $table->foreign('student_id')->references('user_id')->on('Students');
 
             $table->foreign('ccode', 'fk_Enrolls_Courses1_idx')
                 ->references('ccode')->on('Courses')

@@ -110,13 +110,13 @@
           </div>
 
            <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-uppercase">Links</h5>
+            <h5 class="text-uppercase">Other</h5>
   
             <ul class="list-unstyled mb-0">
               <li><a href="#!" class="text-white">Site Map</a></li>
-              <li><a href="#!" class="text-white">Link 2</a></li>
-              <li><a href="#!" class="text-white">Link 3</a></li>
-              <li><a href="#!" class="text-white">Link 4</a></li>
+              <li><a href="#!" class="text-white">About</a></li>
+              <li><a href="#!" class="text-white">English (UK)</a></li>
+              <li><a href="#!" class="text-white">العربية</a></li>
             </ul>
           </div>
          

@@ -7,7 +7,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"> @include('Dep_Sec.dep')</li>
+                <li class="nav-item"> @include('Department.dep')</li>
                 <li class="nav-item"> <div id="get_section"> </div> </div>
             </ul>
         </div>

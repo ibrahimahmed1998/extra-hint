@@ -41,5 +41,5 @@ class Course98 extends Controller // CRUD
         $course = Course::where('ccode', $req->ccode)->first();
 
         //return $course;
-        return View::make("Dep_Sec/course_det",['course' => $course]);
+        return View::make("Department/course_det",['course' => $course]);
      }}

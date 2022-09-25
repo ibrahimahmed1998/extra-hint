@@ -8,8 +8,11 @@ use Illuminate\Support\Facades\Route;
  
 
 Route::get('/', function () {return view('Home.main');});
+Route::get('/register1', function () {return view('Home.register1');});
+
+
 Route::get('/myserivce', function() { return view('Serivce.general'); })->middleware(['auth']);
-Route::post('/add_user',[ Add_user::class ,'add_user'])->middleware(type_admin::class)->name('add_user');
+Route::post('/add_user',[ Add_user::class ,'add_user'])->name('add_user'); // ->middleware(type_admin::class)->name('add_user');
 Route::get('/all_users',[ Deep_search::class ,'all_users'])->middleware(type_admin::class)->name('all_users');
 Route::get('/user_update/{id}',[ Deep_search::class ,'student_data']);
 Route::get('/student_data/{id}',[ Deep_search::class ,'student_data']);

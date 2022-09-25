@@ -17,7 +17,7 @@ class CreateFeadbackTable extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->integer('User_id');
+            $table->unsignedBigInteger('User_id');
             $table->string('ccode', 10);
             $table->string('fheader', 45);
             $table->string('fbody');

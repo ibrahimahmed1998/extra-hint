@@ -1,9 +1,11 @@
 <head>
+    <title>Department | AMS</title>  
+
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <link rel="icon" href="../image/Sign-check-icon.png" type="image/icon type">
 
 <link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/app.css">
+{{-- <link rel="stylesheet" href="/css/app.css"> --}}
 {{---------------------------------------------------------------------------------------}}
 <link rel="stylesheet" href="/css/popup.css">
 <script src="{{ asset('/js/popup.js') }} "></script>

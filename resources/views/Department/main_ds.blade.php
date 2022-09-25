@@ -1,7 +1,7 @@
-<!DOCTYPE html><html>@include('Dep_Sec._header')
+<!DOCTYPE html><html>@include('Department._header')
 <body id="body">
     
-    @include('Dep_Sec._navbar')
+    @include('Department._navbar')
     <div id="layout">
         <div id="get_course"> </div>
         <div id="snackbar"> </div>

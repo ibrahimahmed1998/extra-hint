@@ -23,14 +23,14 @@ class CreateAttendsTable extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->string('ccode');
-            $table->integer('Student_id');
+            $table->unsignedBigInteger('student_id');
             $table->integer('is_lec');
             $table->string('date');
 
             $table->timestamps();    
 
-            $table->foreign('Student_id', 'fk_Attends_Students1_idx')
-                ->references('Student_id')->on('Students')
+            $table->foreign('student_id', 'fk_Attends_Students1_idx')
+                ->references('user_id')->on('Students')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
