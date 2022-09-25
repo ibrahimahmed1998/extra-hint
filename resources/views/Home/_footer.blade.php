@@ -94,7 +94,7 @@
               <li><a href="#!" class="text-white">Government</a></li>
               <li><a href="#!" class="text-white">School</a></li>
               <li><a href="#!" class="text-white">Home</a></li>
-              <li><a href="#!" class="text-white">individual ©Try Free</a></li>
+              <li><a href="#!" class="text-white">individual <sub style="color:#FFD700">Try Free</sub> </a></li>
             </ul>
           </div>
 
@@ -113,7 +113,7 @@
             <h5 class="text-uppercase">Links</h5>
   
             <ul class="list-unstyled mb-0">
-              <li><a href="#!" class="text-white">Link 1</a></li>
+              <li><a href="#!" class="text-white">Site Map</a></li>
               <li><a href="#!" class="text-white">Link 2</a></li>
               <li><a href="#!" class="text-white">Link 3</a></li>
               <li><a href="#!" class="text-white">Link 4</a></li>
