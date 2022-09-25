@@ -10,11 +10,11 @@ Route::get('/', function () {return view('Home.main');});
 Route::get('/myserivce', function() { return view('Serivce.general'); })->middleware(['auth']);
 Route::post('/add_user',[ Add_user::class ,'add_user'])->middleware(type_admin::class)->name('add_user');
 Route::get('/all_users',[ Deep_search::class ,'all_users'])->middleware(type_admin::class)->name('all_users');
-Route::post('/deep_search',[ Deep_search::class ,'deep_search']);
-Route::get('/user_update/{data}', function () {return view('Serivce.Admin._user_update');});
-Route::get('/student_data/{id}', function () {return view('Serivce.student_data');});
+Route::get('/user_update/{id}',[ Deep_search::class ,'student_data']);
+Route::get('/student_data/{id}',[ Deep_search::class ,'student_data']);
 
-
+ 
+ 
 // Route::post('attends', [Attends::class,'attends'])->middleware(type_s::class); // for attend LAYER 1   /////////////////////////////////////////////
 // Route::post('enroll_course', [Enroll_course::class,'enroll_course'])->middleware(type_s::class);
 // Route::post('cancel_course', [Cancel_course::class,'cancel_course'])->middleware(type_s::class);

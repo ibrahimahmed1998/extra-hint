@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
+ use Illuminate\Support\Facades\View;
 
 class Deep_search extends Controller
 {
@@ -15,12 +16,24 @@ class Deep_search extends Controller
         return view('Serivce.general', ['all_users' => $all_users]);
     }
 
-    
+    public function student_data(Request $req)  
+    {
+            $req->validate(['id' => 'integer|exists:Users']);
+
+            $user = User::where('id',$req->id)->get();
+        
+            $student = Student::where('Student_id',$user->first()->id)->get();
+
+        return view('Serivce.student_data', ['user' => $user->first(),'student'=>$student->first()]);
+    }
+
+
     public function deep_search(Request $req)  
     {
         $arr= [] ; $arr2= [] ;
 
         $q =auth()->user();
+
         if($q->type==1)
         {
             return response()->json(['err'=>"not allowed for student"]);
@@ -98,7 +111,7 @@ class Deep_search extends Controller
          }
 
         for ($i=0; $i <$user->count() ; $i++) 
-       { 
+        { 
             if($user[$i]->type==1 || $user[$i]->lvl )
             {
                 $arr[]=$user[$i] ; 
@@ -107,7 +120,7 @@ class Deep_search extends Controller
             {
                 $arr2[]=$user[$i] ; 
             }
-       }
+        }
 
         if(!$user) { return response()->json(['err'=>"enter choice"]);}
         //return response()->json(['success' =>  $user], 201);

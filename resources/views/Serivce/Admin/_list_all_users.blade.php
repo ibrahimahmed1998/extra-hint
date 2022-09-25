@@ -30,7 +30,7 @@
           <div class="col"><input style="width:138px;text-align:center" class="form-control" disabled value={{$single_user->phone}}></div>
           <div class="col-3"><input style="text-align:center" class="form-control" disabled value={{ $single_user->email }}></div>
           <div class="col"> @if($single_user->type==1) </a>
-            <a style="text-align:center ;text-decoration:underline" class="form-control" disabled href="student_data/{{$single_user->id}}">Student</a>
+            <a style="text-align:center ;text-decoration:underline" class="form-control" disabled href="/student_data/{{$single_user->id}}">Student</a>
                 @elseif ($single_user->type==2) 
                 <input style="text-align:center;" class="form-control" disabled value="Advisor">
 
@@ -38,9 +38,9 @@
                  <input style="text-align:center" class="form-control" disabled value="Admin">
                  @endif 
                 </div>
-          <div class="col-1"><a href="/user_update/:{{$single_user->id}}"  type="submit"  class="btn btn-info">Update</a></div>
-          <div class="col-1"><button type="submit" class="btn btn-danger">Delete</button></div>
-        </div>
+          <div class="col-1"><a href="/user_update/{{$single_user->id}}"  type="submit"  class="btn btn-info">Update</a></div>
+          <div class="col-1"><a href="/user_update/{{$single_user->id}}"  type="submit"  class="btn btn-danger">Delete</a></div>
+         </div>
         @endforeach
     @endisset
 </div>

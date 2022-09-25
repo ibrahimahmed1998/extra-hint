@@ -5,7 +5,6 @@
         <div class="col col2">phone:</div>
         <div class="col col2">email:</div>
         <div class="col col2">type:</div>
-
     </div>
         <div class="row">
             <div class="col">
