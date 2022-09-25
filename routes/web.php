@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AUTH_USERS\Add_user;
+use App\Http\Controllers\AUTH_USERS\Deep_search;
 use App\Http\Middleware\type_admin;
 use Illuminate\Support\Facades\Route;
  
@@ -8,6 +9,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {return view('Home.main');});
 Route::get('/myserivce', function() { return view('Serivce.general'); })->middleware(['auth']);
 Route::post('/add_user',[ Add_user::class ,'add_user'])->middleware(type_admin::class)->name('add_user');
+Route::get('/all_users',[ Deep_search::class ,'all_users'])->middleware(type_admin::class)->name('all_users');
+Route::post('/deep_search',[ Deep_search::class ,'deep_search']);
+
+
 
 // Route::post('attends', [Attends::class,'attends'])->middleware(type_s::class); // for attend LAYER 1   /////////////////////////////////////////////
 // Route::post('enroll_course', [Enroll_course::class,'enroll_course'])->middleware(type_s::class);

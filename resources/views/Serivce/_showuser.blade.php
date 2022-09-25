@@ -1,4 +1,4 @@
-<form style="display:none" id="profile">
+<form style="display:none" id="profile" kind="subdiv">
     <div class="row">
         <div class="col">
             first name:<input type="text" class="form-control" disabled value={{ $user->first_name }}>
@@ -10,8 +10,8 @@
             phone:<input type="text" class="form-control" disabled value={{ $user->phone }}>
         </div>
         <div class="col">
-          email:<input type="text" class="form-control" disabled value={{ $user->email }}>
-      </div>
+            email:<input type="text" class="form-control" disabled value={{ $user->email }}>
+       </div>
+       <div class="col">type:<input type="text" class="form-control" disabled value={{ $type }}></div>
     </div>
-        {{-- <div class="col">type:<input type="text" class="form-control" disabled value={{ $type }}></div> --}}
 </form>
