@@ -18,28 +18,21 @@
              <h1><a href="/" class="logo" style="text-align: center">Home</a></h1>
 
              <ul class="list-unstyled components mb-5">
-                 @if ($type == 'admin')@include('Serivce.Types._admin_type')@endif
+                 @if ($type == 'admin')  @include('Serivce.Types._admin_type')@endif
                  @if ($type == 'advisor')@include('Serivce.Types._advisor_type')@endif
                  @if ($type == 'Student')@include('Serivce.Types._student_type')@endif
              </ul>
          </nav>
          <!----------------------------Page Content-------------------------------------->
-         
-         <div id="content" class="p-4 p-md-5 pt-5">
-            
-            @include('Serivce.help')
+         <div id="content" class="p-4 p-md-5 pt-5"> 
+            @include('Serivce.help')<br><br>
 
-            <br> <br>
-             @auth
-                 @include('Serivce._deep_search')
-                 @include('Serivce._showuser')
-                 @include('Serivce._adduser')
-                 @include('Serivce._list_all_users')
-
-             @endauth
+            @auth
+                 @include('Serivce._me')
+                 @include('Serivce.Admin._deep_search')
+                 @include('Serivce.Admin._adduser')
+                 @include('Serivce.Admin._list_all_users')
+            @endauth
          </div>
      </div>
-     @include('Serivce._footer')
- </body>
-
- </html>
+ @include('Serivce._footer')</body></html>
