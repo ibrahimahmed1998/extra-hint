@@ -2,7 +2,7 @@
     <div class="container">
 
         <a class="navbar-brand" style="color:black" href="#"><a class="" class="nav-link" href="/">
-                <img width="100px" src="{{ asset('image/ams-min.jpg') }}"></a></a>
+                <img style="border-radius:10%" width="100px" src="{{ asset('image/ams-min.jpg') }}"></a></a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
@@ -17,7 +17,8 @@
 <li class="nav-item"><a id="user_serivce" class="btn btn-dark" class="nav-link" href="myserivce">My Services</a></li>
 @endauth
 
-<li  class="nav-item"><a target="_blank" class="btn btn-dark" class="nav-link" href="https://github.com/ibrahimahmed1998">Contact Us</a></li>
+<li  class="nav-item"><a target="_blank" class="btn btn-dark" class="nav-link" href="/soon" >AMS Blog</a></li>
+<li  class="nav-item"><a target="_blank" class="btn btn-dark" class="nav-link" href="/soon" >GPA +-</a></li>
 
 @auth
 <li class="nav-item"><a href="logout" type="submit" name="logout" id="logout" class="btn btn-dark"class="nav-link">Logout</a></li>

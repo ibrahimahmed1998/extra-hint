@@ -1,15 +1,20 @@
-<!DOCTYPE html>@include('Home._header')
-<body>
+<!DOCTYPE html>@include('Home._header') <body>
+
     @include('Home._nav')
     @include('Home.slider')
     @include('Home.login')
-    {{-- {{ dd(auth()->user()->first_name)}} --}}{{-- {{ dd(auth()->user())}} --}}
+    <img style="width:200px" src="image/soon.jpg" alt="">  
+    <img style="width:200px" src="image/soon.jpg" alt="">  
+    <img style="width:200px" src="image/soon.jpg" alt="">  
+    <img style="width:200px" src="image/soon.jpg" alt="">  
+    <img style="width:200px" src="image/soon.jpg" alt="">  
+    <img style="width:200px" src="image/soon.jpg" alt="">  
+    <img style="width:200px" src="image/soon.jpg" alt="">  
 
-    {{-- {{auth()->guard()->user()->first_name}} --}}
-
-   {{-- {{auth("user")}} --}}
-
-   {{-- {{  Auth::guard('jwt')->user()    }} --}}
- 
+    @include('Home._footer')
 
  </body></html>
+     {{-- {{ dd(auth()->user()->first_name)}} --}}{{-- {{ dd(auth()->user())}} --}}
+    {{-- {{auth()->guard()->user()->first_name}} --}}
+   {{-- {{auth("user")}} --}}
+   {{-- {{  Auth::guard('jwt')->user()    }} --}}

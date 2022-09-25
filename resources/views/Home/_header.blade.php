@@ -10,7 +10,15 @@
     <script src="bjs/bootstrap.min.js" defer></script>
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/css/temp.css">
+
+ 
+
+
     <link rel="stylesheet" href="bcss/bootstrap.min.css">
+
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+
+
 
     <link rel="icon" href="image/Sign-check-icon.png" type="image/icon type">
 

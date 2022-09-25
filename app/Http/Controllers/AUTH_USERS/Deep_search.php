@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\AUTH_USERS;
 use App\Http\Controllers\Controller;
+use App\Models\Department;
+use App\Models\Section;
 use App\Models\Student;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,10 +23,25 @@ class Deep_search extends Controller
             $req->validate(['id' => 'integer|exists:Users']);
 
             $user = User::where('id',$req->id)->get();
-        
+
             $student = Student::where('Student_id',$user->first()->id)->get();
 
-        return view('Serivce.student_data', ['user' => $user->first(),'student'=>$student->first()]);
+            $adv_name =" ";$dname =" ";$sname =" ";
+
+             if( $student->first() )
+            {
+                $adv_name = User::where('id',$student->first()->adv_id)->first()->first_name ;
+                $dname = Department::where('dep_id',$student->first()->Dep_id)->get()->first()->dname ; 
+                $sname = Section::where('Sec_id',$student->first()->Sec_id)->first()->sec_name ; 
+            }
+            
+
+          return view('Serivce.user_data', 
+          ['user' => $user->first(),
+           'student'=>$student->first(),
+           'adv_name'=>$adv_name,
+           'dname'=>$dname,
+           'sname'=>$sname ]);
     }
 
 

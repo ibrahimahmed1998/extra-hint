@@ -1,5 +1,7 @@
 <div style="display:none" id="profile" kind="subdiv">
     <div class="row">
+
+
         <div class="col col2">first name:</div>
         <div class="col col2">last name:</div>
         <div class="col col2">phone:</div>
@@ -25,11 +27,22 @@
         <br><br><br>
 
         <form id="form2" action="/change_pass" method="POST" style="display:none;">
+            @csrf
             <input required name="password" type="password" class="col-3" placeholder="please enter old password" /> <br> <br>
             <input required name="new_pass" type="password" class="col-3" placeholder="please enter new password" /> <br> <br>
             <input required name="conifrm_new_pass" type="password" class="col-3" placeholder="please re-enter new password" /><br><br>
             <button type="submit" class="btn btn-warning col-2"><b>Change Password ?</b></button>
         </form>
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
 
         <a id="chngpass" href="#" class="btn btn-warning col-2"><b>Change Password ?</b></a>
 

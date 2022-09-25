@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AUTH_USERS\Add_user;
+use App\Http\Controllers\AUTH_USERS\Change_pass;
 use App\Http\Controllers\AUTH_USERS\Deep_search;
 use App\Http\Middleware\type_admin;
 use Illuminate\Support\Facades\Route;
@@ -13,8 +14,11 @@ Route::get('/all_users',[ Deep_search::class ,'all_users'])->middleware(type_adm
 Route::get('/user_update/{id}',[ Deep_search::class ,'student_data']);
 Route::get('/student_data/{id}',[ Deep_search::class ,'student_data']);
 
- 
- 
+Route::get('/soon', function () {return view('Home.soon');});
+
+ Route::post('/change_pass',[ Change_pass::class ,'change_pass']);
+
+
 // Route::post('attends', [Attends::class,'attends'])->middleware(type_s::class); // for attend LAYER 1   /////////////////////////////////////////////
 // Route::post('enroll_course', [Enroll_course::class,'enroll_course'])->middleware(type_s::class);
 // Route::post('cancel_course', [Cancel_course::class,'cancel_course'])->middleware(type_s::class);

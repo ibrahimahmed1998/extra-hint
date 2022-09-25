@@ -7,15 +7,17 @@ use Illuminate\Support\Facades\Hash;
 
 class Change_pass extends Controller
 {
-    public function __construct()  {  $this->middleware('auth:api', ['except' =>[]]); }
+   //  public function __construct()  {  $this->middleware('auth:api', ['except' =>[]]); }
        
     public function change_pass(Request $req)
     {
+
+     
         $req->validate(['password' => 'required|min:8',
                         'new_pass' => 'required|min:8|required_with:conifrm_new_pass|same:conifrm_new_pass']);
  
         $user = Auth()->user();
-
+       
         if ($user) 
         {
             $x = Hash::check($req->password, $user->password);

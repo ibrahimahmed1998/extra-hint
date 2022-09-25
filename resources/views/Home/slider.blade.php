@@ -12,7 +12,7 @@
 
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img style="opacity:0.5" class="d-block w-100" src="{{ asset('/image/ASU-Cairo.jpg') }}" alt="First slide">
+            <img style="opacity:0.5" class="d-block w-100" src="{{ asset('/image/ASU-Cairo-min.jpg') }}" alt="First slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Help To Improve Your Career</h5>
                 <p> Choosing Wright Courses For You </p>
@@ -20,7 +20,7 @@
         </div>
 
         <div class="carousel-item">
-            <img style="opacity:0.5" class="d-block w-100" src="{{ asset('/image/ain2.jpg') }}" alt="Second slide">
+            <img style="opacity:0.5" class="d-block w-100" src="{{ asset('/image/ain2-min.jpg') }}" alt="Second slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Calculate Your KPIs</h5>
                 <p>depend on your Goals and GPA suggest many road map for you</p>
@@ -28,7 +28,7 @@
         </div>
 
         <div class="carousel-item">
-            <img style="opacity:0.5" class="d-block w-100" src="{{ asset('/image/ain1.jpg') }}" alt="Third slide">
+            <img style="opacity:0.5" class="d-block w-100" src="{{ asset('/image/ain1-min.jpg') }}" alt="Third slide">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Help You To Know What your foundation offer</h5>
                 <p> by know it's products and how it help you to make your carrer </p>
