@@ -1,5 +1,7 @@
-<title>AMS -> Service</title>
+<title>AMS</title>
 {{-- @include('Home._header') --}}
+<link rel="icon" href="image/Sign-check-icon.png" type="image/icon type">
+
 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="Sidebar/css/style.css">
