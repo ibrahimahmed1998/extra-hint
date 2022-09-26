@@ -18,7 +18,7 @@ class Signup_ extends FormRequest
             'phone' => 'required|numeric|regex:/(01)\d{9}/|digits:11|unique:users',
             'email' => 'required|email:rfc,dns|unique:users',
             'password' => 'required|min:8',
-            'type' => 'in:admin,student,advisor'
+            'type' => 'required|in:admin,student,advisor'
         ];
     }
 }
