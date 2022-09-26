@@ -66,12 +66,9 @@
                         <div class="p-t-10">
                             <a  style="width:102%;text-align:center;text-decoration:none" href="/" class="btn btn--radius-2 btn--blue" type="submit">Back to Home Page</a>
                         </div>
-
                     </form>
-
                     <br><br>
                     @include('error')
-   
                 </div>
             </div>
         </div>

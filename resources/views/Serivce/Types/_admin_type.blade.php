@@ -14,7 +14,11 @@
 </li>
 
 <li>
-    <a href="#"><span class="fa fa-sticky-note mr-2"></span>Edit Student Degree</a>
+    <a href="https://egfwd.com/"><span class="fa fa-sticky-note mr-2"></span> Enroll Course Trail Free </a>
+</li>
+
+<li>
+    <a href="https://egfwd.com/"><span class="fa fa-sticky-note mr-2"></span>Edit Student Degree</a>
 </li>
 
 
