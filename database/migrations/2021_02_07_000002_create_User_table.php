@@ -16,7 +16,7 @@ class CreateUserTable extends Migration
             $table->id();
             $table->string('phone')->unique();
             $table->string('full_name',50);
-            $table->enum('type', ['student','advisor','admin']);
+            $table->string('type');
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
