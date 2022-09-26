@@ -62,7 +62,10 @@
                         </div>
                 
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                            <button style="width:102%;" class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                        </div>
+                        <div class="p-t-10">
+                            <a  style="width:102%;text-align:center;text-decoration:none" href="/" class="btn btn--radius-2 btn--blue" type="submit">Back to Home Page</a>
                         </div>
 
                     </form>

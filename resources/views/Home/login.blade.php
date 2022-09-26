@@ -18,8 +18,8 @@
             </div>
             <script>window.location.href = "/#popup0"</script>
            @endif
-           <a class="forgot text-muted" href="register1" >haven't Account !</a><br>
-            <a class="forgot text-muted" href="#">Forgot password?</a>
+           <a style="color:white !important;text-decoration:none;" class="forgot text-muted" href="register1" >Join now :) </a><br>
+           <br> <a class="forgot text-muted" href="#">Forgot password?</a>
             <input type="submit" name="" value="Login">
         </form>
     </div>
