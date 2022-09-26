@@ -14,11 +14,11 @@
 </li>
 
 <li>
-    <a href="https://egfwd.com/"><span class="fa fa-sticky-note mr-2"></span> Enroll Course Trail Free </a>
+    <a href="https://auth.udacity.com/sign-up?next=https%3A%2F%2Fadmissions.udacity.com%2Fapply%2Fnd002-fwd-t1"><span class="fa fa-sticky-note mr-2"></span> Enroll Course Trail Free </a>
 </li>
 
 <li>
-    <a href="https://egfwd.com/"><span class="fa fa-sticky-note mr-2"></span>Edit Student Degree</a>
+    <a href="#!"><span class="fa fa-sticky-note mr-2"></span>Edit Student Degree</a>
 </li>
 
 
