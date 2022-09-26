@@ -1,27 +1,15 @@
-#nav98{
-    margin-top: 21px;
-    font-weight: bold;
-
-}
 li{
     font-weight: bolder !important;
-
+    width:288px;
 }
-.nav-item{
-    padding-right:5% !important;
-
-}
-.btn.btn-dark{
-    min-width:118px;
-    max-width:118px;
-    align-content: center;
-    font-weight: bold;
-}
-
 
 #logout:hover
 {
-    background-color: red;
+    color: red;
     border-color: red;
     font-weight: bold ;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link{
+    padding-right: 3.5rem;
 }

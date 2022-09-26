@@ -1,56 +1,60 @@
-<nav id="nav98" class="navbar navbar-expand-lg navbar-light fixed-top">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#!"> <img style="border-radius:10%" width="100px"
+            src="image/ams-min.jpg"></a></a></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <a class="navbar-brand" style="color:black" href="#"><a class="" class="nav-link" href="/">
-                <img style="border-radius:10%" width="100px" src="{{ asset('image/ams-min.jpg') }}"></a></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
+            @guest
+                <li class="nav-item active">
+                    <a class="nav-link" href="#popup0">Login<span class="sr-only" href="#">(current)</span></a>
+                </li>
+            @endguest
 
-@guest
-<li class="nav-item"><a id="loginbtn" href="#popup0" class="btn btn-dark" class="nav-link"href="#">Login</a></li>
-@endguest
+            @auth
+                <li class="nav-item">
+                    <a class="nav-link" href="myserivce">My Services</a>
+                </li>
+            @endauth
 
-<li class="nav-item"><a class="btn btn-dark" class="nav-link" href="service/department">Departments</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="soon">Department</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="soon">Blog</a>
+            </li>
 
-@auth
-<li class="nav-item"><a id="user_serivce" class="btn btn-dark" class="nav-link" href="myserivce">My Services</a></li>
-@endauth
+            @auth
 
-<li  class="nav-item"><a target="_blank" class="btn btn-dark" class="nav-link" href="/soon" >AMS Blog</a></li>
-<li  class="nav-item"><a target="_blank" class="btn btn-dark" class="nav-link" href="/soon" >GPA +-</a></li>
+            <li class="nav-item" >
+                <a id="logout" class="nav-link" href="logout">Logout</a>
+            </li>
 
-@auth
-<li class="nav-item"><a href="logout" type="submit" name="logout" id="logout" class="btn btn-dark"class="nav-link">Logout</a></li>
-@endauth
-            </ul>
-        </div>
+                {{-- <li class="nav-item"><a href="logout" type="submit" name="logout" id="logout"
+                        class="btn btn-dark"class="nav-link">Logout</a></li> --}}
+            @endauth
+
+            {{-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li> --}}
+
+
+        </ul>
+        {{-- <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> --}}
     </div>
 </nav>
-
-{{-- <script>  OLLLLLLLLLLLLLLLLLD CODE 
-                            data = localStorage.getItem('user_data');
-                            data = JSON.parse(data);
-                            var test = data[0]
-                            token = test['token']     // console.log(token);
- 
-                            $('#logout').on('click', function() {
-
-                                console.log("test: "+token);
-                                        $.ajax({
-                                                url: "logout",
-                                                type: 'get',
-                                                contentType:'application/json',
-                                                headers: {"Authorization": "Bearer "+token},
-                                                async: false,
-                                                success: function(data){
-
-                                                    var arr = [] ;
-                                                    localStorage.setItem("user_data",  JSON.stringify(arr));
-
-                                                // create an object with the key of the array
-                                                   window.location.href="/"
-                                            }
-                                        });
-                                    })
-                        </script> --}}
