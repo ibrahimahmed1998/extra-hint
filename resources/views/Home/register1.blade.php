@@ -57,9 +57,8 @@
                              </div>
                         </div>
                  
-                        <div class="col">
-                            <input hidden class="form-control" name="type" value='student' >
-                        </div>
+                        <input required readonly class="input--style-4" type="text" name="type" value='student'>
+                      
                 
                         <div class="p-t-15">
                             <button style="width:102%;" class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
