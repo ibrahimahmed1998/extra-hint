@@ -8,18 +8,22 @@ use App\Http\Controllers\Helpers\iss;
 use App\Models\Course;
 use App\Models\Pre_request;
 use App\Models\enroll;
+use App\Models\User;
 use Illuminate\Http\Request;
+
  class Enroll_course extends Controller
-{
-    public function __construct() { $this->middleware('auth:api', ['except' => []]); } 
-    
+{    
     public function enroll_course(Request $req)  
     {
+        dd("asdasds");
+        $user = User::where('id',$req->user_id)->first();
+       
+
         $req->validate(['ccode'=>'required|string|exists:Courses']);
-        $user=auth()->user();  
+      //  $user=auth()->user(); 
         $gt=new Get_time();      $time=$gt->get_time(); 
         $sem=$time['sem'];       $year=$time['year'];  
-        $sum=0;          $counter = 0;
+        $sum=0; $counter = 0;
 
         $iss = new iss(); if($q=$iss->q($user->id)) {return $q;}
         $ise = new ise(); if($q=$ise->q($user->id,$req->ccode,$sem,$year)) {return $q;}

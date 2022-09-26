@@ -20,4 +20,5 @@ Route::post('list_section', [Section98::class,'list_section']);
 Route::post('list_course', [List_C::class,'read']);  // all courses must DEPARTMENT [OPTIONAL::SECTION-LVL-SEMESTER]
 Route::post('couuse_data', [Course98::class,'read'] );
 Route::post('list_feedbacks', Feedback98::class . '@list_feedbacks');
+
 });

@@ -33,16 +33,6 @@ Route::group([ 'middleware' => type_admin::class ],function ($router){
     //Route::post('delete__shc', [SHC98::class,'delete']);
     });
 
-Route::group(['middleware' => type_admin::class, 'prefix' => '98'],function ($router){
-
-        Route::post('update_user', Update_user::class . '@update_user');
-        Route::post('del_user', Del_user::class . '@del_user');
-        Route::post('del_student', Del_student::class . '@del_student');
-        Route::post('update_student', Update_student::class . '@update_student');
- });
-
-
-
  Route::group(
     ['middleware' => type_adv::class , 'api', 'prefix' => 'advisor'],
     function ($router)
