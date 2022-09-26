@@ -13,7 +13,9 @@ Route::post('/change_pass',[ User_Data::class ,'change_pass']);
 Route::get('/register1', function () {return view('Home.register1');})->name('register1');
 
 Route::get('/myserivce', function() { return view('Serivce.general'); })->middleware(['auth']);
-Route::post('/add_user',[ User_Data::class ,'add_user'])->name('add_user'); // ->middleware(type_admin::class)->name('add_user');
+Route::post('/add_user',[ User_Data::class ,'add_user'])->name('add_user');
+Route::get('/delete_user/{id}',[ User_Data::class ,'del_user'])->name('del_user');
+
 Route::get('/all_users',[ Deep_search::class ,'all_users'])->middleware(type_admin::class)->name('all_users');
 Route::get('/user_update/{id}',[ Deep_search::class ,'student_data']);
 Route::post('/user_update/{id}',[ User_Data::class ,'user_update']);

@@ -120,9 +120,9 @@ class User_Data extends Controller
 
 public function del_user(Request $rq) 
 {
-    $rq->validate(['id' => 'required|integer|exists:Users']);
+    $rq->validate(['id' => 'integer|exists:Users']);
     User::find($rq->id)->delete();
-    return response()->json(['success' => 'User  Deleted  '], 201);
+    return redirect('/')->with('msg', "usre successfully deleted");
 } 
 
 public function del_student(Request $rq)

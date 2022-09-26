@@ -17,6 +17,19 @@
     <div class="col-1"><input class="form-control" disabled                value={{ $student->live_hour }}></div>
     <div class="col-1"><input class="form-control" disabled                value={{ $student->c_gpa }}></div>
     <div class="col-1"><input class="form-control" disabled                value={{ $student->lvl }}></div>
+    @isset($advisors_names)
+    <div class="dropdown col-2">
+        <button class="btn form-control btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           Select Advisor
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            @foreach ($advisors_names as $adv_name)
+            <a class="dropdown-item" href="#" name="adv_name" value={{$adv_name->full_name}} >{{$adv_name->full_name}}</a>
+            @endforeach 
+        </div>
+      </div>
+      @endisset
+
     <div class="col-1"><input class="form-control" disabled name="adv_name"value={{ $adv_name }}></div>
     <div class="col-2"><input class="form-control" disabled name="Dep_id"  value={{ $dname }}></div>
     <div class="col-2"><input class="form-control" disabled name="Sec_id"  value={{ $sname }}></div>

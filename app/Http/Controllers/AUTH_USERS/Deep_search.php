@@ -13,7 +13,7 @@ class Deep_search extends Controller
     public function all_users()
     {
         $all_users = User::all();
-        return view('Serivce.general', ['all_users' => $all_users]);
+         return view('Serivce.general',['all_users'=>$all_users]);
     }
 
     public function student_data(Request $req)
@@ -22,6 +22,10 @@ class Deep_search extends Controller
 
         $user = User::where('id',$req->id)->first();
       
+        $advisors_names = User::where('type','advisor')->get();
+        
+
+
         if($user->type =='student')
         {
             $student = Student::where('user_id',$user->id)->get()->first();
@@ -54,7 +58,10 @@ class Deep_search extends Controller
         'student'=>$student,
         'adv_name'=>$adv_name,
         'dname'=>$dname,
-        'sname'=>$sname ]);
+        'sname'=>$sname,
+        'advisors_names'=>$advisors_names
+    
+    ]);
     }
 
 

@@ -34,12 +34,16 @@ class CreateStudentTable extends Migration
             $table->index(["Sec_id", "Dep_id"], 'fk_Student_Sections1_idx');
             $table->index(["adv_id"], 'fk_Students_Users1_idx');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
 
             $table->foreign('Sec_id', 'fk_Students_Sections1_idx')
-                ->references('Sec_id')->on('Sections')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+            ->references('Sec_id')->on('Sections')
+            ->onDelete('cascade')
+            ->onUpdate('cascade');
         });
     }
      public function down(){Schema::dropIfExists($this->tableName);}
