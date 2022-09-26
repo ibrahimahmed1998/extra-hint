@@ -8,30 +8,31 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 class Deep_search extends Controller
-{  // public function __construct() { $this->middleware('auth:api', ['except' =>[] ]);}
-  
-    public function all_users(){
+{
+
+    public function all_users()
+    {
         $all_users = User::all();
         return view('Serivce.general', ['all_users' => $all_users]);
     }
 
-    public function student_data(Request $req){
+    public function student_data(Request $req)
+    {
         $req->validate(['id' => 'integer|exists:Users']);
 
         $user = User::where('id',$req->id)->get();
 
-        $student = Student::where('Student_id',$user->first()->id)->get();
+        $student = Student::where('user_id',$user->first()->id)->get();
 
-        $adv_name =" ";$dname =" ";$sname =" ";
+        $adv_name =" "; $dname =" ";$sname =" ";
 
-            if( $student->first() )
-        {
+        if( $student->first() )
+         {
             $adv_name = User::where('id',$student->first()->adv_id)->first()->first_name ;
             $dname = Department::where('dep_id',$student->first()->Dep_id)->get()->first()->dname ; 
             $sname = Section::where('Sec_id',$student->first()->Sec_id)->first()->sec_name ; 
-        }
+         }
         
-
         return view('Serivce.user_data', 
         ['user' => $user->first(),
         'student'=>$student->first(),
@@ -134,6 +135,5 @@ class Deep_search extends Controller
         }
 
         if(!$user) { return response()->json(['err'=>"enter choice"]);}
-        //return response()->json(['success' =>  $user], 201);
-        return response()->json(['student' => $arr , 'others'=>$arr2], 201); 
+         return response()->json(['student' => $arr , 'others'=>$arr2], 201); 
     }}

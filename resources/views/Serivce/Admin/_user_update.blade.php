@@ -1,4 +1,4 @@
-@include('Serivce._header_student')
+@include('Serivce._headerfooter._hstudent')
 
 <nav class="navbar navbar-dark bg-dark">
     <a class="navbar-brand" href="#">Home</a>
@@ -6,19 +6,16 @@
         <li class="navbar-nav nav-item col-1" >   <a class="nav-link" href="#">Link</a> </li>
         <li class="navbar-nav nav-item col-1"><a class="nav-link disabled" href="#">Disabled</a> </li>
 </nav>
-
   
 <div class="row">
-    <div class="col-2 ">first name:</div>
-    <div class="col-2 ">last name:</div>
-    <div class="col-2 ">phone:</div>
-    <div class="col-2 ">email:</div>
+    <div class="col-2 ">Full Name:</div>
+    <div class="col-2 ">Phone:</div>
+    <div class="col-2 ">E-mail:</div>
     <div class="col-1 ">Type:</div>
-
 </div>
+
 <div class="row">
-    <div class="col-2"><input class="form-control " disabled value={{ $user->first_name }}></div>
-    <div class="col-2"><input class="form-control " disabled value={{ $user->last_name }}></div>
+    <div class="col-2"><input class="form-control " disabled value={{ $user->full_name }}></div>
     <div class="col-2"><input class="form-control " disabled value={{ $user->phone }}></div>
     <div class="col-2"><input class="form-control " disabled value={{ $user->email }}></div>
     <div class="col"> @if($single_user->type==1) </a>
@@ -57,5 +54,5 @@
 
 </div>
 @endisset
-@include('Serivce._footer_student')
+@include('Serivce.headerfooter._fstudent')
 

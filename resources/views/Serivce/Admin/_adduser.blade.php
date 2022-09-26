@@ -2,15 +2,7 @@
     @csrf
     <div class="row">
         <div class="col">
-            first name:<input type="text" class="form-control" value='ahmed' name="first_name">
-        </div>
-
-        <div class="col">
-            last_name:<input type="text" class="form-control" value='mohammed' name="last_name">
-        </div>
-
-        <div class="col">
-            id:<input type="text" class="form-control" value='19875' name="id">
+            full name:<input type="text" class="form-control" value='ahmed' name="full_name">
         </div>
 
         <div class="col">
@@ -25,12 +17,12 @@
         </div>
 
         <div class="col">
-            <input type="radio" id="1" name="type" value="1">
-            <label for="Admin">Student</label><br>
-            <input type="radio" id="2" name="type" value="2">
-            <label for="Student">Advisor</label><br>
-            <input type="radio" id="3" name="type" value="3">
-            <label for="Advisor">Admin</label>
+            <input type="radio"  name="type" value="student">
+            <label>Student</label><br>
+            <input type="radio"  name="type" value="advisor">
+            <label>Advisor</label><br>
+            <input type="radio"  name="type" value="admin">
+            <label>Admin</label>
         </div>
     </div>
 

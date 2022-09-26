@@ -9,7 +9,7 @@ class type_admin
     public function handle(Request $request, Closure $next)
     {
     
-        if (auth()->user()->type !=3) 
+        if (auth()->user()->type != 'admin') 
         {
             return response()->json(['error' => 'this request for admin only '], 201);
         }

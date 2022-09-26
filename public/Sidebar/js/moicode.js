@@ -11,23 +11,19 @@ function showonly(user_type){
     
     switch (user_type) {
         case 'All':  row = document.querySelectorAll("[gold]"); 
-        console.log(row);
-
         row.forEach( element =>  element.style.display="" )  
         break; 
 
-        case 1:      row = document.querySelectorAll(`[user_type="1"]`);
+        case 'student': row = document.querySelectorAll(`[user_type=${user_type}]`);
         row.forEach( element =>  element.style.display="none" )  
-
          break;
 
-        case 2:      row = document.querySelectorAll(`[user_type="2"]`);
+        case 'advisor': row = document.querySelectorAll(`[user_type=${user_type}]`);
         row.forEach( element =>  element.style.display="none" )  
-
          break;
-        case 3:      row = document.querySelectorAll(`[user_type="3"]`);
-        row.forEach( element =>  element.style.display="none" )  
 
+        case 'admin': row = document.querySelectorAll(`[user_type=${user_type}]`);
+        row.forEach( element =>  element.style.display="none" )  
          break;
     }
     

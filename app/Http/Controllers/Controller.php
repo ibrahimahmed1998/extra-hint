@@ -11,6 +11,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
+    // public function __construct() { $this->middleware('auth:api', ['except' => []]); } 
+
 /* 
     * ENV : 
         - Debug = true [ in case under Developing ] , = False [ after Deployment or Execution Phase ] 

@@ -1,5 +1,11 @@
 <!DOCTYPE html>@include('Home._header') <body>
 
+    @isset($msg)
+       <script>
+          alert("Welcome on board,Member Joined Successfully");
+       </script>
+    @endisset 
+ 
     @include('Home._nav')
     @include('Home.slider')
     @include('Home.login')

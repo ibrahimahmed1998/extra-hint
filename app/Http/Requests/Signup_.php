@@ -14,13 +14,11 @@ class Signup_ extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|unique:Users|integer',      // min:3 firstName:Aya
-            'first_name' => 'required|min:3|max:20|string',
-            'last_name' => 'required|min:3|max:20|string',
+            'full_name' => 'required|min:3|max:50|string',
             'phone' => 'required|numeric|regex:/(01)\d{9}/|digits:11|unique:users',
             'email' => 'required|email:rfc,dns|unique:users',
             'password' => 'required|min:8',
-            'type' => 'required|between:1,3|integer', // 1 = admin , 2 = advisor  , 3 = student  
+            'type' => 'in:admin,student,advisor'
         ];
     }
 }

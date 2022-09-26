@@ -1,6 +1,7 @@
 <li class="active">
-    <a href="#" onclick="profile()"> <span class="fa fa-home mr-3"></span>Show User Data</a>
+    <a href="#" onclick="hide_syntax('profile')"> <span class="fa fa-male mr-3"></span>Show My Data</a>
 </li>
+
 <li >
     <a href="#"><span class="fa fa-home mr-3"></span>Enroll Course</a>
 </li>
