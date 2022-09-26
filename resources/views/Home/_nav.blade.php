@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#!"> <img style="border-radius:10%" width="100px"
+<nav  class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#!"> <img style="border-radius:10%" width="100px" height="30px"
             src="image/ams-min.jpg"></a></a></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +22,7 @@
             @endauth
 
             <li class="nav-item">
-                <a class="nav-link" href="soon">Department</a>
+                <a class="nav-link" href="service/department">Department</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="soon">Blog</a>

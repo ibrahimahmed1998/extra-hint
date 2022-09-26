@@ -3,6 +3,10 @@ li{
     width:288px;
 }
 
+/* .navbar{
+    height:42px;
+} */
+
 #logout:hover
 {
     color: red;
