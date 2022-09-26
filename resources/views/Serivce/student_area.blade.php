@@ -24,7 +24,8 @@
 
 
 {{-- <a href="#!" style="margin:5%" class="btn btn-info">Re-Active Student</a>  --}}
-<a href="#!" style="margin:5%" class="btn btn-info">Show Enrolled</a> 
+<a href="#!" style="margin:5%" class="btn btn-info">Show Enrolled</a> {{-- after show enroll will see cancel course --}}
+  
 <a href="/list_courses/{{$student->user_id}}" style="margin:5%" class="btn btn-info">Enroll new Courses</a> 
 
 
