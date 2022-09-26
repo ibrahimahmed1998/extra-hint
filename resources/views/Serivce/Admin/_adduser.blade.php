@@ -2,7 +2,6 @@
     @csrf
     @include('Serivce.lists.new_user')
     @include('error')
-    @include('popup')
     <br>
     <button type="submit" class="btn btn-primary">Add User</button>
 </form>

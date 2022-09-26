@@ -18,15 +18,14 @@
             </div>
             <script>window.location.href = "/#popup0"</script>
            @endif
-           <a style="color:white !important;text-decoration:none;" class="forgot text-muted" href="register1" >Join now :) </a><br>
-           <br> <a class="forgot text-muted" href="#">Forgot password?</a>
-            <input type="submit" name="" value="Login">
+
+           <input type="submit" name="" value="Login">
+
+           <a style="color:white !important;text-decoration:none; margin-right:7%" class="forgot text-muted" href="register1" >Join now</a> 
+           <a style="color:white !important;text-decoration:none;" class="forgot text-muted" href="#">Forgot password?</a>
         </form>
     </div>
 </div>
-
-
-
 
 @if (isset($data))
     <div id="welcome_login" class="alert alert-success">Welcome {{ $data['first_name'] }}</div>

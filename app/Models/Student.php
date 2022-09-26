@@ -12,7 +12,7 @@ class Student extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'Student_id','roadmap','live_hour' , 'c_gpa', 'lvl','adv_id' , 'dep_id' ,'sec_id'
+        'user_id','roadmap','live_hour' , 'c_gpa', 'lvl','adv_id' , 'dep_id' ,'sec_id'
     ];
 
     // Rest omitted for brevity

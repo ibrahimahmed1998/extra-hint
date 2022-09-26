@@ -1,30 +1,30 @@
-
-
 @isset($msg)
+    <style>
+        #pop_div {
+            background-color: rgb(121, 207, 125);
+            height: 45px;
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            z-index: 10;
+            display: block;
+        }
 
-<div id="popUpMain" style="display: none;">
-    <div id="popup">
-      <h1 id="newsHeading">Join</h1>
-      <a href="#linkHere" target="_blank"><button class="buttonNews">More Info</button></a>
-      <button class="buttonNews">No Thanks</button>
-    </div>
-  </div>
+        #pop_div b {
+            position: relative;
+            color: black;
+            top: 25%;
+        }
+    </style>
 
-    <div>
-        <b>tttttttttttttttttttttttttttttttttes</b>
-    </div>
+    <div id="pop_div"> <b>{{ $msg }}</b> </div>
+
+    
+
+    <script>
+        setTimeout(
+            function() {
+                document.querySelector('#pop_div').style.display="none"; },1500);
+    </script>
+
 @endisset
-
-<script>
-    $(document).ready(function(){
-        setTimeout(function(){
-        $('#popUpMain').css('display', 'block'); }, 3000);
-    });
-  
-    $('.buttonNews').click(function(){
-      $('#popUpMain').css('display', 'none')
-    });
-  </script>
-
-
-

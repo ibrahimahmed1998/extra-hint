@@ -51,7 +51,6 @@
     <div class="col-1"><input class="form-control " disabled value={{ $student->adv_id }}></div>
     <div class="col-1"><input class="form-control " disabled value={{ $student->Dep_id }}></div>
     <div class="col-1"><input class="form-control " disabled value={{ $student->Sec_id }}></div>
-
 </div>
 @endisset
 @include('Serivce.headerfooter._fstudent')

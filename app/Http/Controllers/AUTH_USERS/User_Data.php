@@ -8,57 +8,60 @@ use App\Models\Student;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class User_Data extends Controller
 {
-    public function add_user(Signup_ $req)
+    public function add_user(Signup_ $rq)
     {       
-      $user = User::create(['full_name' => Str::lower($req->full_name),'password' => $req->password,'email' => Str::lower($req->email) ,'type' =>$req->type, 'phone' =>$req->phone, 'created_at'=>now() ]);
+      $user = User::create(['full_name' => Str::lower($rq->full_name),'password' => $rq->password,'email' => Str::lower($rq->email) ,'type' =>$rq->type, 'phone' =>$rq->phone, 'created_at'=>now() ]);
        
       if(!auth()->user())
-      {return view('Home.main', ['msg' => $user->full_name ]);}
-
-      return view('Serivce.general', ['msg' => $user->full_name ]);
+       {
+          return redirect('/')->with('msg', "$user->full_name joined successfully as $user->type");
+       }
+      return view('Serivce.general', ['msg'=>"$user->full_name joined successfully as $user->type"]);
     }
 
-    public function del_user(Request $req) 
+    public function del_user(Request $rq) 
     {
-        $req->validate(['id' => 'required|integer|exists:Users']);
-        User::find($req->id)->delete();
+        $rq->validate(['id' => 'required|integer|exists:Users']);
+        User::find($rq->id)->delete();
         return response()->json(['success' => 'User  Deleted  '], 201);
     } 
-
+ 
     // add student data [ process name verify he is student]
 
-    public function del_student(Request $req)
+    public function del_student(Request $rq)
     {
-        $req->validate(['Student_id' => 'required|integer|exists:Students']);
-        Student::where('Student_id', $req->Student_id)->delete();
+        $rq->validate(['Student_id' => 'required|integer|exists:Students']);
+        Student::where('Student_id', $rq->Student_id)->delete();
         return response()->json(['Success' => "Student deleted"], 201);
     }
 
-    public function change_pass(Request $req)
+    public function change_pass(Request $rq)
     {
-      $req->validate([
+      $rq->validate([
         'password' => 'required|min:8',
         'new_pass' => 'required|min:8|required_with:conifrm_new_pass|same:conifrm_new_pass'
       ]);
 
       $user = Auth()->user();
 
-      if ($user) {
-        $x = Hash::check($req->password, $user->password);
+      if ($user){
+        $x = Hash::check($rq->password, $user->password);
 
         if (!$x) {
           return response()->json(["err" => " password is wrong "], 400);
-        } else if ($req->password == $req->new_pass) {
+        } else if ($rq->password == $rq->new_pass) {
           return response()->json(["err" => "old pass = new pass"], 400);
         } else {
-          User::where('id', $user->id)->update(array('password' => hash::make($req->new_pass)));
+          User::where('id', $user->id)->update(array('password' => hash::make($rq->new_pass)));
 
-          return response()->json(["success" => "Pass changed"], 200);
+          //  return redirect()->route('home',['msg'=>"Password Changed Successfully"]);
+           return view('Home.main',['msg'=>"Password Changed Successfully"]);
         }
       }
     }
@@ -66,7 +69,8 @@ class User_Data extends Controller
   public function user_update(Update_u $rq)
   {
         $user = User::where('id', $rq->id)->first();
-        $users = User::get();
+        $users =User::get();
+        $student="";
 
         foreach($users as $single => $value) {
 
@@ -87,60 +91,52 @@ class User_Data extends Controller
              }
         }
 
-        // if(!$user) throw new Exception("user not found");
-
         $user->update($rq->all());
-      //  dd($user);
 
-      return view('Serivce.user_data',['user'=>$user]);
-    }
+        if($user->type=='student')
+        {
+              //////////////// make it comment to quickly uploaaaaaaaaaaaaaaaaaaaaaad ////////////////
+              // $x = new Auto_student();         $x->auto_student();    /********** AUTOMATIC *************/
 
-    public function update_student(Update_student_ $req)  
-    {
-        $student = Student::where('Student_id', $req->Student_id);
-        //////////////// make it comment to quickly uploaaaaaaaaaaaaaaaaaaaaaad ////////////////
-      //  $x = new Auto_student();         $x->auto_student();    /********** AUTOMATIC *************/
+          $rq->validate([
+            'roadmap' =>'integer|between:1,2',
+            'adv_id' => 'integer|exists:Users,id|different:Student_id',
+            'dep_id' => 'integer|exists:Departments,dep_id',
+            'sec_id' => 'integer|exists:Sections,sec_id',
+        ]);
 
-        if ($req->roadmap) {$student->update(array('roadmap' => $req->roadmap));}
+          $student = Student::where('user_id',$user->id)->first(); 
 
-        if($req->dep_id && $req->sec_id) 
+          /*
           {
-            $student->update(array('dep_id'=>$req->dep_id,'sec_id'=>$req->sec_id));                    
+            // wait until make drop down
+            // $adv_name= User::where('id',$student->adv_id)->get()->first()->full_name; 
+
+
+            // dd($adv_name);
+
+            // if($rq->adv_id) 
+            //  {
+            //     $advisor = User::where('id', $rq->adv_id)->where('type',2)->first();
+            //     $counter = Student::where('adv_id', $rq->adv_id)->get()->count();
+
+            //     if (!$advisor) { return response()->json(['err' => "advisor not found"], 401); } 
+
+            //     if($counter>=10) { return response()->json(['err'=>"can't follow advisor he has ".$counter." Students"],401); } 
+                    
+            //     else { $student->update(array('adv_id'=>$advisor->id));  }
+            // 
           }
+        */
 
-        if($req->adv_id) 
-         {
-            $advisor = User::where('id', $req->adv_id)->where('type',2)->first();
-            $counter = Student::where('adv_id', $req->adv_id)->get()->count();
+        // $new = Student::where('user_id',$user->id)->update(['roadmap'=>$rq->roadmap]);
 
-            if (!$advisor) { return response()->json(['err' => "advisor not found"], 401); } 
-
-            if($counter>=10) { return response()->json(['err'=>"can't follow advisor he has ".$counter." Students"],401); } 
-                 
-            else { $student->update(array('adv_id'=>$advisor->id));  }
-            
-          }
-
-        return response()->json(['Success' => $student->first()], 201);
+        DB::table('Students')->where('user_id',$user->id)->update([
+          'roadmap' =>$rq->roadmap,
+          'Dep_id' => 1,          // then i will make dropdown list 
+          'Sec_id' => 1]);
     }
-    
 
-  }
+    return redirect('/all_users')->with('msg', "usre successfully updated");
 
-        //   if ($user->type == 1) 
-      //   {
-      //       $sec = Section::where('Sec_id', $req->sec_id)->first();
-      //       $dep = Department::where('dep_id', $req->dep_id)->first();
-
-      //       if (!$sec || !$dep)
-      //        {
-      //           User::find($req->id)->delete();
-      //           return response()->json(['err' => 'section or department not found'], 201);
-      //        } 
-      //       else
-      //        {
-      //           Student::create(['Student_id' => $req->id, 'lvl' =>1, 'roadmap' => 1 , 'live_hour' => 12,'c_gpa' => 0, 'dep_id' => $req->dep_id, 'sec_id' => $req->sec_id  ]);                  
-      //           return response()->json(['success' => 'Student joins...AMS'], 201);
-      //        }
-      //   }
-        
+}}

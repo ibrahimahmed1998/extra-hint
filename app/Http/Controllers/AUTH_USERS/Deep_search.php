@@ -5,6 +5,7 @@ use App\Models\Department;
 use App\Models\Section;
 use App\Models\Student;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 
 class Deep_search extends Controller
@@ -20,22 +21,38 @@ class Deep_search extends Controller
     {
         $req->validate(['id' => 'integer|exists:Users']);
 
-        $user = User::where('id',$req->id)->get();
+        $user = User::where('id',$req->id)->first();
+      
+        if($user->type =='student')
+        {
+            $student = Student::where('user_id',$user->id)->get()->first();
 
-        $student = Student::where('user_id',$user->first()->id)->get();
+            if(!$student)
+            {
+                Student::create(['user_id' => $user->id,'lvl'=> 1,'roadmap'=> 1,
+                'live_hour'=>12,'c_gpa'=>0,'dep_id'=>1,'sec_id'=>1]);
 
-        $adv_name =" "; $dname =" ";$sname =" ";
+                return view("Serivce.general", ["msg"=>"student activiated successfully"]);
+             }
+        }
 
-        if( $student->first() )
+        else{
+            $student = null ;
+        }
+      
+        $adv_name =""; $dname ="";$sname ="";
+
+        if($student)
          {
-            $adv_name = User::where('id',$student->first()->adv_id)->first()->first_name ;
-            $dname = Department::where('dep_id',$student->first()->Dep_id)->get()->first()->dname ; 
-            $sname = Section::where('Sec_id',$student->first()->Sec_id)->first()->sec_name ; 
+            
+            $adv_name = User::where('id',$student->adv_id)->get();
+            $dname = Department::where('dep_id',$student->first()->Dep_id)->first()->dname ; 
+            $sname = Section::where('Sec_id',$student->Sec_id)->first()->sec_name ; 
          }
         
         return view('Serivce.user_data', 
-        ['user' => $user->first(),
-        'student'=>$student->first(),
+        ['user' => $user,
+        'student'=>$student,
         'adv_name'=>$adv_name,
         'dname'=>$dname,
         'sname'=>$sname ]);
