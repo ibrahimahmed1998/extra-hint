@@ -2,6 +2,10 @@
 
     <?php $user = auth()->user(); ?> 
 
+    @include('popup')
+    
+      
+
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar">
             <div class="custom-menu">

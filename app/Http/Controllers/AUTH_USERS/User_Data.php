@@ -16,7 +16,11 @@ class User_Data extends Controller
     public function add_user(Signup_ $req)
     {       
       $user = User::create(['full_name' => Str::lower($req->full_name),'password' => $req->password,'email' => Str::lower($req->email) ,'type' => $req->type, 'phone' => $req->phone, 'created_at'=>now() ]);
-      return view('Home.main', ['msg' => $user->full_name ]);
+       
+      if(!auth()->user())
+      {return view('Home.main', ['msg' => $user->full_name ]);}
+
+      return view('Serivce.general', ['msg' => $user->full_name ]);
     }
 
     public function del_user(Request $req) 
