@@ -1,5 +1,6 @@
 <!DOCTYPE html>@include('Home._headerfooter._h')  
 @include('Home._nav')
+@include('popup')
 @if(session('msg'))@include('alert')@endif
 @include('Home.slider')
 @include('Home.login')

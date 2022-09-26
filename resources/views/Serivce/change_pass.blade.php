@@ -4,11 +4,11 @@
     <input required name="new_pass" type="password" class="col-3" placeholder="please enter new password" /> <br> <br>
     <input required name="conifrm_new_pass" type="password" class="col-3"
         placeholder="please re-enter new password" /><br><br>
-    <button type="submit" class="btn btn-warning col-2"><b>Change Password ?</b></button>
+    <button type="submit" class="btn btn-warning col-3"><b>Change Password ?</b></button>
 </form>
     @include('error')
     
-<a id="chngpass" href="#" class="btn btn-warning col-2"><b>Change Password ?</b></a>
+<a id="chngpass" href="#" class="btn btn-warning col-3"><b>Change Password ?</b></a>
 
 <script>
     const btn = document.getElementById('chngpass');

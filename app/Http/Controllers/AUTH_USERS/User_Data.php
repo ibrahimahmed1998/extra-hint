@@ -2,67 +2,44 @@
 namespace App\Http\Controllers\AUTH_USERS;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Signup_;
-use App\Http\Requests\Update_student_;
 use App\Http\Requests\Update_u;
 use App\Models\Student;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use Tymon\JWTAuth\Contracts\Providers\Auth;
+  
 class User_Data extends Controller
 {
     public function add_user(Signup_ $rq)
     {       
-      $user = User::create(['full_name' => Str::lower($rq->full_name),'password' => $rq->password,'email' => Str::lower($rq->email) ,'type' =>$rq->type, 'phone' =>$rq->phone, 'created_at'=>now() ]);
-       
-      if(!auth()->user())
-       {
-          return redirect('/')->with('msg', "$user->full_name joined successfully as $user->type");
-       }
-      return view('Serivce.general', ['msg'=>"$user->full_name joined successfully as $user->type"]);
-    }
-
-    public function del_user(Request $rq) 
-    {
-        $rq->validate(['id' => 'required|integer|exists:Users']);
-        User::find($rq->id)->delete();
-        return response()->json(['success' => 'User  Deleted  '], 201);
-    } 
- 
-    // add student data [ process name verify he is student]
-
-    public function del_student(Request $rq)
-    {
-        $rq->validate(['Student_id' => 'required|integer|exists:Students']);
-        Student::where('Student_id', $rq->Student_id)->delete();
-        return response()->json(['Success' => "Student deleted"], 201);
+        $user = User::create(['full_name' => Str::lower($rq->full_name),'password' => $rq->password,'email' => Str::lower($rq->email) ,'type' =>$rq->type, 'phone' =>$rq->phone, 'created_at'=>now() ]);
+        if(!auth()->user()) { return redirect('/')->with('msg', "$user->full_name joined successfully as $user->type"); }
+        return view('Serivce.general', ['msg'=>"$user->full_name joined successfully as $user->type"]);
     }
 
     public function change_pass(Request $rq)
     {
-      $rq->validate([
-        'password' => 'required|min:8',
-        'new_pass' => 'required|min:8|required_with:conifrm_new_pass|same:conifrm_new_pass'
-      ]);
+      $rq->validate([ 'password' => 'required|min:8',
+          'new_pass' => 'required|min:8|required_with:conifrm_new_pass|same:conifrm_new_pass']);
 
       $user = Auth()->user();
-
-      if ($user){
-        $x = Hash::check($rq->password, $user->password);
-
-        if (!$x) {
-          return response()->json(["err" => " password is wrong "], 400);
-        } else if ($rq->password == $rq->new_pass) {
-          return response()->json(["err" => "old pass = new pass"], 400);
-        } else {
-          User::where('id', $user->id)->update(array('password' => hash::make($rq->new_pass)));
-
-          //  return redirect()->route('home',['msg'=>"Password Changed Successfully"]);
-           return view('Home.main',['msg'=>"Password Changed Successfully"]);
-        }
+        
+      if(!(Hash::check($rq->password,$user->password))){
+        return view('Serivce.general',['msg'=>"note : current password is wrong"]);
+      } else if ($rq->password == $rq->new_pass) {
+        return view('Home.main',['msg'=>"note : old pass equal new pass"]);
+      } else {
+        // User::where('id',$user->id)->update(array('password'=>hash::make($rq->new_pass)));
+       $user = ['email'=>$user->email,'password'=>$rq->password];
+      //  dd($user);
+        FacadesAuth::attempt($user);
+    
+         //  return redirect()->route('home',['msg'=>"Password Changed Successfully"]);
+          return view('Home.main',['msg'=>"Password Changed Successfully"]);
       }
     }
 
@@ -139,4 +116,20 @@ class User_Data extends Controller
 
     return redirect('/all_users')->with('msg', "usre successfully updated");
 
-}}
+}
+
+public function del_user(Request $rq) 
+{
+    $rq->validate(['id' => 'required|integer|exists:Users']);
+    User::find($rq->id)->delete();
+    return response()->json(['success' => 'User  Deleted  '], 201);
+} 
+
+public function del_student(Request $rq)
+{
+    $rq->validate(['Student_id' => 'required|integer|exists:Students']);
+    Student::where('Student_id', $rq->Student_id)->delete();
+    return response()->json(['Success' => "Student deleted"], 201);
+}
+
+}

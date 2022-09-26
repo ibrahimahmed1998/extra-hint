@@ -1,9 +1,7 @@
  @include('Serivce._headerfooter._h')
-
-     <?php $user = auth()->user(); ?>
-
-     @if (session('msg'))@include('alert')@endif
-     
+     <?php $user = auth()->user();?>
+     @include('popup')
+     @if(session('msg'))@include('alert')@endif
      <div class="wrapper d-flex align-items-stretch">
          <nav id="sidebar">
              <div class="custom-menu">
