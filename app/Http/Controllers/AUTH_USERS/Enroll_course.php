@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers\F_Student;   
+namespace App\Http\Controllers\AUTH_USERS;
 use App\Http\Controllers\Controller ;
 use App\Http\Controllers\Helpers\enrolling;
 use App\Http\Controllers\Helpers\Get_time;
@@ -13,14 +13,15 @@ use Illuminate\Http\Request;
 
  class Enroll_course extends Controller
 {    
-    public function enroll_course(Request $req)  
+    public function enroll_course2(Request $req)  
     {
-        dd("asdasds");
-        $user = User::where('id',$req->user_id)->first();
-       
+      
+        $user = User::where('id',$req->user_id)->first();   //$user=auth()->user(); 
 
-        $req->validate(['ccode'=>'required|string|exists:Courses']);
-      //  $user=auth()->user(); 
+        $req->validate(['ccode'=>'string|exists:Courses']);
+
+        // dd($req->ccode);
+
         $gt=new Get_time();      $time=$gt->get_time(); 
         $sem=$time['sem'];       $year=$time['year'];  
         $sum=0; $counter = 0;
@@ -38,7 +39,7 @@ use Illuminate\Http\Request;
         //enroled courses in SAME SEMESTER YEARS 
         $ecsy = enroll::where('semester', $sem)->
                         where('year', $year)->
-                        where('Student_id', $user->id)->get();
+                        where('user_id', $user->id)->get();
 
         foreach ($ecsy  as $c )  { $sum=$sum+Course::where('ccode',$c->ccode)->value('cch') ; }   
       

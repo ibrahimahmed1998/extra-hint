@@ -5,7 +5,6 @@ use App\Models\Department;
 use App\Models\Section;
 use App\Models\Student;
 use App\Models\User;
-use Exception;
 use Illuminate\Http\Request;
 
 class Deep_search extends Controller

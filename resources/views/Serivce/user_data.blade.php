@@ -37,7 +37,7 @@
             <div class="col-1"><input class="form-control col2" disabled value={{ $coures->c_semester }}></div>
             <div class="col-1"><input class="form-control col2" disabled value={{ $coures->c_lvl }}></div>
             <div class="col-2" style="margin-right: -5%"><a href="course/{{$coures->ccode}}"  type="submit"  class="btn btn-warning">View {{$coures->ccode}}</a></div>
-            <div class="col-2"><a href="/enroll_course/{{$user->id}}/{{$coures->ccode}}" class="btn btn-info">Enroll Now</a></div>
+            <div class="col-2"><a href="/enroll_courses/{{$user->id}}/{{$coures->ccode}}" class="btn btn-info">Enroll Now</a></div>
         </div>
     @endforeach
  @endisset

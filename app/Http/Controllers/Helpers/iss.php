@@ -8,14 +8,14 @@ class iss extends Controller // is student ???
 
     public function q($id)
     {
-        $student =  Student::where('Student_id',$id)->first() ;
+        $student =  Student::where('user_id',$id)->first() ;
 
         $user=auth()->user();
       
        
         if($user->type == 1)
         {
-            $student = Student::where('Student_id',$user->id)->first() ;
+            $student = Student::where('user_id',$user->id)->first() ;
         }
         
         if(!$student)

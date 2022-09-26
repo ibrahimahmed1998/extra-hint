@@ -11,7 +11,7 @@ class ise extends Controller        // IS ENROLLED  ?
         $is_enrolled = enroll::where('ccode', $ccode)->
                                where('year',$year)->
                                where('semester',$sem)->
-                               where('Student_id',$id)->first();
+                               where('user_id',$id)->first();
 
         if($is_enrolled)
         { 
