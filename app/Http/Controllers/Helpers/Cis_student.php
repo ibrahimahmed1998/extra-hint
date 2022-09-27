@@ -2,18 +2,15 @@
 namespace App\Http\Controllers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
-class iss extends Controller // is student ???
+class Cis_student extends Controller  
 {
-    public function __construct() { $this->middleware('auth:api', ['except' => []]); }
-
-    public function q($id)
+    public function is_student($id)
     {
         $student =  Student::where('user_id',$id)->first() ;
 
         $user=auth()->user();
       
-       
-        if($user->type == 1)
+        if($user->type == 'student')
         {
             $student = Student::where('user_id',$user->id)->first() ;
         }
@@ -24,5 +21,4 @@ class iss extends Controller // is student ???
         }
         return ;
      }
-
 }

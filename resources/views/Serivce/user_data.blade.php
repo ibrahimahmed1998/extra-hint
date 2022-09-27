@@ -1,8 +1,8 @@
 @include('Serivce._user_nav')
+@if(session('msg'))@include('alert')@endif
 @include('popup')
 <div style="margin:3%">
-
-    <div class="row">@include('Serivce.lists.user_fields')</div>
+      <div class="row">@include('Serivce.lists.user_fields')</div>
     {{-- {{dd($user)}} --}}
     <form action="/user_update/{{$user->id}}" method="POST">
         @csrf

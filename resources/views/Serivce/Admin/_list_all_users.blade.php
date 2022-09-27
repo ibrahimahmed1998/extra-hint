@@ -24,7 +24,7 @@
 
     @foreach ($all_users as $user)
         @include('Serivce.lists.user_fields_values')
-        <div class="col-1"><a href="/user_update/{{$user->id}}"  type="submit"  class="btn btn-info">View</a></div>
+        <div style="margin-left: -170px" class="col-1"><a href="/user_update/{{$user->id}}"  type="submit"  class="btn btn-info">View</a></div>
     </div>
     @endforeach
 @endisset
