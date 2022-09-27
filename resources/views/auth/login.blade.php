@@ -57,4 +57,3 @@
     </div>
   </form>
   @include('error')
-  {{-- @include('Home._headerfooter._f') --}}

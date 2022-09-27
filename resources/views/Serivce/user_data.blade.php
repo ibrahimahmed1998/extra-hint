@@ -68,7 +68,6 @@
             <div class="col-1" style="margin-left:-15px;"><input style="margin-left:-5px; width:50px" class="form-control col2" disabled value={{ $single_course->hlab_d }}></div>
             <div class="col-1" style="margin-left:-15px;"><input style="margin-left:-5px; width:50px"class="form-control col2" disabled value={{ $single_course->horal_d }}></div>
             <div class="col-1" style="margin-left:-15px;"><input style="margin-left:-2px;width:50px" class="form-control col2" disabled value={{ $single_course->hclass_work_d }}></div>
-          
             <div class="col-1" style="margin-left:-15px;"><input style="margin-left:8px; width:50px " class="form-control col2" disabled value={{ $single_course->hfinal_d }}></div>
             <div class="col-1" style="margin-left:-15px;"><input style="width:50px" class="form-control col2" disabled value={{ $single_course->htotal_d }}></div>
             <div class="col-1" style="margin-left:-15px;"><input style="width:50px" class="form-control" disabled value={{ $single_course->hpass }}></div>

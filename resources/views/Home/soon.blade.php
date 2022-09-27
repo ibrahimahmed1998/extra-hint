@@ -1,3 +1,1 @@
-<body background="image/soon.jpg">
-    
-</body>
+<body background="image/soon.jpg"></body>
