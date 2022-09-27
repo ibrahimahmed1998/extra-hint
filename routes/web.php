@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AUTH_USERS\Current_courses;
 use App\Http\Controllers\AUTH_USERS\Deep_search;
 use App\Http\Controllers\AUTH_USERS\Enroll_course;
@@ -13,6 +14,7 @@ Route::get('/soon', function () {return view('Home.soon');});
 Route::get('/logingate2', function () { return view('auth.login');})->name('/');
 Route::get('/logingate2', function () { return view('auth.login');})->name('login');
 Route::get('/login', function () { return view('Home.main');})->name('login_pop');
+Route::post('login2', [AuthenticatedSessionController::class, 'store']);
 
 Route::post('/change_pass',[ User_Data::class ,'change_pass']);
 Route::get('/register1', function () {return view('Home.register1');})->name('register1');
