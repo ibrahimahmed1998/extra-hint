@@ -81,7 +81,5 @@ use Illuminate\Http\Request;
         else if(($sem==2||$sem==1) && ($limit<=19) ) 
         { 
             return $enrolling->q($user->id,$req->ccode,$sem,$year);
-
-            dd($year);
-        }                              
+         }                              
 }}
