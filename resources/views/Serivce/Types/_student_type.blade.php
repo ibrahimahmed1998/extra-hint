@@ -1,8 +1,9 @@
 <li class="active">
     <a href="#" onclick="hide_syntax('profile')"> <span class="fa fa-male mr-3"></span>My Profile</a>
 </li>
-
-<li><a href="#"><span class="fa fa-user mr-3"></span> Show Courses</a></li>
+    
+{{-- {{  dd($user->id)}} --}}
+<li><a href="/user_update/{{$user->id}}"><span class="fa fa-user mr-3"></span> Show Courses</a></li>
 <li ><a href="#"><span class="fa fa-user mr-3"></span>Enroll Course</a></li>
 <li ><a href="#"><span class="fa fa-user mr-3"></span>My Courses</a></li>
 <li><a href="#"><span class="fa fa-sticky-note mr-3"></span> Success Statement</a></li>

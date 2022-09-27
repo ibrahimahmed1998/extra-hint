@@ -10,14 +10,20 @@ use Illuminate\Support\Facades\Auth as FacadesAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Tymon\JWTAuth\Contracts\Providers\Auth;
   
 class User_Data extends Controller
 {
     public function add_user(Signup_ $rq)
     {       
         $user = User::create(['full_name' => Str::lower($rq->full_name),'password' => $rq->password,'email' => Str::lower($rq->email) ,'type' =>$rq->type, 'phone' =>$rq->phone, 'created_at'=>now() ]);
-        if(!auth()->user()) { return redirect('/')->with('msg', "$user->full_name joined successfully as $user->type"); }
+        if(!auth()->user())
+        { 
+
+          Student::create(['user_id' => $user->id,'lvl'=> 1,'roadmap'=> 1,
+          'live_hour'=>12,'c_gpa'=>0,'dep_id'=>1,'sec_id'=>1]);
+
+          return redirect('/')->with('msg', "$user->full_name joined successfully as $user->type");
+        }
         return view('Serivce.general', ['msg'=>"$user->full_name joined successfully as $user->type"]);
     }
 
@@ -124,12 +130,5 @@ public function del_user(Request $rq)
     User::find($rq->id)->delete();
     return redirect('/')->with('msg', "usre successfully deleted");
 } 
-
-public function del_student(Request $rq)
-{
-    $rq->validate(['Student_id' => 'required|integer|exists:Students']);
-    Student::where('Student_id', $rq->Student_id)->delete();
-    return response()->json(['Success' => "Student deleted"], 201);
-}
 
 }
