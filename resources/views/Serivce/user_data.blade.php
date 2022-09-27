@@ -60,7 +60,6 @@
     </div>
 
     @foreach($enrolled_courses as $single_course)
-     
         <div class="row" style="margin:1%">           
             <div class="col-1" style="margin-left:-32px;"><input style="width:90px"  class="form-control col2 " disabled value={{ $single_course->ccode }}></div>
             <div class="col-1" style="margin-left:25px;"><input style="width:40px" class="form-control col2 " disabled value={{ $single_course->semester }}></div>
