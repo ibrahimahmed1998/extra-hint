@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () { return view('Home.main');})->name('home');
 Route::get('/soon', function () {return view('Home.soon');});
-Route::get('/logingate2', function () { return view('Home._headerfooter.hiddenlogin');})->name('/');
-Route::get('/logingate2', function () { return view('Home._headerfooter.hiddenlogin');})->name('login');
+Route::get('/logingate2', function () { return view('auth.login');})->name('/');
+Route::get('/logingate2', function () { return view('auth.login');})->name('login');
 Route::get('/login', function () { return view('Home.main');})->name('login');
 
 Route::post('/change_pass',[ User_Data::class ,'change_pass']);

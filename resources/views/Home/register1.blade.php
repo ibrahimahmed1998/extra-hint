@@ -1,13 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Register</title>
+    <script src="popper.min.js"></script>
+    <script src="jquery-3.6.1.min.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    
     <script src="reg_form/js/global.js"></script>
     <link href="reg_form/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
     <link href="reg_form/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="reg_form/vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="reg_form/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
     <link rel="stylesheet" href="reg_form/css/main.css" media="all">
