@@ -83,7 +83,7 @@
               <li><a href="service/department" class="text-white">All Departments</a></li>
               <li><a href="/soon" class="text-white">GPA Calculator +-</a></li>
               <li><a href="#!" class="text-white">Members Feadback</a></li>
-              <li><a href="#!" class="text-white">Video Tutorial</a></li>
+              <li><a href="https://youtu.be/snG4LP7io3c" class="text-white">Video Tutorial</a></li>
             </ul>
           </div>
 
@@ -113,7 +113,8 @@
             <h5 class="text-uppercase">Other</h5>
   
             <ul class="list-unstyled mb-0">
-              <li><a href="#!" class="text-white">Site Map</a></li>
+              <li><a href="{{ asset('/'.'database.pdf')}}" 
+                     target="_blank"  class="text-white">Site Map</a></li>
               <li><a href="#!" class="text-white">About</a></li>
               <li><a href="#!" class="text-white">English (UK)</a></li>
               <li><a href="#!" class="text-white">العربية</a></li>
