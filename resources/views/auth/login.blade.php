@@ -22,9 +22,9 @@
     <link rel="stylesheet" href="reg_form/css/main.css" media="all">
 </head>
 
-<body>
-    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-        <div class="wrapper wrapper--w680">
+<body >
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins" style="background-color:black!important;" >
+        <div class="wrapper wrapper--w680" >
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title">Login</h2>

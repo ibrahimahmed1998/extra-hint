@@ -36,11 +36,17 @@ padding: 0.5%
 ">
 <br>
 
+<div data-aos="fade-in">
     <b style="float:left; width:700px; margin:4% 0% 0% 7%; font-size:40px; clear:both">
         Is an automated academic advising system it was programmed to be used in E-learning platforms, universities,
     and schools, for helping all students, advisors, and administrators work meticulously and not be preoccupied
     with the management process
     </b>
+
+</div>
+
+
+   
 
     <img class="avatar" style="float:right; margin:8% 6% 0% 0%; " src="/image/manage1.jpg" alt="">
      
@@ -76,5 +82,9 @@ padding: 0.5%
      
 </div>
 
- 
+<script src="aos/aos.js" ></script>
+<script>
+    AOS.init();
+  </script>
+
 @include('Home._headerfooter._f')
