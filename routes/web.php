@@ -11,10 +11,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () { return view('Home.main');})->name('home');
 Route::get('/soon', function () {return view('Home.soon');});
-Route::get('/logingate2', function () { return view('auth.login');})->name('/');
-Route::get('/logingate2', function () { return view('auth.login');})->name('login');
-Route::get('/login', function () { return view('Home.main');})->name('login_pop');
-Route::post('login2', [AuthenticatedSessionController::class, 'store']);
+// Route::get('/logingate2', function () { return view('auth.login');})->name('/');
+Route::get('/login', function () { return view('auth.login');})->name('login');
+Route::get('/logingate2', function () { return view('Home.main');})->name('login_pop');
 
 Route::post('/change_pass',[ User_Data::class ,'change_pass']);
 Route::get('/register1', function () {return view('Home.register1');})->name('register1');

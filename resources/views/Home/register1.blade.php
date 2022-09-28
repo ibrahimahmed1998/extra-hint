@@ -59,11 +59,25 @@
                                 </div>
                              </div>
                         </div>
-                 
-                        <input required readonly class="input--style-4" type="text" name="type" value='student'>
-                      
-                
-                        <div class="p-t-15">
+                        <br><br>
+
+
+                        <div class="p-t-10 ">
+                            <label class="radio-container m-r-45">I'm Student
+                            <input type="radio" checked="checked" value="student" name="type">
+                            <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-container">I'm Advisor
+                            <input type="radio" value="advisor" name="type">
+                            <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-container">I'm Admin
+                            <input type="radio" value="admin" name="type">
+                            <span class="checkmark"></span>
+                            </label>
+                            </div>
+                            <br><br>
+                        <div class="p-t-15 ">
                             <button style="width:102%;" class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
                         </div>
                         <div class="p-t-10">

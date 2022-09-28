@@ -11,7 +11,7 @@
 
         @guest
             <li class="nav-item active">
-                <a class="nav-link" href="#popup0">Login<span class="sr-only" href="#">(current)</span></a>
+                <a class="nav-link" href="login">Login<span class="sr-only">(current)</span></a>
             </li>
         @endguest
         
