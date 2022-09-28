@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/css/temp.css">
     <link rel="stylesheet" href="bcss/bootstrap.min.css">
     <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+
     <link rel="stylesheet" href="css/avatar.css">
     <link rel="stylesheet" href="aos/aos.css">
 
