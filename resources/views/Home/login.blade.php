@@ -1,4 +1,4 @@
-
+{{-- 
 <div id="popup0" class="overlay">
     <div style=" margin:auto; right:70%;  position: absolute;">
         <form action="/login2" class="box" method="POST">
@@ -68,4 +68,4 @@
         }
         window.location.href = "/#popup0"
     </script>
-@endif
+@endif --}}

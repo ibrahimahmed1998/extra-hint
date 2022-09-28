@@ -6,17 +6,15 @@
       <!-- Section: Social media -->
       <section class="mb-4">
        
-        <!-- Google -->
-        <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+     
+        <a class="btn btn-outline-light btn-floating m-1" href="mailto:ibrahim.ahmed.elaidi@gmail.com" role="button"
           ><i class="fab fa-google"></i
         ></a>
     
-        <!-- Linkedin -->
         <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/ibrahimahmed1998" role="button"
           ><i class="fab fa-linkedin-in"></i
         ></a>
-  
-        <!-- Github -->
+
         <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/ibrahimahmed1998" role="button"
           ><i class="fab fa-github"></i
         ></a>
@@ -41,9 +39,8 @@
             <div class="col-md-5 col-12">
               <!-- Email input -->
               <div class="form-outline form-white mb-4">
-                <input type="email" id="form5Example21" class="form-control" />
-                <label class="form-label" for="form5Example21">Email address</label>
-              </div>
+                <input type="email" id="form5Example21" placeholder="Email address" class="form-control" />
+               </div>
             </div>
             <!--Grid column-->
   
@@ -64,9 +61,10 @@
       <!-- Section: Text -->
       <section class="mb-4">
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum
-          repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam
-          eum harum corrupti dicta, aliquam sequi voluptate quas.
+          AMS is the trusted market leader in talent transformation. We change lives, 
+          businesses, and nations through digital upskilling, developing the edge you need toconquer what’s next.
+            AMS* programs represent collaborations with our industry partners who help us develop our content 
+          and who hire many of our program graduates.
         </p>
       </section>
       <!-- Section: Text -->
@@ -130,8 +128,8 @@
   
     <!-- Copyright -->
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+      © 2022 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">AMS</a>
     </div>
     <!-- Copyright -->
   </footer>

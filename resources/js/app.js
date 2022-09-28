@@ -8,3 +8,6 @@ Alpine.start();
 
 
 // document.getElementById("").setAttribute
+
+//  document.querySelector
+ 

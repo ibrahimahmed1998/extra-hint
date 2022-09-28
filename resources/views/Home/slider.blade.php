@@ -1,9 +1,6 @@
-<head>
-    <link rel="stylesheet" href={{ asset('css/in_style.css') }} type="text/css">
-</head>
-
+ 
+{{-- <link rel="stylesheet" href={{ asset('css/in_style.css') }} type="text/css"> --}}
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-
     <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -14,7 +11,7 @@
         <div class="carousel-item active">
             <img style="opacity:0.5" class="d-block w-100" src="{{ asset('/image/ASU-Cairo-min.jpg') }}" alt="First slide">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Help To Improve Your Career</h5>
+                <h5 >Help To Improve Your Career</h5>
                 <p> Choosing Wright Courses For You </p>
             </div>
         </div>
@@ -42,4 +39,3 @@
             class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>
 </div>
 
-</body></html>
