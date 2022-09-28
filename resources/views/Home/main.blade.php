@@ -29,9 +29,27 @@ padding: 0.5%
 @include('Home._nav')
 @include('popup')
 @if(session('msg'))@include('alert')@endif
-@include('Home.slider')
-@include('Home.login')
 
+<div style="width:100%;height:1000px; background-color: white; 
+/* background: -webkit-linear-gradient(to right, #0575E6, #00F260);   */
+/* background: linear-gradient(to right, #0575E6, #00F260);  */
+">
+<br>
+
+    <b style="float:left; width:700px; margin:4% 0% 0% 7%; font-size:40px; clear:both">
+        Is an automated academic advising system it was programmed to be used in E-learning platforms, universities,
+    and schools, for helping all students, advisors, and administrators work meticulously and not be preoccupied
+    with the management process
+    </b>
+
+    <img class="avatar" style="float:right; margin:8% 6% 0% 0%; " src="/image/manage1.jpg" alt="">
+     
+      
+</div>
+
+
+@include('Home.slider')
+ 
 {{-- <div style=" background-color: white;"  >
     <img style="width:200px" src="image/soon.jpg" alt="">
     <img style="width:200px" src="image/soon.jpg" alt="">

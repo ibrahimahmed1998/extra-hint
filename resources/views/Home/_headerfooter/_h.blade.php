@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/temp.css">
     <link rel="stylesheet" href="bcss/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.css">
+    <link rel="stylesheet" href="/css/avatar.css">
+
     <link rel="icon" href="image/Sign-check-icon.png" type="image/icon type">
     <link rel="stylesheet" href="css/home.nav.css">
 </head>
