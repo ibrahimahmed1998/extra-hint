@@ -4,7 +4,12 @@
 @include('Home._nav')
 @include('Home.section')
 @include('Home.slider')
+{{-- what people say || our parnter  --}}
+
 @include('Home.section3')
+{{-- Plans  --}}
+
+
 @include('Home._footer')
 @include('Home._headerfooter._f')
 
