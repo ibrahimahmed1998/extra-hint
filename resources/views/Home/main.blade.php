@@ -1,16 +1,12 @@
-<!DOCTYPE html> 
 @include('Home._headerfooter._h')
 @include('alert') 
-
 @include('popup')
 @include('Home._nav')
-
-<div class="container ">
-    <h1>We invite you to <br><span class="auto-type"></span></h1>
-</div>
-
 @include('Home.section')
 @include('Home.slider')
+@include('Home.section3')
+@include('Home._footer')
+@include('Home._headerfooter._f')
 
  {{--
 <div
@@ -31,8 +27,3 @@
     <x-embed url="https://www.youtube.com/watch?v=snG4LP7io3c"/>
 </div> --}}
  
-<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-<script> var typed = new Typed(".auto-type",{ strings:["Grow Fast 🧠💪","be on Top 🥇💯","Join Us 👌🤝"],typeSpeed:150,backSpeed:75,loop:true}) </script>
-<script src="aos/aos.js"></script>
-<script> AOS.init(); </script>
-@include('Home._headerfooter._f')

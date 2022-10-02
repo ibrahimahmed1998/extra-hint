@@ -1,6 +1,11 @@
 li{
     font-weight: bolder !important;
-    width:288px;
+    width:240px;
+}
+
+li a {
+    width:280px;
+
 }
 
 /* .navbar{
@@ -15,7 +20,7 @@ li{
 }
 
 .navbar-expand-lg .navbar-nav .nav-link{
-    padding-right: 3.5rem;
+    padding-right: 7.0rem;
 }
 
 

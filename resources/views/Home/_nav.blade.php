@@ -28,6 +28,7 @@
         
             <li class="nav-item"><a class="nav-link" href="service/department">Explore Departments</a></li>
             <li class="nav-item"><a class="nav-link" href="soon">Blog</a></li>
+            <li class="nav-item"><a class="nav-link" href="#whyams">Career</a></li>
             <li class="nav-item"><a class="nav-link" href="#whyams">Why AMS ?</a></li>
 
         @auth

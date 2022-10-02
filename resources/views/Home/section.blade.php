@@ -1,3 +1,5 @@
+<div class="container"> <h1> We invite you to <br><span class="auto-type"> </span> </h1> </div>
+
 <div id="section1"> <br>
     <div data-aos="fade-in">
         <b>
@@ -18,9 +20,4 @@
         </b>
     </div>
     <img class="avatar" width="620px" src="/image/manage2-min.jpeg" alt="manage2-min">
-</div>
-
-<div id="section3"><br>
-    <b id="section3_b"> Transforming lives, businesses, and nations.</b>
-    <a id="section3_a" href="/register1" class="btn btn-warning"> Get in touch</a>
 </div>
