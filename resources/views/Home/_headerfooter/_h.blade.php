@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="css/avatar.css">
     <link rel="stylesheet" href="aos/aos.css">
     <link rel="icon" href="image/Sign-check-icon.png" type="image/icon type">
-    <link rel="stylesheet" href="css/home.nav.css">
-    <link rel="stylesheet" href="css\Home\main.css">
+    <link rel="stylesheet" href="css/Home/nav.css">
+    <link rel="stylesheet" href="css/Home/main.css">
  
 </head>
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script> --}}
