@@ -32,13 +32,29 @@ padding: 0.5%
     @include('alert')
 @endif
 
-<div
-    style="width:100%;height:850px; background-color: white; 
+
+
+<style>
+    .container{
+        text-align:center; 
+        margin-top:20%;
+      }
+      .container h1{
+        font-size: 120px;
+      }
+      .auto-type{color: #FFC107}
+</style>
+
+<div  class="container "><h1>We invite you to <br><span class="auto-type"></span></h1>  </div>
+
+
+<div style="margin-top:23%; width:100%;height:850px; background-color: white; 
 /* background: -webkit-linear-gradient(to right, #0575E6, #00F260);   */
 /* background: linear-gradient(to right, #0575E6, #00F260);  */
 ">
     <br>
 
+    
     <div data-aos="fade-in">
         <b style="float:left; width:700px; margin:4% 0% 0% 7%; font-size:40px; clear:both">
             Is an automated academic advising system it was programmed to be used in E-learning platforms, universities,
@@ -65,7 +81,7 @@ padding: 0.5%
         </b>
 
     </div>
-    <img class="avatar" style="float:left; margin:8% 6% 0% 0%; " src="/image/manage1.jpg" alt="">
+    <img class="avatar" width="620px" style="float:left; margin:2% 0% 0% 7%; " src="/image/manage2-min.jpeg" alt="">
 </div>
 
 
@@ -118,10 +134,9 @@ padding: 0.5%
  
     <x-embed url="https://www.youtube.com/watch?v=snG4LP7io3c"/>
 </div> --}}
-
-    <script src="aos/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-
-    @include('Home._headerfooter._f')
+ 
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script> var typed = new Typed(".auto-type",{ strings:["Grow Fast 🧠💪","be on Top 🥇💯","Join Us 👌🤝"],typeSpeed:150,backSpeed:75,loop:true}) </script>
+<script src="aos/aos.js"></script>
+<script> AOS.init(); </script>
+@include('Home._headerfooter._f')

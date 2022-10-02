@@ -11,6 +11,8 @@
     bottom: 270px;
   }
 
+.auto-type{ color:blue; }
+
   .carousel-caption h5 {
     font-size: 45px;
     text-transform: uppercase;
