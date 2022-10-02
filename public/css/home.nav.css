@@ -17,3 +17,14 @@ li{
 .navbar-expand-lg .navbar-nav .nav-link{
     padding-right: 3.5rem;
 }
+
+
+#announcement
+{
+    background-color:#FFDF01;
+    margin:1%;
+    text-align: center; 
+    font-weight: bold;
+    margin: 0;
+    padding: 0.5%
+}

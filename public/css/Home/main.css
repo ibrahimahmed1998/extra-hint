@@ -1,0 +1,78 @@
+.container {
+    text-align: center;
+    margin-top: 20%;
+}
+
+.container h1 {
+    font-size: 120px;
+}
+
+.auto-type {
+    color: #FFC107
+}
+
+
+#section1 {
+    margin-top: 23%;
+    width: 100%;
+    height: 850px;
+    background-color: white;
+    /* background: -webkit-linear-gradient(to right, #0575E6, #00F260);   */
+    /* background: linear-gradient(to right, #0575E6, #00F260);  */
+}
+
+#section2 {
+
+    width: 100%;
+    height: 850px;
+    background-color: white;
+    /* background: -webkit-linear-gradient(to right, #0575E6, #00F260);   */
+    /* background: linear-gradient(to right, #0575E6, #00F260);  */
+
+}
+
+#section3 {
+    width: 100%;
+    height: 500px;
+    background-color: white;
+    /* background: -webkit-linear-gradient(to right, #0575E6, #00F260);   */
+    /* background: linear-gradient(to right, #0575E6, #00F260);  */
+}
+
+
+
+#section1 b
+{ 
+float:left; width:700px; margin:4% 0% 0% 7%; font-size:40px; clear:both
+}
+
+#section1 img{
+    float:right; margin:8% 6% 0% 0%;
+}
+
+
+#section2 b{
+    float:right; width:700px; margin:4% 0% 0% 7%; font-size:40px; clear:both
+}
+
+#section2 img{
+    float:left; margin:2% 0% 0% 7%;
+
+}
+
+#section3 b {
+    float: left;
+    margin: 6% 0% 0% 25%;
+    font-size: 40px;
+    background-position-x: 50px
+}
+
+#section3_a {
+    width: 350px;
+    height: 60px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    float: left;
+    margin: 5% 0% 0% 40%;
+}

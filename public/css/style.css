@@ -20,10 +20,7 @@ li{
     /* width: 40%;
     height: 50%; */
     margin: 5%;
-
 }
-
-
 
 div div div .dropdown-item:hover {
     background: rgb(255, 255, 193);
@@ -38,3 +35,7 @@ div div .dropdown-item:hover {
     display: block;
     font-weight: bold
 }
+
+.container{ text-align:center;  margin-top:20%; }
+    .container h1{ font-size: 120px; }
+    .auto-type{color: #FFC107}
