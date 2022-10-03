@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="fontawesome/css/all.css">
     <link rel="stylesheet" href="css/avatar.css">
     <link rel="stylesheet" href="aos/aos.css">
-    <link rel="icon" href="image/Sign-check-icon.png" type="image/icon type">
+    <link rel="icon" href="image/logo-min.jpg" type="image/icon type">
     <link rel="stylesheet" href="css/Home/nav.css">
     <link rel="stylesheet" href="css/Home/main.css">
  

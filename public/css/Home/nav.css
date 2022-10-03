@@ -1,12 +1,17 @@
 li{
     font-weight: bolder !important;
-    width:240px;
+    width:235px;
 }
-
+ 
 li a {
-    width:280px;
-
+    width:279.5px;
 }
+
+li:last-child a {
+    width:240.5px;
+}
+
+
 
 /* .navbar{
     height:42px;

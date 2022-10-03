@@ -1,14 +1,20 @@
 @include('Home._headerfooter._h')
 @include('alert') 
 @include('popup')
-@include('Home._nav')
-@include('Home.section')
-@include('Home.slider')
-{{-- what people say || our parnter  --}}
+@include('Home._nav') 
+{{-- make user profile icon [ pic + name + setting ] --}}
 
-@include('Home.section3')
-{{-- Plans  --}}
+@auth
+    @include('Home.auth.main')
+@endauth
 
+@guest
+    @include('Home.guest.section')
+    @include('Home.guest.slider')
+    {{-- what people say || our parnter  --}}
+    @include('Home.guest.section3')
+    {{-- Plans  --}}
+@endguest
 
 @include('Home._footer')
 @include('Home._headerfooter._f')

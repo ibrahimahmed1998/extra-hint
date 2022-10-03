@@ -9,6 +9,7 @@
         "bensampo/laravel-embed": "^1.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "jgrossi/corcel": "^5.1",
         "laravel/framework": "^8.54",
         "laravel/tinker": "^2.5",
         "tymon/jwt-auth": "^1.0"

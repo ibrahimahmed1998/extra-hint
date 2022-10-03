@@ -5,6 +5,7 @@
     </div>
 @endguest
 
+
 <nav  class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/"> <img style="border-radius:10%" width="100px" height="30px"
             src="image/ams-min.jpg"></a></a></a>

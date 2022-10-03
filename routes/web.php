@@ -9,6 +9,8 @@ use App\Http\Controllers\Yellow\List_C;
 use App\Http\Middleware\type_admin;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/blog', function () { return view('wordpress.wp-admin.install');})->name('blog');
+
 Route::get('/', function () { return view('Home.main');})->name('home');
 Route::get('/soon', function () {return view('Home.soon');});
 // Route::get('/logingate2', function () { return view('auth.login');})->name('/');
