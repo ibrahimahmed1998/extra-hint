@@ -13,7 +13,7 @@
     @include('Home.guest.slider')
     {{-- what people say || our parnter  --}}
     @include('Home.guest.section3')
-    {{-- Plans  --}}
+    {{-- Plans || lifetime plans 100%  --}}
 @endguest
 
 @include('Home._footer')

@@ -16,24 +16,20 @@
 
  <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+     @auth
+      <li class="nav-item"><a class="nav-link" href="myserivce">My Services</a></li>
+     @endauth
+    <li class="nav-item"><a class="nav-link" href="#whyams">Why AMS ?</a></li>
+    <li class="nav-item"><a class="nav-link" href="service/department">Explore Departments</a></li>
+    <li class="nav-item"><a class="nav-link" href="soon">Blog</a></li>
+    <li class="nav-item"><a class="nav-link" href="#whyams">Career</a></li>
 
-        @guest
-            <li class="nav-item active">
-                <a class="nav-link" href="login">Login<span class="sr-only">(current)</span></a>
-            </li>
-        @endguest
-        
-        @auth
-            <li class="nav-item"><a class="nav-link" href="myserivce">My Services</a></li>
-        @endauth
-        
-            <li class="nav-item"><a class="nav-link" href="service/department">Explore Departments</a></li>
-            <li class="nav-item"><a class="nav-link" href="soon">Blog</a></li>
-            <li class="nav-item"><a class="nav-link" href="#whyams">Career</a></li>
-            <li class="nav-item"><a class="nav-link" href="#whyams">Why AMS ?</a></li>
-
-        @auth
-            <li class="nav-item" ><a id="logout" class="nav-link" href="logout">Logout</a></li>
-        @endauth
-        
+    @guest
+     <li class="nav-item active">
+      <a class="nav-link" href="login">Login<span class="sr-only">(current)</span></a>
+     </li>
+    @endguest
+    @auth
+     <li class="nav-item" ><a id="logout" class="nav-link" href="logout">Logout</a></li>
+    @endauth 
 </ul></div></nav>
