@@ -1,10 +1,10 @@
-@guest
+@guest     
+    <style>#left_margin{margin-left:5%; }</style>
     <div id="announcement">
         Welcome to AMS! Claim your personal discount now. Explore programs and use within 30 days.
         <i onclick="hide_announcement()" class="fa-solid fa-xmark pl-3"></i>
     </div>
 @endguest
-
 
 <nav  class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/"> <img style="border-radius:10%" width="100px" height="30px"
@@ -19,8 +19,8 @@
      @auth
       <li class="nav-item"><a class="nav-link" href="myserivce">My Services</a></li>
      @endauth
-    <li class="nav-item"><a class="nav-link" href="#whyams">Why AMS ?</a></li>
-    <li class="nav-item"><a class="nav-link" href="service/department">Explore Departments</a></li>
+    {{-- <li class="nav-item"><a class="nav-link" href="#whyams">Why AMS ?</a></li> --}}
+    <li id="left_margin" class="nav-item"><a class="nav-link" href="service/department">Explore Departments</a></li>
     <li class="nav-item"><a class="nav-link" href="soon">Blog</a></li>
     <li class="nav-item"><a class="nav-link" href="#whyams">Career</a></li>
 
